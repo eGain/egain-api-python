@@ -9,7 +9,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *egai
     </a>
 </div>
 
-
 <!-- Start Summary [summary] -->
 ## Summary
 
