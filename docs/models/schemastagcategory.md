@@ -1,0 +1,12 @@
+# SchemasTagCategory
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `name`                                                                           | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | name of the tag category.                                                        |
+| `tag_group`                                                                      | List[[models.SchemasTagGroup](../models/schemastaggroup.md)]                     | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `tag`                                                                            | List[[models.SchemasTag](../models/schemastag.md)]                               | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `created`                                                                        | [Optional[models.CreatedDateAndTime]](../models/createddateandtime.md)           | :heavy_minus_sign:                                                               | Date the Tag Category was created.                                               |
+| `last_modified`                                                                  | [Optional[models.LastModifiedDateAndTime]](../models/lastmodifieddateandtime.md) | :heavy_minus_sign:                                                               | Date of last modification.                                                       |

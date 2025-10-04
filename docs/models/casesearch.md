@@ -1,0 +1,18 @@
+# CaseSearch
+
+
+## Fields
+
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `accept_count`                                                  | *Optional[int]*                                                 | :heavy_minus_sign:                                              | The number of times action was accepted                         |
+| `action`                                                        | List[[models.Action](../models/action.md)]                      | :heavy_minus_sign:                                              | actions in search                                               |
+| `additional_info`                                               | *Optional[bool]*                                                | :heavy_minus_sign:                                              | This field indicates if action has additional information       |
+| `metadata`                                                      | List[[models.Metadata](../models/metadata.md)]                  | :heavy_minus_sign:                                              | Metadata in search                                              |
+| `case_id`                                                       | *Optional[str]*                                                 | :heavy_minus_sign:                                              | case Id                                                         |
+| `passed_threshold_value`                                        | *Optional[bool]*                                                | :heavy_minus_sign:                                              | This field indicates if the case has passed the threshold value |
+| `reject_count`                                                  | *Optional[int]*                                                 | :heavy_minus_sign:                                              | The number of times action was rejected                         |
+| `short_name`                                                    | *Optional[str]*                                                 | :heavy_minus_sign:                                              | The short name                                                  |
+| `score`                                                         | *Optional[float]*                                               | :heavy_minus_sign:                                              | The score of the case                                           |
+| `title`                                                         | *Optional[str]*                                                 | :heavy_minus_sign:                                              | The title of the case                                           |
+| `type`                                                          | [Optional[models.CaseSearchType]](../models/casesearchtype.md)  | :heavy_minus_sign:                                              | The type of the action                                          |

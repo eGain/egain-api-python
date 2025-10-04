@@ -1,0 +1,10 @@
+# QuickpickRating
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `id`                                                                             | *str*                                                                            | :heavy_check_mark:                                                               | The numerical ID of the Casebase Release.                                        | 409601000000001                                                                  |
+| `name`                                                                           | *str*                                                                            | :heavy_check_mark:                                                               | name of the case or article                                                      |                                                                                  |
+| `profile_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | The ID of the guided help profile.<br><br/>1 will always be the **system profile**.<br/> |                                                                                  |

@@ -1,0 +1,12 @@
+# Context
+
+Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response.
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `user_context`                                                                                                        | *Optional[str]*                                                                                                       | :heavy_minus_sign:                                                                                                    | Information about the end user (e.g., preferences, profile data, or behavioral signals).                              |
+| `page_context`                                                                                                        | *Optional[str]*                                                                                                       | :heavy_minus_sign:                                                                                                    | Details about the UI or page where the query was initiated (e.g., page URL, section, or component).                   |
+| `company_context`                                                                                                     | *Optional[str]*                                                                                                       | :heavy_minus_sign:                                                                                                    | Information about the organization associated with the user, used for tailoring responses in enterprise environments. |

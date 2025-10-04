@@ -1,0 +1,13 @@
+# RetrieveResponseAnswer
+
+If a certified answer is given. The answer object will be present. <br><br> This will be shown only if certified answers are configured and the certified answer meets the configured threshold.
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `answer_value`                                                               | *str*                                                                        | :heavy_check_mark:                                                           | The certified answer.                                                        | Per the Lending FAQ document...                                              |
+| `references`                                                                 | List[[models.ReferenceResponse](../models/referenceresponse.md)]             | :heavy_check_mark:                                                           | Source used to produce the certified answer.                                 |                                                                              |
+| `answer_type`                                                                | [models.RetrieveResponseAnswerType](../models/retrieveresponseanswertype.md) | :heavy_check_mark:                                                           | Specifies that the answer produced was a certified answer.                   | certified                                                                    |
+| `relevance_score`                                                            | *float*                                                                      | :heavy_check_mark:                                                           | Confidence score (0.0-1.0) reflecting how well the answer matches the query. | 0.99                                                                         |

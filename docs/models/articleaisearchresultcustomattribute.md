@@ -1,0 +1,10 @@
+# ArticleAISearchResultCustomAttribute
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `name`                                                                               | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | The custom attribute's name.                                                         |
+| `value`                                                                              | List[*str*]                                                                          | :heavy_minus_sign:                                                                   | The custom attribute's values.                                                       |
+| `type`                                                                               | [Optional[models.ArticleAISearchResultType]](../models/articleaisearchresulttype.md) | :heavy_minus_sign:                                                                   | The custom attribute's type.                                                         |

@@ -1,0 +1,14 @@
+# AttachmentContent
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `attachment_id`                                                              | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | The ID of the attachment.                                                    |
+| `name`                                                                       | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | The name of the attachment.                                                  |
+| `size`                                                                       | *Optional[int]*                                                              | :heavy_minus_sign:                                                           | The size of the attachment in bytes. The maximum size is limited to 25MB.    |
+| `type`                                                                       | [Optional[models.AttachmentContentType]](../models/attachmentcontenttype.md) | :heavy_minus_sign:                                                           | The type of attachment.                                                      |
+| `attachment_content_type`                                                    | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | The type of the content.                                                     |
+| `streaming_url`                                                              | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | The streaming URL of the attachment.                                         |
+| `link`                                                                       | [Optional[models.Link]](../models/link.md)                                   | :heavy_minus_sign:                                                           | Defines the relationship between this resource and another object.           |

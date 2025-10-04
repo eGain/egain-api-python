@@ -1,0 +1,9 @@
+# AISearchResponseChannel
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `type`                                                                                              | [models.AISearchResponseType](../models/aisearchresponsetype.md)                                    | :heavy_check_mark:                                                                                  | The channel where the query originated, e.g., directly from the portal or via a custom integration. |
+| `name`                                                                                              | *Optional[str]*                                                                                     | :heavy_minus_sign:                                                                                  | The name of the channel.                                                                            |
