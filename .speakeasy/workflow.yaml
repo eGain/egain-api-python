@@ -13,6 +13,9 @@ targets:
     egain:
         target: python
         source: Knowledge Portal Manager APIs
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/egain-corporation/portalmgr/knowledge-portal-manager-ap-is-python-code-samples
