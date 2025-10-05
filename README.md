@@ -148,7 +148,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -180,7 +180,7 @@ async def main():
         access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
     ) as egain:
 
-        res = await egain.aiservices.retrieve.post_portal_id_retrieve_async(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
             "PROD-1234": [
                 "PROD-2000",
                 "PROD-2003",
@@ -220,7 +220,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -249,11 +249,11 @@ with Egain(
 
 #### [aiservices.answers](docs/sdks/answers/README.md)
 
-* [post_portal_id_answers](docs/sdks/answers/README.md#post_portal_id_answers) - Get the best answer for a user query
+* [get_best_answer](docs/sdks/answers/README.md#get_best_answer) - Get the best answer for a user query
 
 #### [aiservices.retrieve](docs/sdks/retrieve/README.md)
 
-* [post_portal_id_retrieve](docs/sdks/retrieve/README.md#post_portal_id_retrieve) - Retrieve Chunks
+* [retrieve_chunks](docs/sdks/retrieve/README.md#retrieve_chunks) - Retrieve Chunks
 
 ### [content](docs/sdks/content/README.md)
 
@@ -441,7 +441,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -471,7 +471,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -593,7 +593,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -623,7 +623,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -652,7 +652,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",

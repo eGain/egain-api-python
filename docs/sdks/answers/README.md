@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [post_portal_id_answers](#post_portal_id_answers) - Get the best answer for a user query
+* [get_best_answer](#get_best_answer) - Get the best answer for a user query
 
-## post_portal_id_answers
+## get_best_answer
 
 The **Answers API** allows enterprises to deliver fast, accurate, and contextual responses powered by their organizational knowledge. It supports two complementary approaches:  
 <li> **Certified Answers**: Direct snippets retrieved from enterprise-authored content. </li>  
@@ -18,7 +18,7 @@ Every response includes supporting search results, references, and confidence sc
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="post_/{portalID}/answers" method="post" path="/{portalID}/answers" -->
+<!-- UsageSnippet language="python" operationID="getBestAnswer" method="post" path="/{portalID}/answers" -->
 ```python
 from egain_api_python import Egain
 import os
@@ -28,7 +28,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.answers.post_portal_id_answers(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.answers.get_best_answer(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",

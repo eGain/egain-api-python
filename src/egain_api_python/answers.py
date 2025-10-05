@@ -10,7 +10,7 @@ from typing import Dict, List, Mapping, Optional, Union
 
 
 class Answers(BaseSDK):
-    def post_portal_id_answers(
+    def get_best_answer(
         self,
         *,
         q: str,
@@ -62,12 +62,12 @@ class Answers(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.POST_PORTAL_ID_ANSWERS_OP_SERVERS[0]
+            base_url = models.GET_BEST_ANSWER_OP_SERVERS[0]
             url_variables = {
                 "API_DOMAIN": "api.egain.cloud",
             }
 
-        request = models.PostPortalIDAnswersRequest(
+        request = models.GetBestAnswerRequest(
             q=q,
             portal_id=portal_id,
             dollar_filter_user_profile_id=dollar_filter_user_profile_id,
@@ -119,7 +119,7 @@ class Answers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post_/{portalID}/answers",
+                operation_id="getBestAnswer",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -145,7 +145,7 @@ class Answers(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def post_portal_id_answers_async(
+    async def get_best_answer_async(
         self,
         *,
         q: str,
@@ -197,12 +197,12 @@ class Answers(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.POST_PORTAL_ID_ANSWERS_OP_SERVERS[0]
+            base_url = models.GET_BEST_ANSWER_OP_SERVERS[0]
             url_variables = {
                 "API_DOMAIN": "api.egain.cloud",
             }
 
-        request = models.PostPortalIDAnswersRequest(
+        request = models.GetBestAnswerRequest(
             q=q,
             portal_id=portal_id,
             dollar_filter_user_profile_id=dollar_filter_user_profile_id,
@@ -254,7 +254,7 @@ class Answers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post_/{portalID}/answers",
+                operation_id="getBestAnswer",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

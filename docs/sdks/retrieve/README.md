@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [post_portal_id_retrieve](#post_portal_id_retrieve) - Retrieve Chunks
+* [retrieve_chunks](#retrieve_chunks) - Retrieve Chunks
 
-## post_portal_id_retrieve
+## retrieve_chunks
 
 The Retrieve API enables enterprises to directly access relevant content chunks from their organizational knowledge sources. It is designed for scenarios where developers want granular control over retrieved information, such as powering custom search, analytics, or retrieval-augmented generation (RAG) pipelines. <br><br> In addition to raw chunk retrieval, the API can return **Certified Answers** if it meets the 'Certified Answer' threshold score. Responses include relevance scores, metadata, and references to maintain transparency and flexibility. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="post_/{portalID}/retrieve" method="post" path="/{portalID}/retrieve" -->
+<!-- UsageSnippet language="python" operationID="retrieveChunks" method="post" path="/{portalID}/retrieve" -->
 ```python
 from egain_api_python import Egain
 import os
@@ -23,7 +23,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.post_portal_id_retrieve(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",

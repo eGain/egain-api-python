@@ -15,13 +15,13 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-POST_PORTAL_ID_ANSWERS_OP_SERVERS = [
+GET_BEST_ANSWER_OP_SERVERS = [
     # aiservices
     "https://${API_DOMAIN}/core/aiservices/v4",
 ]
 
 
-class PostPortalIDAnswersRequestTypedDict(TypedDict):
+class GetBestAnswerRequestTypedDict(TypedDict):
     q: str
     r"""The search query string. The string must be escaped as required by the URL syntax rules."""
     portal_id: str
@@ -39,7 +39,7 @@ class PostPortalIDAnswersRequestTypedDict(TypedDict):
     answers_request: NotRequired[AnswersRequestTypedDict]
 
 
-class PostPortalIDAnswersRequest(BaseModel):
+class GetBestAnswerRequest(BaseModel):
     q: Annotated[
         str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]

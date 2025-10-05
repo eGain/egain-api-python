@@ -1,4 +1,4 @@
-# PostPortalIDRetrieveRequest
+# RetrieveChunksRequest
 
 
 ## Fields

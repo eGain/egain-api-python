@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ee4acf09-a651-4ad3-acc5-0580d6879989
 management:
-  docChecksum: 66c85523db35fb042d1d0bcb7c1dbe5a
+  docChecksum: 2bf1bd441fc0d43492fe021e5426fc10
   docVersion: 4.0.0
   speakeasyVersion: 1.634.2
   generationVersion: 2.721.3
-  releaseVersion: 0.1.1
-  configChecksum: da313ba1ed18503cce00d1293c948e99
+  releaseVersion: 0.1.2
+  configChecksum: 3f972681c78ac823091fdacbbd4c5709
   published: true
 features:
   python:
@@ -221,6 +221,7 @@ generatedFiles:
   - docs/models/getarticleratingsrequest.md
   - docs/models/getarticlesintopicrequest.md
   - docs/models/getattachmentbyidinportalrequest.md
+  - docs/models/getbestanswerrequest.md
   - docs/models/getbookmarkrequest.md
   - docs/models/getcasebasereleasebyidrequest.md
   - docs/models/getcasebyidrequest.md
@@ -293,8 +294,6 @@ generatedFiles:
   - docs/models/portal.md
   - docs/models/portalresult.md
   - docs/models/portalsettings.md
-  - docs/models/postportalidanswersrequest.md
-  - docs/models/postportalidretrieverequest.md
   - docs/models/profile.md
   - docs/models/profileresult.md
   - docs/models/progress.md
@@ -321,6 +320,7 @@ generatedFiles:
   - docs/models/restorequickpickrequest.md
   - docs/models/results.md
   - docs/models/resulttype.md
+  - docs/models/retrievechunksrequest.md
   - docs/models/retrieverequest.md
   - docs/models/retrieverequestchannel.md
   - docs/models/retrieverequesttype.md
@@ -597,6 +597,7 @@ generatedFiles:
   - src/egain_api_python/models/getarticleratingsop.py
   - src/egain_api_python/models/getarticlesintopicop.py
   - src/egain_api_python/models/getattachmentbyidinportalop.py
+  - src/egain_api_python/models/getbestanswerop.py
   - src/egain_api_python/models/getbookmarkop.py
   - src/egain_api_python/models/getcasebasereleasebyidop.py
   - src/egain_api_python/models/getcasebyidop.py
@@ -653,8 +654,6 @@ generatedFiles:
   - src/egain_api_python/models/portal.py
   - src/egain_api_python/models/portalresult.py
   - src/egain_api_python/models/portalsettings.py
-  - src/egain_api_python/models/post_portalid_answersop.py
-  - src/egain_api_python/models/post_portalid_retrieveop.py
   - src/egain_api_python/models/profile.py
   - src/egain_api_python/models/profileresult.py
   - src/egain_api_python/models/publishprofile.py
@@ -670,6 +669,7 @@ generatedFiles:
   - src/egain_api_python/models/relatedquestions.py
   - src/egain_api_python/models/resourcetype_parameter.py
   - src/egain_api_python/models/restorequickpickop.py
+  - src/egain_api_python/models/retrievechunksop.py
   - src/egain_api_python/models/retrieverequest.py
   - src/egain_api_python/models/retrieveresponse.py
   - src/egain_api_python/models/role.py
@@ -5761,4 +5761,32 @@ examples:
       responses:
         "503":
           application/json: {"status": "unhealthy", "timestamp": "2024-01-15T10:30:00Z", "version": "4.0.0"}
+  retrieveChunks:
+    speakeasy-default-retrieve-chunks:
+      parameters:
+        path:
+          portalID: "PROD-1000"
+        query:
+          q: "fair lending"
+          $filter[userProfileID]: "PROD-3210"
+          $lang: "en-US"
+          $filter[tags]: {"PROD-1234": ["PROD-2000", "PROD-2003"], "PROD-2005": ["PROD-2007"]}
+      requestBody:
+        application/json: {"channel": {"type": "custom", "name": "Eight Bank Website"}}
+      responses:
+        "200":
+          application/json: {"answer": {"answerValue": "Per the Lending FAQ document...", "references": [{"id": "<id>", "name": "<value>", "docType": "HTML", "source": "eGain Article"}], "answerType": "certified", "relevanceScore": 0.99}, "searchResults": [{"id": "PROD-48192", "name": "Lending FAQs", "docType": "Pdf", "source": "eGain Article", "snippet": "Fair lending is a part of...", "relevanceScore": 4661.16}], "channel": {"type": "custom", "name": "Eight Bank Page"}}
+  getBestAnswer:
+    speakeasy-default-get-best-answer:
+      parameters:
+        path:
+          portalID: "PROD-1000"
+        query:
+          q: "fair lending"
+          $filter[userProfileID]: "PROD-3210"
+          $lang: "en-US"
+          $filter[tags]: {"PROD-1234": ["PROD-2000", "PROD-2003"], "PROD-2005": ["PROD-2007"]}
+      responses:
+        "200":
+          application/json: {"searchResults": [{"id": "PROD-48192", "name": "Lending FAQs", "docType": "Pdf", "source": "eGain Article", "snippet": "Fair lending is a part of...", "relevanceScore": 2894.84}]}
 examplesVersion: 1.0.2

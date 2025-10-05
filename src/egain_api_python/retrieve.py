@@ -10,7 +10,7 @@ from typing import Dict, List, Mapping, Optional, Union
 
 
 class Retrieve(BaseSDK):
-    def post_portal_id_retrieve(
+    def retrieve_chunks(
         self,
         *,
         q: str,
@@ -55,12 +55,12 @@ class Retrieve(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.POST_PORTAL_ID_RETRIEVE_OP_SERVERS[0]
+            base_url = models.RETRIEVE_CHUNKS_OP_SERVERS[0]
             url_variables = {
                 "API_DOMAIN": "api.egain.cloud",
             }
 
-        request = models.PostPortalIDRetrieveRequest(
+        request = models.RetrieveChunksRequest(
             q=q,
             portal_id=portal_id,
             dollar_filter_user_profile_id=dollar_filter_user_profile_id,
@@ -111,7 +111,7 @@ class Retrieve(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post_/{portalID}/retrieve",
+                operation_id="retrieveChunks",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -137,7 +137,7 @@ class Retrieve(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def post_portal_id_retrieve_async(
+    async def retrieve_chunks_async(
         self,
         *,
         q: str,
@@ -182,12 +182,12 @@ class Retrieve(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.POST_PORTAL_ID_RETRIEVE_OP_SERVERS[0]
+            base_url = models.RETRIEVE_CHUNKS_OP_SERVERS[0]
             url_variables = {
                 "API_DOMAIN": "api.egain.cloud",
             }
 
-        request = models.PostPortalIDRetrieveRequest(
+        request = models.RetrieveChunksRequest(
             q=q,
             portal_id=portal_id,
             dollar_filter_user_profile_id=dollar_filter_user_profile_id,
@@ -238,7 +238,7 @@ class Retrieve(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post_/{portalID}/retrieve",
+                operation_id="retrieveChunks",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

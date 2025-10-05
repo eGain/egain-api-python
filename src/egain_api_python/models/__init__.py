@@ -393,6 +393,11 @@ if TYPE_CHECKING:
         GetAttachmentByIDInPortalRequest,
         GetAttachmentByIDInPortalRequestTypedDict,
     )
+    from .getbestanswerop import (
+        GET_BEST_ANSWER_OP_SERVERS,
+        GetBestAnswerRequest,
+        GetBestAnswerRequestTypedDict,
+    )
     from .getbookmarkop import GetbookmarkRequest, GetbookmarkRequestTypedDict
     from .getcasebasereleasebyidop import (
         GetCasebaseReleaseByIDRequest,
@@ -548,16 +553,6 @@ if TYPE_CHECKING:
         PortalSettingsTypedDict,
         SearchLearningLevel,
     )
-    from .post_portalid_answersop import (
-        POST_PORTAL_ID_ANSWERS_OP_SERVERS,
-        PostPortalIDAnswersRequest,
-        PostPortalIDAnswersRequestTypedDict,
-    )
-    from .post_portalid_retrieveop import (
-        POST_PORTAL_ID_RETRIEVE_OP_SERVERS,
-        PostPortalIDRetrieveRequest,
-        PostPortalIDRetrieveRequestTypedDict,
-    )
     from .profile import Profile, ProfileTypedDict
     from .profileresult import ProfileResult, ProfileResultTypedDict
     from .publishprofile import PublishProfile, PublishProfileTypedDict
@@ -590,6 +585,11 @@ if TYPE_CHECKING:
     from .restorequickpickop import (
         RestoreQuickpickRequest,
         RestoreQuickpickRequestTypedDict,
+    )
+    from .retrievechunksop import (
+        RETRIEVE_CHUNKS_OP_SERVERS,
+        RetrieveChunksRequest,
+        RetrieveChunksRequestTypedDict,
     )
     from .retrieverequest import (
         RetrieveRequest,
@@ -1046,6 +1046,7 @@ __all__ = [
     "FolderBreadcrumbTypedDict",
     "FolderSummary",
     "FolderSummaryTypedDict",
+    "GET_BEST_ANSWER_OP_SERVERS",
     "GET_HEALTH_OP_SERVERS",
     "GET_IMPORT_CONTENT_OP_SERVERS",
     "GHSearchRequest",
@@ -1093,6 +1094,8 @@ __all__ = [
     "GetArticlesInTopicRequestTypedDict",
     "GetAttachmentByIDInPortalRequest",
     "GetAttachmentByIDInPortalRequestTypedDict",
+    "GetBestAnswerRequest",
+    "GetBestAnswerRequestTypedDict",
     "GetCaseByIDRequest",
     "GetCaseByIDRequestTypedDict",
     "GetCasebaseReleaseByIDRequest",
@@ -1205,8 +1208,6 @@ __all__ = [
     "OwnedBy",
     "OwnedByTypedDict",
     "PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS",
-    "POST_PORTAL_ID_ANSWERS_OP_SERVERS",
-    "POST_PORTAL_ID_RETRIEVE_OP_SERVERS",
     "PaginationInfo",
     "PaginationInfoTypedDict",
     "PatchImportContentValidationRequest",
@@ -1223,10 +1224,6 @@ __all__ = [
     "PortalSettings",
     "PortalSettingsTypedDict",
     "PortalTypedDict",
-    "PostPortalIDAnswersRequest",
-    "PostPortalIDAnswersRequestTypedDict",
-    "PostPortalIDRetrieveRequest",
-    "PostPortalIDRetrieveRequestTypedDict",
     "Profile",
     "ProfileResult",
     "ProfileResultTypedDict",
@@ -1253,6 +1250,7 @@ __all__ = [
     "QuickpickResultTypedDict",
     "QuickpickResults",
     "QuickpickResultsTypedDict",
+    "RETRIEVE_CHUNKS_OP_SERVERS",
     "RateArticleRequest",
     "RateArticleRequestTypedDict",
     "ReferenceResponse",
@@ -1273,6 +1271,8 @@ __all__ = [
     "ResultType",
     "Results",
     "ResultsTypedDict",
+    "RetrieveChunksRequest",
+    "RetrieveChunksRequestTypedDict",
     "RetrieveRequest",
     "RetrieveRequestChannel",
     "RetrieveRequestChannelTypedDict",
@@ -1758,6 +1758,9 @@ _dynamic_imports: dict[str, str] = {
     "GetArticlesInTopicRequestTypedDict": ".getarticlesintopicop",
     "GetAttachmentByIDInPortalRequest": ".getattachmentbyidinportalop",
     "GetAttachmentByIDInPortalRequestTypedDict": ".getattachmentbyidinportalop",
+    "GET_BEST_ANSWER_OP_SERVERS": ".getbestanswerop",
+    "GetBestAnswerRequest": ".getbestanswerop",
+    "GetBestAnswerRequestTypedDict": ".getbestanswerop",
     "GetbookmarkRequest": ".getbookmarkop",
     "GetbookmarkRequestTypedDict": ".getbookmarkop",
     "GetCasebaseReleaseByIDRequest": ".getcasebasereleasebyidop",
@@ -1896,12 +1899,6 @@ _dynamic_imports: dict[str, str] = {
     "PortalSettings": ".portalsettings",
     "PortalSettingsTypedDict": ".portalsettings",
     "SearchLearningLevel": ".portalsettings",
-    "POST_PORTAL_ID_ANSWERS_OP_SERVERS": ".post_portalid_answersop",
-    "PostPortalIDAnswersRequest": ".post_portalid_answersop",
-    "PostPortalIDAnswersRequestTypedDict": ".post_portalid_answersop",
-    "POST_PORTAL_ID_RETRIEVE_OP_SERVERS": ".post_portalid_retrieveop",
-    "PostPortalIDRetrieveRequest": ".post_portalid_retrieveop",
-    "PostPortalIDRetrieveRequestTypedDict": ".post_portalid_retrieveop",
     "Profile": ".profile",
     "ProfileTypedDict": ".profile",
     "ProfileResult": ".profileresult",
@@ -1939,6 +1936,9 @@ _dynamic_imports: dict[str, str] = {
     "ResourceTypeParameter": ".resourcetype_parameter",
     "RestoreQuickpickRequest": ".restorequickpickop",
     "RestoreQuickpickRequestTypedDict": ".restorequickpickop",
+    "RETRIEVE_CHUNKS_OP_SERVERS": ".retrievechunksop",
+    "RetrieveChunksRequest": ".retrievechunksop",
+    "RetrieveChunksRequestTypedDict": ".retrievechunksop",
     "RetrieveRequest": ".retrieverequest",
     "RetrieveRequestChannel": ".retrieverequest",
     "RetrieveRequestChannelTypedDict": ".retrieverequest",
