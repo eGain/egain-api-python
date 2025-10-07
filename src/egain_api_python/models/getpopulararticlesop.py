@@ -21,11 +21,11 @@ class GetpopulararticlesRequestTypedDict(TypedDict):
     r"""The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses)."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
-    dollar_filter_topic_id: NotRequired[str]
+    filter_topic_id: NotRequired[str]
     r"""The ID of the topic. It is used to restrict to a specific topic."""
     language: NotRequired[LanguageQueryParameter]
     r"""The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>"""
-    dollar_filter_tags: NotRequired[str]
+    filter_tags: NotRequired[str]
     r"""A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together."""
     pagenum: NotRequired[int]
     r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
@@ -71,7 +71,7 @@ class GetpopulararticlesRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
-    dollar_filter_topic_id: Annotated[
+    filter_topic_id: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[topicId]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -85,7 +85,7 @@ class GetpopulararticlesRequest(BaseModel):
     ] = None
     r"""The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>"""
 
-    dollar_filter_tags: Annotated[
+    filter_tags: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[tags]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

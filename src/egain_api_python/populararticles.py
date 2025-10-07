@@ -15,9 +15,9 @@ class Populararticles(BaseSDK):
         *,
         accept_language: models.AcceptLanguage,
         portal_id: str,
-        dollar_filter_topic_id: Optional[str] = None,
+        filter_topic_id: Optional[str] = None,
         language: Optional[models.LanguageQueryParameter] = None,
-        dollar_filter_tags: Optional[str] = None,
+        filter_tags: Optional[str] = None,
         pagenum: Optional[int] = 1,
         pagesize: Optional[int] = 10,
         article_result_additional_attributes: Optional[
@@ -51,9 +51,9 @@ class Populararticles(BaseSDK):
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param dollar_filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
+        :param filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
-        :param dollar_filter_tags: A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together.
+        :param filter_tags: A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together.
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param article_result_additional_attributes: The attributes of an Article to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' will return all attributes.  #### Default Attributes These Article attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the Article. | name  | The name of the Article. | articleType | The Article Type and its attributes. | createdBy | The ID, first name, middle name and last name of the user that created the Article. | createdDate | The date that the Article was created. | hasAttachments | True: The Article has one or more attachments.<br>False: The Article does not have any attachments. | languageCode | The language code of the Article language.  | modifiedBy | The ID, first name, middle name and last name of the user that last modified the Article. | modifiedDate | The date that the Article was last modified on. | link | The link object, used to retrieve the details of the Article. | versionId | The ID of the Article version that is returned.
@@ -75,9 +75,9 @@ class Populararticles(BaseSDK):
         request = models.GetpopulararticlesRequest(
             accept_language=accept_language,
             portal_id=portal_id,
-            dollar_filter_topic_id=dollar_filter_topic_id,
+            filter_topic_id=filter_topic_id,
             language=language,
-            dollar_filter_tags=dollar_filter_tags,
+            filter_tags=filter_tags,
             pagenum=pagenum,
             pagesize=pagesize,
             article_result_additional_attributes=article_result_additional_attributes,
@@ -153,9 +153,9 @@ class Populararticles(BaseSDK):
         *,
         accept_language: models.AcceptLanguage,
         portal_id: str,
-        dollar_filter_topic_id: Optional[str] = None,
+        filter_topic_id: Optional[str] = None,
         language: Optional[models.LanguageQueryParameter] = None,
-        dollar_filter_tags: Optional[str] = None,
+        filter_tags: Optional[str] = None,
         pagenum: Optional[int] = 1,
         pagesize: Optional[int] = 10,
         article_result_additional_attributes: Optional[
@@ -189,9 +189,9 @@ class Populararticles(BaseSDK):
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param dollar_filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
+        :param filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
-        :param dollar_filter_tags: A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together.
+        :param filter_tags: A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together.
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param article_result_additional_attributes: The attributes of an Article to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' will return all attributes.  #### Default Attributes These Article attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the Article. | name  | The name of the Article. | articleType | The Article Type and its attributes. | createdBy | The ID, first name, middle name and last name of the user that created the Article. | createdDate | The date that the Article was created. | hasAttachments | True: The Article has one or more attachments.<br>False: The Article does not have any attachments. | languageCode | The language code of the Article language.  | modifiedBy | The ID, first name, middle name and last name of the user that last modified the Article. | modifiedDate | The date that the Article was last modified on. | link | The link object, used to retrieve the details of the Article. | versionId | The ID of the Article version that is returned.
@@ -213,9 +213,9 @@ class Populararticles(BaseSDK):
         request = models.GetpopulararticlesRequest(
             accept_language=accept_language,
             portal_id=portal_id,
-            dollar_filter_topic_id=dollar_filter_topic_id,
+            filter_topic_id=filter_topic_id,
             language=language,
-            dollar_filter_tags=dollar_filter_tags,
+            filter_tags=filter_tags,
             pagenum=pagenum,
             pagesize=pagesize,
             article_result_additional_attributes=article_result_additional_attributes,

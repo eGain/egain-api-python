@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ee4acf09-a651-4ad3-acc5-0580d6879989
 management:
-  docChecksum: 2bf1bd441fc0d43492fe021e5426fc10
+  docChecksum: 381c01c751ce35c3cd1466fb10ea4157
   docVersion: 4.0.0
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 0.1.2
-  configChecksum: 3f972681c78ac823091fdacbbd4c5709
+  speakeasyVersion: 1.635.1
+  generationVersion: 2.722.2
+  releaseVersion: 0.1.3
+  configChecksum: 4a205ac1d40d0306894d37a8690daa15
   published: true
 features:
   python:
@@ -84,7 +84,6 @@ generatedFiles:
   - docs/models/articleaisearchresultlink.md
   - docs/models/articleaisearchresultsource.md
   - docs/models/articleaisearchresulttype.md
-  - docs/models/articleaisearchresulttypename.md
   - docs/models/articleattachment.md
   - docs/models/articleattachmenttype.md
   - docs/models/articlecategories.md
@@ -104,7 +103,6 @@ generatedFiles:
   - docs/models/articlesortorder.md
   - docs/models/articletype.md
   - docs/models/articletypeattributes.md
-  - docs/models/articletypetypename.md
   - docs/models/articlewitheditions.md
   - docs/models/attachment.md
   - docs/models/attachmentadditionalattributes.md
@@ -146,6 +144,7 @@ generatedFiles:
   - docs/models/compliancearticleresults.md
   - docs/models/complianceforarticle.md
   - docs/models/complyarticlerequest.md
+  - docs/models/components.md
   - docs/models/componentsschemastag.md
   - docs/models/componentsschemastagcategory.md
   - docs/models/componentsschemastaggroup.md
@@ -175,6 +174,7 @@ generatedFiles:
   - docs/models/customattribute.md
   - docs/models/customattributetype.md
   - docs/models/customer.md
+  - docs/models/database.md
   - docs/models/datadestination.md
   - docs/models/deletebookmarkrequest.md
   - docs/models/deletesuggestionrequest.md
@@ -192,9 +192,13 @@ generatedFiles:
   - docs/models/email.md
   - docs/models/exportcontentresponse.md
   - docs/models/exportstatus.md
+  - docs/models/exportstatusprogress.md
   - docs/models/exportstatusrequest.md
+  - docs/models/exportstatusresults.md
   - docs/models/exportstatusstatus.md
+  - docs/models/externalservices.md
   - docs/models/feedbackarticleforsuggestion.md
+  - docs/models/filesystem.md
   - docs/models/filters.md
   - docs/models/filterstatus.md
   - docs/models/folderbreadcrumb.md
@@ -228,6 +232,7 @@ generatedFiles:
   - docs/models/getchildtopicsrequest.md
   - docs/models/getclusterbycasebasereleaseidrequest.md
   - docs/models/gethealthresponse.md
+  - docs/models/gethealthstatus.md
   - docs/models/getimportcontentrequest.md
   - docs/models/getmyportalsrequest.md
   - docs/models/getmysubscriptionrequest.md
@@ -253,7 +258,10 @@ generatedFiles:
   - docs/models/importcontentdatasource.md
   - docs/models/importcontenttype.md
   - docs/models/importstatus.md
+  - docs/models/importstatusprogress.md
+  - docs/models/importstatusresults.md
   - docs/models/importstatusstatus.md
+  - docs/models/jobtype.md
   - docs/models/kblanguage.md
   - docs/models/kblanguagecode.md
   - docs/models/kblanguagecode1.md
@@ -262,7 +270,6 @@ generatedFiles:
   - docs/models/knowledgeexportcode.md
   - docs/models/knowledgeexportcredentials.md
   - docs/models/knowledgeexportlanguage.md
-  - docs/models/knowledgeexportresourcetype.md
   - docs/models/l10nstring.md
   - docs/models/label.md
   - docs/models/languagecode.md
@@ -294,9 +301,9 @@ generatedFiles:
   - docs/models/portal.md
   - docs/models/portalresult.md
   - docs/models/portalsettings.md
+  - docs/models/processingengine.md
   - docs/models/profile.md
   - docs/models/profileresult.md
-  - docs/models/progress.md
   - docs/models/publishprofile.md
   - docs/models/publishview.md
   - docs/models/publishviews.md
@@ -311,14 +318,12 @@ generatedFiles:
   - docs/models/ratearticlerequest.md
   - docs/models/referenceresponse.md
   - docs/models/referenceresponsedoctype.md
-  - docs/models/referenceresponselink.md
   - docs/models/referenceresponsesource.md
   - docs/models/rejectghsolutionrequest.md
   - docs/models/relatedarticleforcreateupdatedeletesuggestion.md
   - docs/models/relatedquestions.md
-  - docs/models/resourcetypeparameter.md
+  - docs/models/resourcetype.md
   - docs/models/restorequickpickrequest.md
-  - docs/models/results.md
   - docs/models/resulttype.md
   - docs/models/retrievechunksrequest.md
   - docs/models/retrieverequest.md
@@ -346,12 +351,12 @@ generatedFiles:
   - docs/models/searchpriortoescalationrequest.md
   - docs/models/searchresult.md
   - docs/models/searchresultdoctype.md
-  - docs/models/searchresultlink.md
   - docs/models/searchresults.md
   - docs/models/searchresultsource.md
   - docs/models/searchsuggestionrequest.md
   - docs/models/security.md
   - docs/models/selectuserprofilerequest.md
+  - docs/models/serviceunavailablestatus.md
   - docs/models/sessioncontextvariable.md
   - docs/models/shorturl.md
   - docs/models/snippetforstructuredauthoring.md
@@ -367,6 +372,7 @@ generatedFiles:
   - docs/models/startghsearchresponse.md
   - docs/models/startquestionandanswer.md
   - docs/models/stepghsearchrequest.md
+  - docs/models/storage.md
   - docs/models/stringattributevalue.md
   - docs/models/structuredauthoringfields.md
   - docs/models/subscribearticlerequest.md
@@ -386,12 +392,12 @@ generatedFiles:
   - docs/models/thresholdtype.md
   - docs/models/topic.md
   - docs/models/topicadditionalattributes.md
-  - docs/models/topicaisearchresult.md
   - docs/models/topicbreadcrumb.md
   - docs/models/topicresult.md
   - docs/models/topicsummary.md
   - docs/models/topictreenode.md
   - docs/models/topictreeresult.md
+  - docs/models/typename.md
   - docs/models/unsubscribearticlerequest.md
   - docs/models/uploadattachmentrequest.md
   - docs/models/userdetails.md
@@ -667,7 +673,6 @@ generatedFiles:
   - src/egain_api_python/models/referenceresponse.py
   - src/egain_api_python/models/rejectghsolutionop.py
   - src/egain_api_python/models/relatedquestions.py
-  - src/egain_api_python/models/resourcetype_parameter.py
   - src/egain_api_python/models/restorequickpickop.py
   - src/egain_api_python/models/retrievechunksop.py
   - src/egain_api_python/models/retrieverequest.py
@@ -713,7 +718,6 @@ generatedFiles:
   - src/egain_api_python/models/tags.py
   - src/egain_api_python/models/topic.py
   - src/egain_api_python/models/topicadditionalattributes.py
-  - src/egain_api_python/models/topicaisearchresult.py
   - src/egain_api_python/models/topicbreadcrumb.py
   - src/egain_api_python/models/topicresult.py
   - src/egain_api_python/models/topicsummary.py
@@ -5511,7 +5515,7 @@ examples:
   exportContent:
     Required Attribute missing:
       requestBody:
-        application/json: {"articleCategories": "searchable", "portalID": "PROD-1000", "language": {"code": "en-US"}, "resourceTypes": ["articles"], "dataDestination": {"destinationType": "AWS S3 bucket", "path": "https://s3.us-west-2.amazonaws.com/amzn-s3-demo-bucket1", "region": "us-west-2", "credentials": {"accessKey": "s3-access-user", "secretKey": "s3-access-secret"}}}
+        application/json: {"articleCategories": "searchable", "portalID": "PROD-1000", "language": {"code": "en-US"}, "resourceTypes": ["articles"], "dataDestination": {"destinationType": "AWS S3 bucket", "path": "s3://amzn-s3-demo-bucket/mydeptfolder", "region": "us-west-2", "credentials": {"accessKey": "s3-access-user", "secretKey": "s3-access-secret"}}}
       responses:
         "400":
           application/json: {"code": "400-112", "developerMessage": "Required query parameter(s) is missing. The following parameters are required: <param name>"}
@@ -5519,7 +5523,7 @@ examples:
           application/json: {"code": "400-112", "developerMessage": "Required query parameter(s) is missing. The following parameters are required: <param name>"}
     Unallowed attribute value:
       requestBody:
-        application/json: {"articleCategories": "searchable", "portalID": "PROD-1000", "language": {"code": "en-US"}, "resourceTypes": ["articles"], "dataDestination": {"destinationType": "AWS S3 bucket", "path": "https://s3.us-west-2.amazonaws.com/amzn-s3-demo-bucket1", "region": "us-west-2", "credentials": {"accessKey": "s3-access-user", "secretKey": "s3-access-secret"}}}
+        application/json: {"articleCategories": "searchable", "portalID": "PROD-1000", "language": {"code": "en-US"}, "resourceTypes": ["articles"], "dataDestination": {"destinationType": "AWS S3 bucket", "path": "s3://amzn-s3-demo-bucket/mydeptfolder", "region": "us-west-2", "credentials": {"accessKey": "s3-access-user", "secretKey": "s3-access-secret"}}}
       responses:
         "400":
           application/json: {"code": "400-196", "developerMessage": "Invalid value of attribute <attribute>, expected values are: [<possible_values>]."}
@@ -5546,7 +5550,7 @@ examples:
           jobID: "7A84B875-6F75-4C7B-B137-0632B62DB0BD"
       responses:
         "200":
-          application/json: {"status": "Successful", "progress": {"processed": 4500, "total": 4500, "percentage": 100}, "startTime": "2025-09-15T10:00:00.000Z", "results": {"successful": 4485, "warnings": 12, "errors": 3}}
+          application/json: {"status": "Successful", "progress": {"processed": 4500, "total": 4500, "percentage": 100}, "startTime": "2025-09-15T10:00:00.000Z", "completionTime": "2025-09-15T11:25:00.000Z", "results": {"successful": 4485, "warnings": 12, "errors": 3}}
     Failed Job:
       parameters:
         path:
@@ -5622,7 +5626,7 @@ examples:
           application/json: {"code": "<value>", "developerMessage": "<value>"}
     Update existing content:
       requestBody:
-        application/json: {"dataSource": {"type": "AWS S3 bucket", "path": "sftp://server.com/content/updates/", "credentials": {}}, "operation": "reimport", "scheduleTime": {"date": "2024-03-01T02:00:00.000Z"}}
+        application/json: {"dataSource": {"type": "Shared file path", "path": "sftp://server.com/content/updates/", "credentials": {}}, "operation": "reimport", "scheduleTime": {"date": "2024-03-01T02:00:00.000Z"}}
       responses:
         "400":
           application/json: {"code": "<value>", "developerMessage": "<value>"}
@@ -5659,7 +5663,7 @@ examples:
           job_id: "7A84B875-6F75-4C7B-B137-0632B62DB0BD"
       responses:
         "200":
-          application/json: {"status": "In Progress", "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt"}
+          application/json: {"status": "In Progress", "jobType": "Import", "progress": {"processed": 1250, "total": 5000, "percentage": 25}, "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt", "startTime": "2024-03-01T10:00:00.000Z", "estimatedCompletion": "2024-03-01T11:30:00.000Z", "currentOperation": "Processing content items"}
     Completed Job:
       parameters:
         path:
@@ -5673,7 +5677,7 @@ examples:
           job_id: "7A84B875-6F75-4C7B-B137-0632B62DB0BD"
       responses:
         "200":
-          application/json: {"status": "Failed", "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt"}
+          application/json: {"status": "Failed", "jobType": "Import", "progress": {"processed": 1250, "total": 5000, "percentage": 25}, "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt", "startTime": "2024-03-01T10:00:00.000Z", "failureTime": "2024-03-01T10:45:00.000Z", "error": "Database connection timeout after processing 1250 items", "retryable": true}
     Unsupported Parameters:
       parameters:
         path:
@@ -5701,6 +5705,20 @@ examples:
           application/json: {"code": "400-112", "developerMessage": "Required query parameter(s) is missing. The following parameters are required: '<query_parameter>'."}
         "500":
           application/json: {"code": "400-112", "developerMessage": "Required query parameter(s) is missing. The following parameters are required: '<query_parameter>'."}
+    Completed Import Job:
+      parameters:
+        path:
+          job_id: "7A84B875-6F75-4C7B-B137-0632B62DB0BD"
+      responses:
+        "200":
+          application/json: {"status": "Successful", "jobType": "Import", "progress": {"processed": 5000, "total": 5000, "percentage": 100}, "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt", "startTime": "2024-03-01T10:00:00.000Z", "completionTime": "2024-03-01T11:15:00.000Z", "results": {"warnings": 10, "errors": 5}}
+    Completed Validation Job:
+      parameters:
+        path:
+          job_id: "7A84B875-6F75-4C7B-B137-0632B62DB0BD"
+      responses:
+        "200":
+          application/json: {"status": "Successful", "jobType": "Validation", "progress": {"processed": 5000, "total": 5000, "percentage": 100}, "logFileLocation": "s3://mybucket/logs/import-logs-7A84B875-6F75-4C7B-B137-0632B62DB0BD.txt", "startTime": "2024-03-01T10:00:00.000Z", "completionTime": "2024-03-01T11:15:00.000Z", "results": {"warnings": 10, "errors": 5}}
   createImportValidation:
     Basic content validation:
       requestBody:
@@ -5742,6 +5760,26 @@ examples:
       responses:
         "412":
           application/json: {"code": "412-100", "developerMessage": "Pre condition failed"}
+    S3 content validation:
+      requestBody:
+        application/json: {"dataSource": {"type": "AWS S3 bucket", "path": "s3://mybucket/myfolder/", "region": "us-east-1", "credentials": {}}}
+      responses:
+        "400":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
+        "412":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
+        "500":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
+    SFTP content validation:
+      requestBody:
+        application/json: {"dataSource": {"type": "Shared file path", "path": "s3://mybucket/myfolder/"}}
+      responses:
+        "400":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
+        "412":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
+        "500":
+          application/json: {"code": "<value>", "developerMessage": "<value>"}
   patchImportContentValidation:
     Unauthorized:
       parameters:
@@ -5756,11 +5794,11 @@ examples:
     Healthy Service:
       responses:
         "200":
-          application/json: {"status": "healthy", "timestamp": "2024-01-15T10:30:00Z", "version": "4.0.0", "uptime": "2d 5h 30m 15s"}
+          application/json: {"status": "healthy", "timestamp": "2024-01-15T10:30:00.000Z", "version": "4.0.0", "uptime": "2d 5h 30m 15s"}
     Unhealthy Service:
       responses:
         "503":
-          application/json: {"status": "unhealthy", "timestamp": "2024-01-15T10:30:00Z", "version": "4.0.0"}
+          application/json: {"status": "unhealthy", "timestamp": "2024-01-15T10:30:00.000Z", "version": "4.0.0", "issues": ["Database connection failed", "External service timeout", "Storage system unavailable"], "components": {"database": "unhealthy", "fileSystem": "healthy", "externalServices": "unhealthy", "processingEngine": "degraded", "storage": "unhealthy"}}
   retrieveChunks:
     speakeasy-default-retrieve-chunks:
       parameters:
@@ -5788,5 +5826,5 @@ examples:
           $filter[tags]: {"PROD-1234": ["PROD-2000", "PROD-2003"], "PROD-2005": ["PROD-2007"]}
       responses:
         "200":
-          application/json: {"searchResults": [{"id": "PROD-48192", "name": "Lending FAQs", "docType": "Pdf", "source": "eGain Article", "snippet": "Fair lending is a part of...", "relevanceScore": 2894.84}]}
+          application/json: {"answer": {"answerValue": "<value>", "references": [{"id": "<id>", "name": "<value>", "docType": "Doc", "source": "eGain Article", "topicBreadCrumb": {"topicSummary": [{"id": "PROD-1921"}]}}], "answerType": "certified", "relevanceScore": 2129.24}, "searchResults": [{"id": "PROD-48192", "name": "Lending FAQs", "docType": "Pdf", "source": "eGain Article", "snippet": "Fair lending is a part of...", "relevanceScore": 2894.84}]}
 examplesVersion: 1.0.2

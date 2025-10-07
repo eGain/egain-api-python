@@ -22,7 +22,7 @@ class GetAnnouncementArticlesRequestTypedDict(TypedDict):
     r"""The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses)."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
-    dollar_filter_tags: NotRequired[str]
+    filter_tags: NotRequired[str]
     r"""A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together."""
     article_result_additional_attributes: NotRequired[
         List[ArticleResultAdditionalAttributes]
@@ -72,7 +72,7 @@ class GetAnnouncementArticlesRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
-    dollar_filter_tags: Annotated[
+    filter_tags: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[tags]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

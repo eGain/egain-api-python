@@ -228,7 +228,7 @@ class Articlelists(BaseSDK):
         accept_language: models.AcceptLanguage,
         portal_id: str,
         list_id: str,
-        dollar_filter_topic_id: Optional[str] = None,
+        filter_topic_id: Optional[str] = None,
         article_result_additional_attributes: Optional[
             List[models.ArticleResultAdditionalAttributes]
         ] = None,
@@ -253,7 +253,7 @@ class Articlelists(BaseSDK):
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param list_id: The ID of the list to be returned.
-        :param dollar_filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
+        :param filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
         :param article_result_additional_attributes: The attributes of an Article to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' will return all attributes.  #### Default Attributes These Article attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the Article. | name  | The name of the Article. | articleType | The Article Type and its attributes. | createdBy | The ID, first name, middle name and last name of the user that created the Article. | createdDate | The date that the Article was created. | hasAttachments | True: The Article has one or more attachments.<br>False: The Article does not have any attachments. | languageCode | The language code of the Article language.  | modifiedBy | The ID, first name, middle name and last name of the user that last modified the Article. | modifiedDate | The date that the Article was last modified on. | link | The link object, used to retrieve the details of the Article. | versionId | The ID of the Article version that is returned.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param retries: Override the default retry configuration for this method
@@ -275,7 +275,7 @@ class Articlelists(BaseSDK):
             accept_language=accept_language,
             portal_id=portal_id,
             list_id=list_id,
-            dollar_filter_topic_id=dollar_filter_topic_id,
+            filter_topic_id=filter_topic_id,
             article_result_additional_attributes=article_result_additional_attributes,
             language=language,
         )
@@ -351,7 +351,7 @@ class Articlelists(BaseSDK):
         accept_language: models.AcceptLanguage,
         portal_id: str,
         list_id: str,
-        dollar_filter_topic_id: Optional[str] = None,
+        filter_topic_id: Optional[str] = None,
         article_result_additional_attributes: Optional[
             List[models.ArticleResultAdditionalAttributes]
         ] = None,
@@ -376,7 +376,7 @@ class Articlelists(BaseSDK):
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param list_id: The ID of the list to be returned.
-        :param dollar_filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
+        :param filter_topic_id: The ID of the topic. It is used to restrict to a specific topic.
         :param article_result_additional_attributes: The attributes of an Article to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' will return all attributes.  #### Default Attributes These Article attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the Article. | name  | The name of the Article. | articleType | The Article Type and its attributes. | createdBy | The ID, first name, middle name and last name of the user that created the Article. | createdDate | The date that the Article was created. | hasAttachments | True: The Article has one or more attachments.<br>False: The Article does not have any attachments. | languageCode | The language code of the Article language.  | modifiedBy | The ID, first name, middle name and last name of the user that last modified the Article. | modifiedDate | The date that the Article was last modified on. | link | The link object, used to retrieve the details of the Article. | versionId | The ID of the Article version that is returned.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param retries: Override the default retry configuration for this method
@@ -398,7 +398,7 @@ class Articlelists(BaseSDK):
             accept_language=accept_language,
             portal_id=portal_id,
             list_id=list_id,
-            dollar_filter_topic_id=dollar_filter_topic_id,
+            filter_topic_id=filter_topic_id,
             article_result_additional_attributes=article_result_additional_attributes,
             language=language,
         )

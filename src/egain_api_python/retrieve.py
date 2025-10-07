@@ -15,10 +15,10 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
-        dollar_filter_user_profile_id: Optional[str] = None,
+        filter_user_profile_id: Optional[str] = None,
         language: Optional[models.LanguageCodeParameter] = None,
-        dollar_filter_tags: Optional[Dict[str, List[str]]] = None,
-        dollar_filter_topic_ids: Optional[List[str]] = None,
+        filter_tags: Optional[Dict[str, List[str]]] = None,
+        filter_topic_ids: Optional[List[str]] = None,
         channel: Optional[
             Union[models.RetrieveRequestChannel, models.RetrieveRequestChannelTypedDict]
         ] = None,
@@ -35,10 +35,10 @@ class Retrieve(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param dollar_filter_user_profile_id:
+        :param filter_user_profile_id:
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
-        :param dollar_filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
-        :param dollar_filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
         :param event_id: Unique ID for this specific API call or event.
         :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
@@ -63,10 +63,10 @@ class Retrieve(BaseSDK):
         request = models.RetrieveChunksRequest(
             q=q,
             portal_id=portal_id,
-            dollar_filter_user_profile_id=dollar_filter_user_profile_id,
+            filter_user_profile_id=filter_user_profile_id,
             language=language,
-            dollar_filter_tags=dollar_filter_tags,
-            dollar_filter_topic_ids=dollar_filter_topic_ids,
+            filter_tags=filter_tags,
+            filter_topic_ids=filter_topic_ids,
             retrieve_request=models.RetrieveRequest(
                 channel=utils.get_pydantic_model(
                     channel, Optional[models.RetrieveRequestChannel]
@@ -142,10 +142,10 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
-        dollar_filter_user_profile_id: Optional[str] = None,
+        filter_user_profile_id: Optional[str] = None,
         language: Optional[models.LanguageCodeParameter] = None,
-        dollar_filter_tags: Optional[Dict[str, List[str]]] = None,
-        dollar_filter_topic_ids: Optional[List[str]] = None,
+        filter_tags: Optional[Dict[str, List[str]]] = None,
+        filter_topic_ids: Optional[List[str]] = None,
         channel: Optional[
             Union[models.RetrieveRequestChannel, models.RetrieveRequestChannelTypedDict]
         ] = None,
@@ -162,10 +162,10 @@ class Retrieve(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param dollar_filter_user_profile_id:
+        :param filter_user_profile_id:
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
-        :param dollar_filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
-        :param dollar_filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
         :param event_id: Unique ID for this specific API call or event.
         :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
@@ -190,10 +190,10 @@ class Retrieve(BaseSDK):
         request = models.RetrieveChunksRequest(
             q=q,
             portal_id=portal_id,
-            dollar_filter_user_profile_id=dollar_filter_user_profile_id,
+            filter_user_profile_id=filter_user_profile_id,
             language=language,
-            dollar_filter_tags=dollar_filter_tags,
-            dollar_filter_topic_ids=dollar_filter_topic_ids,
+            filter_tags=filter_tags,
+            filter_topic_ids=filter_topic_ids,
             retrieve_request=models.RetrieveRequest(
                 channel=utils.get_pydantic_model(
                     channel, Optional[models.RetrieveRequestChannel]

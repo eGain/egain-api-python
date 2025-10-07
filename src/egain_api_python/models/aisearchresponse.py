@@ -3,7 +3,6 @@
 from __future__ import annotations
 from .articleaisearchresult import ArticleAISearchResult, ArticleAISearchResultTypedDict
 from .paginationinfo import PaginationInfo, PaginationInfoTypedDict
-from .topicaisearchresult import TopicAISearchResult, TopicAISearchResultTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
 from typing import List, Literal, Optional
@@ -36,15 +35,12 @@ class SearchResultsTypedDict(TypedDict):
     r"""Top search results with relevance scores"""
 
     article: NotRequired[List[ArticleAISearchResultTypedDict]]
-    topic: NotRequired[List[TopicAISearchResultTypedDict]]
 
 
 class SearchResults(BaseModel):
     r"""Top search results with relevance scores"""
 
     article: Optional[List[ArticleAISearchResult]] = None
-
-    topic: Optional[List[TopicAISearchResult]] = None
 
 
 class AISearchResponseTypedDict(TypedDict):

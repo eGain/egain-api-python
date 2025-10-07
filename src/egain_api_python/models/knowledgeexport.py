@@ -48,7 +48,7 @@ class KnowledgeExportLanguage(BaseModel):
     r"""The code of the language."""
 
 
-KnowledgeExportResourceType = Literal[
+ResourceType = Literal[
     "articles",
     "topics",
     "portals",
@@ -104,7 +104,7 @@ class KnowledgeExportTypedDict(TypedDict):
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
     language: KnowledgeExportLanguageTypedDict
     r"""The Knowledge Base language in which the content is created."""
-    resource_types: List[KnowledgeExportResourceType]
+    resource_types: List[ResourceType]
     r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list. Details of a single portal are exported.
     Articles whose state is Published are returned.
     | Portal Attribute Name | Description
@@ -170,9 +170,7 @@ class KnowledgeExport(BaseModel):
     language: KnowledgeExportLanguage
     r"""The Knowledge Base language in which the content is created."""
 
-    resource_types: Annotated[
-        List[KnowledgeExportResourceType], pydantic.Field(alias="resourceTypes")
-    ]
+    resource_types: Annotated[List[ResourceType], pydantic.Field(alias="resourceTypes")]
     r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list. Details of a single portal are exported.
     Articles whose state is Published are returned.
     | Portal Attribute Name | Description

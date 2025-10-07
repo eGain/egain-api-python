@@ -1,4 +1,4 @@
-# Progress
+# ExportStatusProgress
 
 Details about the job's progress.
 

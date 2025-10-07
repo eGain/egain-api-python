@@ -23,7 +23,7 @@ class GetArticleListDetailsRequestTypedDict(TypedDict):
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
     list_id: str
     r"""The ID of the list to be returned."""
-    dollar_filter_topic_id: NotRequired[str]
+    filter_topic_id: NotRequired[str]
     r"""The ID of the topic. It is used to restrict to a specific topic."""
     article_result_additional_attributes: NotRequired[
         List[ArticleResultAdditionalAttributes]
@@ -74,7 +74,7 @@ class GetArticleListDetailsRequest(BaseModel):
     ]
     r"""The ID of the list to be returned."""
 
-    dollar_filter_topic_id: Annotated[
+    filter_topic_id: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[topicId]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

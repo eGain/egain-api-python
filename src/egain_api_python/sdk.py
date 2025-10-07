@@ -45,6 +45,7 @@ class Egain(BaseSDK):
 
 
 
+    https://github.com/eGain/egain-api-python - Full SDK Documentation
     """
 
     aiservices: "Aiservices"

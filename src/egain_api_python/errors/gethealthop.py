@@ -2,44 +2,58 @@
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from datetime import datetime
 from egain_api_python.errors import EgainError
+from egain_api_python.models import gethealthop as models_gethealthop
 from egain_api_python.types import BaseModel
 import httpx
-from typing import Optional
+from typing import Any, List, Optional
 
 
 class ServiceUnavailableErrorData(BaseModel):
-    status: Optional[str] = None
+    status: Optional[models_gethealthop.ServiceUnavailableStatus] = None
     r"""**Health Status**
 
-    The overall health status of the service. When unhealthy:
-    - Service may not process requests correctly
-    - Performance may be significantly degraded
-    - Some features may be unavailable
-    - Immediate attention is required
+    The overall health status of the service. Possible values:
+    - **healthy**: Service is operating normally
+    - **degraded**: Service is functional but with performance issues
+    - **unhealthy**: Service is experiencing critical issues
+    - **maintenance**: Service is under planned maintenance
 
     """
 
-    timestamp: Optional[datetime] = None
+    timestamp: Optional[Any] = None
     r"""**Health Check Timestamp**
 
-    The exact date and time when this health check was performed. This helps with:
-    - Incident timeline analysis
-    - Problem duration tracking
-    - Recovery time measurement
-    - Historical incident analysis
+    The exact date and time when this health check was performed. This is useful for:
+    - Tracking health check frequency
+    - Correlating with other system events
+    - Monitoring health check response times
+    - Historical health trend analysis
 
     """
 
     version: Optional[str] = None
     r"""**API Version**
 
-    The current version of the Import Content API. This information is useful for:
-    - Support team identification
-    - Known issue correlation
-    - Version-specific troubleshooting
-    - Upgrade planning
+    The current version of the Import Content API. This helps with:
+    - Version compatibility checking
+    - Feature availability verification
+    - Upgrade planning and coordination
+    - Support and troubleshooting
+
+    """
+
+    issues: Optional[List[str]] = None
+    r"""**Issues**:
+
+    List of detected health problems
+
+    """
+
+    components: Optional[models_gethealthop.Components] = None
+    r"""**Comonents**:
+
+    Health status of import service componenets
 
     """
 

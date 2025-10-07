@@ -1,4 +1,4 @@
-# KnowledgeExportResourceType
+# ResourceType
 
 
 ## Values

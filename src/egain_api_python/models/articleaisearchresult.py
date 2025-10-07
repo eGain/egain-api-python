@@ -6,7 +6,7 @@ from .schemas_tags import SchemasTags, SchemasTagsTypedDict
 from .topicbreadcrumb import TopicBreadcrumb, TopicBreadcrumbTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
-from typing import List, Literal, Optional
+from typing import Any, List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -68,32 +68,25 @@ class OpensearchHighlightingRaw(BaseModel):
     ] = None
 
 
-ArticleAISearchResultTypeName = Literal[
-    "General",
-    "Guided Help",
-    "Data Link",
-    "Topic Home",
-    "Suggestion",
-    "Virtaul Assistant Action",
-    "Rich Message",
-]
-r"""Indicates the article category name."""
-
-
 class ArticleTypeAttributesTypedDict(TypedDict):
-    r"""The type of the Article."""
+    r"""The type of the Article and its attributes."""
 
-    type_name: NotRequired[ArticleAISearchResultTypeName]
+    type_name: NotRequired[str]
     r"""Indicates the article category name."""
+    article_type_id: NotRequired[Any]
+    r"""The ID of the Article Type."""
 
 
 class ArticleTypeAttributes(BaseModel):
-    r"""The type of the Article."""
+    r"""The type of the Article and its attributes."""
 
-    type_name: Annotated[
-        Optional[ArticleAISearchResultTypeName], pydantic.Field(alias="typeName")
-    ] = None
+    type_name: Annotated[Optional[str], pydantic.Field(alias="typeName")] = None
     r"""Indicates the article category name."""
+
+    article_type_id: Annotated[Optional[Any], pydantic.Field(alias="articleTypeId")] = (
+        None
+    )
+    r"""The ID of the Article Type."""
 
 
 class ArticleAISearchResultLinkTypedDict(TypedDict):
@@ -158,7 +151,7 @@ class ArticleAISearchResultTypedDict(TypedDict):
     r"""An array of tag categories. Note that the total number of tag categories cannot exceed 20."""
     keywords: NotRequired[str]
     article_type_attributes: NotRequired[ArticleTypeAttributesTypedDict]
-    r"""The type of the Article."""
+    r"""The type of the Article and its attributes."""
     link: NotRequired[ArticleAISearchResultLinkTypedDict]
     r"""Defines the relationship between this resource and another object."""
 
@@ -248,7 +241,7 @@ class ArticleAISearchResult(BaseModel):
     article_type_attributes: Annotated[
         Optional[ArticleTypeAttributes], pydantic.Field(alias="articleTypeAttributes")
     ] = None
-    r"""The type of the Article."""
+    r"""The type of the Article and its attributes."""
 
     link: Optional[ArticleAISearchResultLink] = None
     r"""Defines the relationship between this resource and another object."""

@@ -24,7 +24,7 @@ class GetArticlesInTopicRequestTypedDict(TypedDict):
     r"""The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses)."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
-    dollar_filter_topic_id: str
+    filter_topic_id: str
     r"""The ID of the topic. It is used to restrict to a specific topic."""
     search_profile_id: NotRequired[str]
     r"""Search Profile ID"""
@@ -51,7 +51,7 @@ class GetArticlesInTopicRequestTypedDict(TypedDict):
     | versionId | The ID of the Article version that is returned.
 
     """
-    dollar_filter_tags: NotRequired[str]
+    filter_tags: NotRequired[str]
     r"""A comma separated list of Tag / Tag Group IDs. The query results will be filtered by the tags that are specified.<br><br>Tag IDs and Tag Group IDs can be mixed together."""
     workflow_milestone: NotRequired[WorkflowMilestone]
     r"""For agents with the View Author Portal or View Staging Portal actions, this determines which version of the Article is returned.<li>'Authoring' returns the most recent version of an Article checked-in by an author.</li><li>'Staging' returns the updated version currently being processed in a workflow.</li><li>'Publish' returns the most recently published version.</li>"""
@@ -82,7 +82,7 @@ class GetArticlesInTopicRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
-    dollar_filter_topic_id: Annotated[
+    filter_topic_id: Annotated[
         str,
         pydantic.Field(alias="$filter[topicId]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -122,7 +122,7 @@ class GetArticlesInTopicRequest(BaseModel):
 
     """
 
-    dollar_filter_tags: Annotated[
+    filter_tags: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[tags]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

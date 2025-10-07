@@ -17,7 +17,7 @@ class Export(BaseSDK):
         language: Union[
             models.KnowledgeExportLanguage, models.KnowledgeExportLanguageTypedDict
         ],
-        resource_types: List[models.KnowledgeExportResourceType],
+        resource_types: List[models.ResourceType],
         data_destination: Union[
             models.DataDestination, models.DataDestinationTypedDict
         ],
@@ -142,7 +142,7 @@ class Export(BaseSDK):
         language: Union[
             models.KnowledgeExportLanguage, models.KnowledgeExportLanguageTypedDict
         ],
-        resource_types: List[models.KnowledgeExportResourceType],
+        resource_types: List[models.ResourceType],
         data_destination: Union[
             models.DataDestination, models.DataDestinationTypedDict
         ],

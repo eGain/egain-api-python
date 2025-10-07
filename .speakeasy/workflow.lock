@@ -1,9 +1,9 @@
-speakeasyVersion: 1.634.2
+speakeasyVersion: 1.635.1
 sources:
     Knowledge Portal Manager APIs:
         sourceNamespace: knowledge-portal-manager-ap-is
-        sourceRevisionDigest: sha256:5dd444e80ae2906cb26df3a6a32fd11b009b427fa57c4d8b420749906117a112
-        sourceBlobDigest: sha256:541ebb2cd12b97688753682ee0f9027fc095742e9bf3c15d20acb00f7cefbad2
+        sourceRevisionDigest: sha256:37579b160e8b9aca305083bfd3373b413ea8c0324dc8d0406534eda499589143
+        sourceBlobDigest: sha256:6d04ec37572da8c3d415544a2ecd69ef10af4d88364d0b441c0fcee65c9313b9
         tags:
             - latest
             - 4.0.0
@@ -11,10 +11,10 @@ targets:
     egain:
         source: Knowledge Portal Manager APIs
         sourceNamespace: knowledge-portal-manager-ap-is
-        sourceRevisionDigest: sha256:5dd444e80ae2906cb26df3a6a32fd11b009b427fa57c4d8b420749906117a112
-        sourceBlobDigest: sha256:541ebb2cd12b97688753682ee0f9027fc095742e9bf3c15d20acb00f7cefbad2
+        sourceRevisionDigest: sha256:37579b160e8b9aca305083bfd3373b413ea8c0324dc8d0406534eda499589143
+        sourceBlobDigest: sha256:6d04ec37572da8c3d415544a2ecd69ef10af4d88364d0b441c0fcee65c9313b9
         codeSamplesNamespace: knowledge-portal-manager-ap-is-python-code-samples
-        codeSamplesRevisionDigest: sha256:a32d830b4d0ea1b3a00dc17ab59b0f01cf64404882ab19a942772964dbe37596
+        codeSamplesRevisionDigest: sha256:c3cb341975173fdad5ea302e1d21cf4bb228b749165d205131204f34c413eed3
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -24,6 +24,8 @@ workflow:
                 - location: ../speakeasy/aiservices/v4/api-with-overlay.yaml
                 - location: ../speakeasy/contentmgr/v4/api-with-overlay.yaml
                 - location: ../speakeasy/portalmgr/v4/api-with-overlay.yaml
+            overlays:
+                - location: ../speakeasy/languageoverlays/python.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/egain-corporation/portalmgr/knowledge-portal-manager-ap-is

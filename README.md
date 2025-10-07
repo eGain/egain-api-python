@@ -33,6 +33,11 @@ The following Resources have predefined limits for specific access attributes fo
 |  |Number of articles to display in announcements | 25
 |  |Maximum related articles in portal setting | 100
 |  |Usage links and link groups setup for a portal | 25
+    
+      
+
+
+For more information about the API: [Full SDK Documentation](https://github.com/eGain/egain-api-python)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -148,7 +153,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -180,7 +185,7 @@ async def main():
         access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
     ) as egain:
 
-        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
             "PROD-1234": [
                 "PROD-2000",
                 "PROD-2003",
@@ -220,7 +225,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -441,7 +446,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -471,7 +476,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -593,7 +598,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -623,7 +628,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -652,7 +657,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", dollar_filter_user_profile_id="PROD-3210", language="en-US", dollar_filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",

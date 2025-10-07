@@ -26,15 +26,15 @@ class GetBestAnswerRequestTypedDict(TypedDict):
     r"""The search query string. The string must be escaped as required by the URL syntax rules."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
-    dollar_filter_user_profile_id: NotRequired[str]
+    filter_user_profile_id: NotRequired[str]
     language: NotRequired[LanguageCodeParameter]
     r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
-    dollar_filter_tags: NotRequired[Dict[str, List[str]]]
+    filter_tags: NotRequired[Dict[str, List[str]]]
     r"""An object where each key is a **Category Tag ID** (numeric string),
     and each value is an array of **Tag IDs** for that category.
 
     """
-    dollar_filter_topic_ids: NotRequired[List[str]]
+    filter_topic_ids: NotRequired[List[str]]
     r"""An array of topic IDs. It is used to restrict search results to specific topics."""
     answers_request: NotRequired[AnswersRequestTypedDict]
 
@@ -52,7 +52,7 @@ class GetBestAnswerRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
-    dollar_filter_user_profile_id: Annotated[
+    filter_user_profile_id: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[userProfileID]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -65,7 +65,7 @@ class GetBestAnswerRequest(BaseModel):
     ] = None
     r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
 
-    dollar_filter_tags: Annotated[
+    filter_tags: Annotated[
         Optional[Dict[str, List[str]]],
         pydantic.Field(alias="$filter[tags]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -75,7 +75,7 @@ class GetBestAnswerRequest(BaseModel):
 
     """
 
-    dollar_filter_topic_ids: Annotated[
+    filter_topic_ids: Annotated[
         Optional[List[str]],
         pydantic.Field(alias="$filter[topicIds]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

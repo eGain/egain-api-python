@@ -7,7 +7,7 @@ from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ArticleTypeTypeName = Literal[
+TypeName = Literal[
     "General",
     "Guided Help",
     "Data Link",
@@ -24,7 +24,7 @@ class ArticleTypeTypedDict(TypedDict):
 
     article_category_id: NotRequired[int]
     r"""Specifies the article category ID."""
-    type_name: NotRequired[ArticleTypeTypeName]
+    type_name: NotRequired[TypeName]
     r"""Indicates the article category name."""
     use_structured_authoring: NotRequired[bool]
     r"""Indicates whether to use Structured Authoring for the Article Type."""
@@ -40,9 +40,7 @@ class ArticleType(BaseModel):
     ] = None
     r"""Specifies the article category ID."""
 
-    type_name: Annotated[
-        Optional[ArticleTypeTypeName], pydantic.Field(alias="typeName")
-    ] = None
+    type_name: Annotated[Optional[TypeName], pydantic.Field(alias="typeName")] = None
     r"""Indicates the article category name."""
 
     use_structured_authoring: Annotated[

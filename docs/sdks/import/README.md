@@ -225,6 +225,8 @@ with Egain(
     res = egain.content.import_.create_import_validation(data_source={
         "type": "AWS S3 bucket",
         "path": "s3://mybucket/myfolder/",
+        "region": "us-east-1",
+        "credentials": {},
     })
 
     # Handle response

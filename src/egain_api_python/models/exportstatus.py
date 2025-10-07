@@ -16,7 +16,7 @@ ExportStatusStatus = Literal[
 ]
 
 
-class ProgressTypedDict(TypedDict):
+class ExportStatusProgressTypedDict(TypedDict):
     r"""Details about the job's progress."""
 
     processed: NotRequired[int]
@@ -27,7 +27,7 @@ class ProgressTypedDict(TypedDict):
     r"""The percentage of the job that is complete."""
 
 
-class Progress(BaseModel):
+class ExportStatusProgress(BaseModel):
     r"""Details about the job's progress."""
 
     processed: Optional[int] = None
@@ -40,7 +40,7 @@ class Progress(BaseModel):
     r"""The percentage of the job that is complete."""
 
 
-class ResultsTypedDict(TypedDict):
+class ExportStatusResultsTypedDict(TypedDict):
     r"""Breakdown of completed job results."""
 
     successful: NotRequired[int]
@@ -51,7 +51,7 @@ class ResultsTypedDict(TypedDict):
     r"""The count of items with errors."""
 
 
-class Results(BaseModel):
+class ExportStatusResults(BaseModel):
     r"""Breakdown of completed job results."""
 
     successful: Optional[int] = None
@@ -66,15 +66,17 @@ class Results(BaseModel):
 
 class ExportStatusTypedDict(TypedDict):
     status: ExportStatusStatus
-    progress: NotRequired[ProgressTypedDict]
+    progress: NotRequired[ExportStatusProgressTypedDict]
     r"""Details about the job's progress."""
     start_time: NotRequired[datetime]
     r"""The timestamp when the job started."""
     estimated_completion: NotRequired[datetime]
     r"""The estimated timestamp when the job is expected to finish."""
+    completion_time: NotRequired[datetime]
+    r"""The timestamp when the job completed."""
     failure_time: NotRequired[datetime]
     r"""The timestamp when the job failed."""
-    results: NotRequired[ResultsTypedDict]
+    results: NotRequired[ExportStatusResultsTypedDict]
     r"""Breakdown of completed job results."""
     error: NotRequired[str]
     r"""A description of the job failure reason."""
@@ -83,7 +85,7 @@ class ExportStatusTypedDict(TypedDict):
 class ExportStatus(BaseModel):
     status: ExportStatusStatus
 
-    progress: Optional[Progress] = None
+    progress: Optional[ExportStatusProgress] = None
     r"""Details about the job's progress."""
 
     start_time: Annotated[Optional[datetime], pydantic.Field(alias="startTime")] = None
@@ -94,12 +96,17 @@ class ExportStatus(BaseModel):
     ] = None
     r"""The estimated timestamp when the job is expected to finish."""
 
+    completion_time: Annotated[
+        Optional[datetime], pydantic.Field(alias="completionTime")
+    ] = None
+    r"""The timestamp when the job completed."""
+
     failure_time: Annotated[Optional[datetime], pydantic.Field(alias="failureTime")] = (
         None
     )
     r"""The timestamp when the job failed."""
 
-    results: Optional[Results] = None
+    results: Optional[ExportStatusResults] = None
     r"""Breakdown of completed job results."""
 
     error: Optional[str] = None

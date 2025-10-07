@@ -1,4 +1,4 @@
-# ArticleTypeTypeName
+# TypeName
 
 Indicates the article category name.
 
