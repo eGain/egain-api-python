@@ -22,7 +22,6 @@ class Answers(BaseSDK):
         channel: Optional[
             Union[models.AnswersRequestChannel, models.AnswersRequestChannelTypedDict]
         ] = None,
-        context: Optional[Union[models.Context, models.ContextTypedDict]] = None,
         event_id: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -33,10 +32,10 @@ class Answers(BaseSDK):
         r"""Get the best answer for a user query
 
         The **Answers API** allows enterprises to deliver fast, accurate, and contextual responses powered by their organizational knowledge. It supports two complementary approaches:
-        <li> **Certified Answers**: Direct snippets retrieved from enterprise-authored content. </li>
-        <li> **Generative Answers**: Natural language responses synthesized by a large language model (LLM).  </li>
+        - **Certified Answers**: Direct snippets retrieved from enterprise-authored content.
+        - **Generative Answers**: Natural language responses synthesized by a large language model (LLM).
 
-        Every response includes supporting search results, references, and confidence scores—ensuring transparency, trust, and traceability. The API is built for secure, scalable integration across enterprise environments.
+        Every response includes supporting search results, references, and confidence scores—ensuring transparency, trust, and traceability. The API is built for secure, scalable integration across enterprise environments. <br>**This endpoint is only available for Self Service environments.**
 
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
@@ -46,7 +45,6 @@ class Answers(BaseSDK):
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
-        :param context: Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response.
         :param event_id: Unique ID for this specific API call or event.
         :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
         :param retries: Override the default retry configuration for this method
@@ -63,9 +61,6 @@ class Answers(BaseSDK):
             base_url = server_url
         else:
             base_url = models.GET_BEST_ANSWER_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
 
         request = models.GetBestAnswerRequest(
             q=q,
@@ -78,7 +73,6 @@ class Answers(BaseSDK):
                 channel=utils.get_pydantic_model(
                     channel, Optional[models.AnswersRequestChannel]
                 ),
-                context=utils.get_pydantic_model(context, Optional[models.Context]),
                 event_id=event_id,
                 session_id=session_id,
             ),
@@ -120,7 +114,7 @@ class Answers(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBestAnswer",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -157,7 +151,6 @@ class Answers(BaseSDK):
         channel: Optional[
             Union[models.AnswersRequestChannel, models.AnswersRequestChannelTypedDict]
         ] = None,
-        context: Optional[Union[models.Context, models.ContextTypedDict]] = None,
         event_id: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -168,10 +161,10 @@ class Answers(BaseSDK):
         r"""Get the best answer for a user query
 
         The **Answers API** allows enterprises to deliver fast, accurate, and contextual responses powered by their organizational knowledge. It supports two complementary approaches:
-        <li> **Certified Answers**: Direct snippets retrieved from enterprise-authored content. </li>
-        <li> **Generative Answers**: Natural language responses synthesized by a large language model (LLM).  </li>
+        - **Certified Answers**: Direct snippets retrieved from enterprise-authored content.
+        - **Generative Answers**: Natural language responses synthesized by a large language model (LLM).
 
-        Every response includes supporting search results, references, and confidence scores—ensuring transparency, trust, and traceability. The API is built for secure, scalable integration across enterprise environments.
+        Every response includes supporting search results, references, and confidence scores—ensuring transparency, trust, and traceability. The API is built for secure, scalable integration across enterprise environments. <br>**This endpoint is only available for Self Service environments.**
 
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
@@ -181,7 +174,6 @@ class Answers(BaseSDK):
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
-        :param context: Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response.
         :param event_id: Unique ID for this specific API call or event.
         :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
         :param retries: Override the default retry configuration for this method
@@ -198,9 +190,6 @@ class Answers(BaseSDK):
             base_url = server_url
         else:
             base_url = models.GET_BEST_ANSWER_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
 
         request = models.GetBestAnswerRequest(
             q=q,
@@ -213,7 +202,6 @@ class Answers(BaseSDK):
                 channel=utils.get_pydantic_model(
                     channel, Optional[models.AnswersRequestChannel]
                 ),
-                context=utils.get_pydantic_model(context, Optional[models.Context]),
                 event_id=event_id,
                 session_id=session_id,
             ),
@@ -255,7 +243,7 @@ class Answers(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBestAnswer",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

@@ -101,7 +101,7 @@ class Export(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="exportContent",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -226,7 +226,7 @@ class Export(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="exportContent",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -339,7 +339,7 @@ class Export(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="exportStatus",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -452,7 +452,7 @@ class Export(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="exportStatus",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

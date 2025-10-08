@@ -66,28 +66,26 @@ class AnswersResponseChannel(BaseModel):
 
 
 class AnswersResponseTypedDict(TypedDict):
-    answer: NotRequired[AnswersResponseAnswerTypedDict]
-    search_results: NotRequired[List[SearchResultTypedDict]]
+    answer: AnswersResponseAnswerTypedDict
+    search_results: List[SearchResultTypedDict]
     r"""List of top search results used to support the answer. Includes snippets, metadata, and relevance scores."""
-    channel: NotRequired[AnswersResponseChannelTypedDict]
-    session_id: NotRequired[str]
+    session_id: str
     r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
+    channel: NotRequired[AnswersResponseChannelTypedDict]
     event_id: NotRequired[str]
     r"""Unique ID for this specific API call or event."""
 
 
 class AnswersResponse(BaseModel):
-    answer: Optional[AnswersResponseAnswer] = None
+    answer: AnswersResponseAnswer
 
-    search_results: Annotated[
-        Optional[List[SearchResult]], pydantic.Field(alias="searchResults")
-    ] = None
+    search_results: Annotated[List[SearchResult], pydantic.Field(alias="searchResults")]
     r"""List of top search results used to support the answer. Includes snippets, metadata, and relevance scores."""
 
-    channel: Optional[AnswersResponseChannel] = None
-
-    session_id: Annotated[Optional[str], pydantic.Field(alias="sessionId")] = None
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
     r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
+
+    channel: Optional[AnswersResponseChannel] = None
 
     event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
     r"""Unique ID for this specific API call or event."""

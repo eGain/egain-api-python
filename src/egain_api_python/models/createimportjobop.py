@@ -6,15 +6,15 @@ from typing import Dict, List
 from typing_extensions import TypedDict
 
 
-CREATE_IMPORT_OP_SERVERS = [
+CREATE_IMPORT_JOB_OP_SERVERS = [
     # Production Server
     "https://${API_DOMAIN}/knowledge/contentmgr/v4",
 ]
 
 
-class CreateImportResponseTypedDict(TypedDict):
+class CreateImportJobResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
 
 
-class CreateImportResponse(BaseModel):
+class CreateImportJobResponse(BaseModel):
     headers: Dict[str, List[str]]

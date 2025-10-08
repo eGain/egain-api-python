@@ -29,36 +29,8 @@ class AnswersRequestChannel(BaseModel):
     r"""A descriptive name for the channel (e.g., \"web\", \"mobile app\", \"agent console\")."""
 
 
-class ContextTypedDict(TypedDict):
-    r"""Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response."""
-
-    user_context: NotRequired[str]
-    r"""Information about the end user (e.g., preferences, profile data, or behavioral signals)."""
-    page_context: NotRequired[str]
-    r"""Details about the UI or page where the query was initiated (e.g., page URL, section, or component)."""
-    company_context: NotRequired[str]
-    r"""Information about the organization associated with the user, used for tailoring responses in enterprise environments."""
-
-
-class Context(BaseModel):
-    r"""Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response."""
-
-    user_context: Annotated[Optional[str], pydantic.Field(alias="userContext")] = None
-    r"""Information about the end user (e.g., preferences, profile data, or behavioral signals)."""
-
-    page_context: Annotated[Optional[str], pydantic.Field(alias="pageContext")] = None
-    r"""Details about the UI or page where the query was initiated (e.g., page URL, section, or component)."""
-
-    company_context: Annotated[
-        Optional[str], pydantic.Field(alias="companyContext")
-    ] = None
-    r"""Information about the organization associated with the user, used for tailoring responses in enterprise environments."""
-
-
 class AnswersRequestTypedDict(TypedDict):
     channel: NotRequired[AnswersRequestChannelTypedDict]
-    context: NotRequired[ContextTypedDict]
-    r"""Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response."""
     event_id: NotRequired[str]
     r"""Unique ID for this specific API call or event."""
     session_id: NotRequired[str]
@@ -67,9 +39,6 @@ class AnswersRequestTypedDict(TypedDict):
 
 class AnswersRequest(BaseModel):
     channel: Optional[AnswersRequestChannel] = None
-
-    context: Optional[Context] = None
-    r"""Additional contextual metadata that enriches the query, providing the LLM with relevant details for tailoring the response."""
 
     event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
     r"""Unique ID for this specific API call or event."""

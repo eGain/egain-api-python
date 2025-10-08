@@ -51,8 +51,6 @@ if TYPE_CHECKING:
         AnswersRequestChannelTypedDict,
         AnswersRequestType,
         AnswersRequestTypedDict,
-        Context,
-        ContextTypedDict,
     )
     from .answersresponse import (
         AnswersResponse,
@@ -85,8 +83,6 @@ if TYPE_CHECKING:
         ArticleAISearchResultTypedDict,
         ArticleTypeAttributes,
         ArticleTypeAttributesTypedDict,
-        OpensearchHighlightingRaw,
-        OpensearchHighlightingRawTypedDict,
     )
     from .articleattachment import (
         ArticleAttachment,
@@ -148,6 +144,11 @@ if TYPE_CHECKING:
     from .bookmark import Bookmark, BookmarkTypedDict
     from .bookmarkresult import BookmarkResult, BookmarkResultTypedDict
     from .bookmarkstatus import BookmarkStatus, BookmarkStatusTypedDict
+    from .cancelimportop import (
+        CANCEL_IMPORT_OP_SERVERS,
+        CancelImportRequest,
+        CancelImportRequestTypedDict,
+    )
     from .case import Case, CaseType, CaseTypedDict, ThresholdType
     from .caseadditionalattributes import CaseAdditionalAttributes
     from .caseanswer import CaseAnswer, CaseAnswerTypedDict
@@ -224,15 +225,15 @@ if TYPE_CHECKING:
         CreateFederatedSearchResultEventRequest,
         CreateFederatedSearchResultEventRequestTypedDict,
     )
-    from .createimportop import (
-        CREATE_IMPORT_OP_SERVERS,
-        CreateImportResponse,
-        CreateImportResponseTypedDict,
+    from .createimportjobop import (
+        CREATE_IMPORT_JOB_OP_SERVERS,
+        CreateImportJobResponse,
+        CreateImportJobResponseTypedDict,
     )
-    from .createimportvalidationop import (
-        CREATE_IMPORT_VALIDATION_OP_SERVERS,
-        CreateImportValidationResponse,
-        CreateImportValidationResponseTypedDict,
+    from .createimportvalidationjobop import (
+        CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS,
+        CreateImportValidationJobResponse,
+        CreateImportValidationJobResponseTypedDict,
     )
     from .createquickpick import CreateQuickpick, CreateQuickpickTypedDict
     from .createquickpickop import (
@@ -422,10 +423,10 @@ if TYPE_CHECKING:
         ServiceUnavailableStatus,
         Storage,
     )
-    from .getimportcontentop import (
-        GET_IMPORT_CONTENT_OP_SERVERS,
-        GetImportContentRequest,
-        GetImportContentRequestTypedDict,
+    from .getimportstatusop import (
+        GET_IMPORT_STATUS_OP_SERVERS,
+        GetImportStatusRequest,
+        GetImportStatusRequestTypedDict,
     )
     from .getmyportalsop import GetMyPortalsRequest, GetMyPortalsRequestTypedDict
     from .getmysubscriptionop import (
@@ -547,11 +548,6 @@ if TYPE_CHECKING:
     from .order import Order
     from .ownedby import OwnedBy, OwnedByTypedDict
     from .paginationinfo import PaginationInfo, PaginationInfoTypedDict
-    from .patchimportcontentvalidationop import (
-        PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS,
-        PatchImportContentValidationRequest,
-        PatchImportContentValidationRequestTypedDict,
-    )
     from .personalization import (
         Filters,
         FiltersTypedDict,
@@ -904,8 +900,11 @@ __all__ = [
     "BookmarkStatus",
     "BookmarkStatusTypedDict",
     "BookmarkTypedDict",
-    "CREATE_IMPORT_OP_SERVERS",
-    "CREATE_IMPORT_VALIDATION_OP_SERVERS",
+    "CANCEL_IMPORT_OP_SERVERS",
+    "CREATE_IMPORT_JOB_OP_SERVERS",
+    "CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS",
+    "CancelImportRequest",
+    "CancelImportRequestTypedDict",
     "Captcha",
     "CaptchaTypedDict",
     "Case",
@@ -970,18 +969,16 @@ __all__ = [
     "ContactPersonTypedDict",
     "Contacts",
     "ContactsTypedDict",
-    "Context",
-    "ContextTypedDict",
     "CreateBookmark",
     "CreateBookmarkTypedDict",
     "CreateFederatedSearchEvent",
     "CreateFederatedSearchEventTypedDict",
     "CreateFederatedSearchResultEventRequest",
     "CreateFederatedSearchResultEventRequestTypedDict",
-    "CreateImportResponse",
-    "CreateImportResponseTypedDict",
-    "CreateImportValidationResponse",
-    "CreateImportValidationResponseTypedDict",
+    "CreateImportJobResponse",
+    "CreateImportJobResponseTypedDict",
+    "CreateImportValidationJobResponse",
+    "CreateImportValidationJobResponseTypedDict",
     "CreateQuickpick",
     "CreateQuickpickRequest",
     "CreateQuickpickRequestTypedDict",
@@ -1066,7 +1063,7 @@ __all__ = [
     "FolderSummaryTypedDict",
     "GET_BEST_ANSWER_OP_SERVERS",
     "GET_HEALTH_OP_SERVERS",
-    "GET_IMPORT_CONTENT_OP_SERVERS",
+    "GET_IMPORT_STATUS_OP_SERVERS",
     "GHSearchRequest",
     "GHSearchRequestTypedDict",
     "GHSearchResult",
@@ -1123,8 +1120,8 @@ __all__ = [
     "GetHealthResponse",
     "GetHealthResponseTypedDict",
     "GetHealthStatus",
-    "GetImportContentRequest",
-    "GetImportContentRequestTypedDict",
+    "GetImportStatusRequest",
+    "GetImportStatusRequestTypedDict",
     "GetMyPortalsRequest",
     "GetMyPortalsRequestTypedDict",
     "GetMySubscriptionRequest",
@@ -1223,18 +1220,13 @@ __all__ = [
     "ModifySuggestionsRequest",
     "ModifySuggestionsRequestTypedDict",
     "Name",
-    "OpensearchHighlightingRaw",
-    "OpensearchHighlightingRawTypedDict",
     "Operation",
     "OptionalArticleAttributes",
     "Order",
     "OwnedBy",
     "OwnedByTypedDict",
-    "PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS",
     "PaginationInfo",
     "PaginationInfoTypedDict",
-    "PatchImportContentValidationRequest",
-    "PatchImportContentValidationRequestTypedDict",
     "Personalization",
     "PersonalizationAccessTags",
     "PersonalizationAccessTagsTypedDict",
@@ -1493,8 +1485,6 @@ _dynamic_imports: dict[str, str] = {
     "AnswersRequestChannelTypedDict": ".answersrequest",
     "AnswersRequestType": ".answersrequest",
     "AnswersRequestTypedDict": ".answersrequest",
-    "Context": ".answersrequest",
-    "ContextTypedDict": ".answersrequest",
     "AnswersResponse": ".answersresponse",
     "AnswersResponseAnswer": ".answersresponse",
     "AnswersResponseAnswerType": ".answersresponse",
@@ -1522,8 +1512,6 @@ _dynamic_imports: dict[str, str] = {
     "ArticleAISearchResultTypedDict": ".articleaisearchresult",
     "ArticleTypeAttributes": ".articleaisearchresult",
     "ArticleTypeAttributesTypedDict": ".articleaisearchresult",
-    "OpensearchHighlightingRaw": ".articleaisearchresult",
-    "OpensearchHighlightingRawTypedDict": ".articleaisearchresult",
     "ArticleAttachment": ".articleattachment",
     "ArticleAttachmentType": ".articleattachment",
     "ArticleAttachmentTypedDict": ".articleattachment",
@@ -1583,6 +1571,9 @@ _dynamic_imports: dict[str, str] = {
     "BookmarkResultTypedDict": ".bookmarkresult",
     "BookmarkStatus": ".bookmarkstatus",
     "BookmarkStatusTypedDict": ".bookmarkstatus",
+    "CANCEL_IMPORT_OP_SERVERS": ".cancelimportop",
+    "CancelImportRequest": ".cancelimportop",
+    "CancelImportRequestTypedDict": ".cancelimportop",
     "Case": ".case",
     "CaseType": ".case",
     "CaseTypedDict": ".case",
@@ -1657,12 +1648,12 @@ _dynamic_imports: dict[str, str] = {
     "ResultType": ".createfederatedsearchevent",
     "CreateFederatedSearchResultEventRequest": ".createfederatedsearchresulteventop",
     "CreateFederatedSearchResultEventRequestTypedDict": ".createfederatedsearchresulteventop",
-    "CREATE_IMPORT_OP_SERVERS": ".createimportop",
-    "CreateImportResponse": ".createimportop",
-    "CreateImportResponseTypedDict": ".createimportop",
-    "CREATE_IMPORT_VALIDATION_OP_SERVERS": ".createimportvalidationop",
-    "CreateImportValidationResponse": ".createimportvalidationop",
-    "CreateImportValidationResponseTypedDict": ".createimportvalidationop",
+    "CREATE_IMPORT_JOB_OP_SERVERS": ".createimportjobop",
+    "CreateImportJobResponse": ".createimportjobop",
+    "CreateImportJobResponseTypedDict": ".createimportjobop",
+    "CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS": ".createimportvalidationjobop",
+    "CreateImportValidationJobResponse": ".createimportvalidationjobop",
+    "CreateImportValidationJobResponseTypedDict": ".createimportvalidationjobop",
     "CreateQuickpick": ".createquickpick",
     "CreateQuickpickTypedDict": ".createquickpick",
     "CreateQuickpickRequest": ".createquickpickop",
@@ -1799,9 +1790,9 @@ _dynamic_imports: dict[str, str] = {
     "ProcessingEngine": ".gethealthop",
     "ServiceUnavailableStatus": ".gethealthop",
     "Storage": ".gethealthop",
-    "GET_IMPORT_CONTENT_OP_SERVERS": ".getimportcontentop",
-    "GetImportContentRequest": ".getimportcontentop",
-    "GetImportContentRequestTypedDict": ".getimportcontentop",
+    "GET_IMPORT_STATUS_OP_SERVERS": ".getimportstatusop",
+    "GetImportStatusRequest": ".getimportstatusop",
+    "GetImportStatusRequestTypedDict": ".getimportstatusop",
     "GetMyPortalsRequest": ".getmyportalsop",
     "GetMyPortalsRequestTypedDict": ".getmyportalsop",
     "GetMySubscriptionRequest": ".getmysubscriptionop",
@@ -1909,9 +1900,6 @@ _dynamic_imports: dict[str, str] = {
     "OwnedByTypedDict": ".ownedby",
     "PaginationInfo": ".paginationinfo",
     "PaginationInfoTypedDict": ".paginationinfo",
-    "PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS": ".patchimportcontentvalidationop",
-    "PatchImportContentValidationRequest": ".patchimportcontentvalidationop",
-    "PatchImportContentValidationRequestTypedDict": ".patchimportcontentvalidationop",
     "Filters": ".personalization",
     "FiltersTypedDict": ".personalization",
     "Personalization": ".personalization",

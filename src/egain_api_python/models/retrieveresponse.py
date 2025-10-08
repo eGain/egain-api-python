@@ -67,30 +67,28 @@ class RetrieveResponseChannel(BaseModel):
 
 
 class RetrieveResponseTypedDict(TypedDict):
+    search_results: List[SearchResultTypedDict]
+    r"""Top search results with relevance scores and metadata."""
+    session_id: str
+    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
     answer: NotRequired[RetrieveResponseAnswerTypedDict]
     r"""If a certified answer is given. The answer object will be present. <br><br> This will be shown only if certified answers are configured and the certified answer meets the configured threshold."""
-    search_results: NotRequired[List[SearchResultTypedDict]]
-    r"""Top search results with relevance scores and metadata."""
     channel: NotRequired[RetrieveResponseChannelTypedDict]
     event_id: NotRequired[str]
     r"""Unique ID for this specific API call or event."""
-    session_id: NotRequired[str]
-    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
 
 
 class RetrieveResponse(BaseModel):
+    search_results: Annotated[List[SearchResult], pydantic.Field(alias="searchResults")]
+    r"""Top search results with relevance scores and metadata."""
+
+    session_id: Annotated[str, pydantic.Field(alias="sessionId")]
+    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
+
     answer: Optional[RetrieveResponseAnswer] = None
     r"""If a certified answer is given. The answer object will be present. <br><br> This will be shown only if certified answers are configured and the certified answer meets the configured threshold."""
-
-    search_results: Annotated[
-        Optional[List[SearchResult]], pydantic.Field(alias="searchResults")
-    ] = None
-    r"""Top search results with relevance scores and metadata."""
 
     channel: Optional[RetrieveResponseChannel] = None
 
     event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
     r"""Unique ID for this specific API call or event."""
-
-    session_id: Annotated[Optional[str], pydantic.Field(alias="sessionId")] = None
-    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""

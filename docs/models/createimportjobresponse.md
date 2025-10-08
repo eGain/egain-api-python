@@ -1,4 +1,4 @@
-# CreateImportValidationResponse
+# CreateImportJobResponse
 
 
 ## Fields

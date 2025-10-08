@@ -6,13 +6,13 @@ from egain_api_python.utils import FieldMetadata, PathParamMetadata
 from typing_extensions import Annotated, TypedDict
 
 
-GET_IMPORT_CONTENT_OP_SERVERS = [
+GET_IMPORT_STATUS_OP_SERVERS = [
     # Production Server
     "https://${API_DOMAIN}/knowledge/contentmgr/v4",
 ]
 
 
-class GetImportContentRequestTypedDict(TypedDict):
+class GetImportStatusRequestTypedDict(TypedDict):
     job_id: str
     r"""**Job ID Parameter**
 
@@ -28,7 +28,7 @@ class GetImportContentRequestTypedDict(TypedDict):
     """
 
 
-class GetImportContentRequest(BaseModel):
+class GetImportStatusRequest(BaseModel):
     job_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

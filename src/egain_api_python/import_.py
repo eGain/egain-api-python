@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Import(BaseSDK):
-    def create_import(
+    def create_import_job(
         self,
         *,
         data_source: Union[
@@ -24,13 +24,16 @@ class Import(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateImportResponse:
-        r"""Import content from external sources
+    ) -> models.CreateImportJobResponse:
+        r"""Import content from external sources by creating an import job
 
         # Import Content
 
         ## Overview
-        This API initiates a bulk content import operation from Amazon S3 buckets. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+        This API initiates a bulk content import operation from Data Sources. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+
+        ## Pre-requisties
+        1. Content in Data Source needs to be in this format: [Guide to Data Import Format](../../../../../developer-portal/guides/ingestion/data-import-format-guide.md)
 
         ## How It Works
         1. **Job Creation**: The API creates an import job and returns a unique job ID
@@ -73,10 +76,7 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.CREATE_IMPORT_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CREATE_IMPORT_JOB_OP_SERVERS[0]
 
         request = models.ImportContent(
             data_source=utils.get_pydantic_model(
@@ -119,8 +119,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createImport",
-                oauth2_scopes=[],
+                operation_id="createImportJob",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -132,7 +132,7 @@ class Import(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "*"):
-            return models.CreateImportResponse(
+            return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -161,7 +161,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def create_import_async(
+    async def create_import_job_async(
         self,
         *,
         data_source: Union[
@@ -175,13 +175,16 @@ class Import(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateImportResponse:
-        r"""Import content from external sources
+    ) -> models.CreateImportJobResponse:
+        r"""Import content from external sources by creating an import job
 
         # Import Content
 
         ## Overview
-        This API initiates a bulk content import operation from Amazon S3 buckets. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+        This API initiates a bulk content import operation from Data Sources. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+
+        ## Pre-requisties
+        1. Content in Data Source needs to be in this format: [Guide to Data Import Format](../../../../../developer-portal/guides/ingestion/data-import-format-guide.md)
 
         ## How It Works
         1. **Job Creation**: The API creates an import job and returns a unique job ID
@@ -224,10 +227,7 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.CREATE_IMPORT_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CREATE_IMPORT_JOB_OP_SERVERS[0]
 
         request = models.ImportContent(
             data_source=utils.get_pydantic_model(
@@ -270,8 +270,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createImport",
-                oauth2_scopes=[],
+                operation_id="createImportJob",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -283,7 +283,7 @@ class Import(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "*"):
-            return models.CreateImportResponse(
+            return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -312,7 +312,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    def get_import_content(
+    def get_import_status(
         self,
         *,
         job_id: str,
@@ -369,12 +369,9 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.GET_IMPORT_CONTENT_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.GET_IMPORT_STATUS_OP_SERVERS[0]
 
-        request = models.GetImportContentRequest(
+        request = models.GetImportStatusRequest(
             job_id=job_id,
         )
 
@@ -406,8 +403,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getImportContent",
-                oauth2_scopes=[],
+                operation_id="getImportStatus",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -441,7 +438,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def get_import_content_async(
+    async def get_import_status_async(
         self,
         *,
         job_id: str,
@@ -498,12 +495,9 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.GET_IMPORT_CONTENT_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.GET_IMPORT_STATUS_OP_SERVERS[0]
 
-        request = models.GetImportContentRequest(
+        request = models.GetImportStatusRequest(
             job_id=job_id,
         )
 
@@ -535,8 +529,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getImportContent",
-                oauth2_scopes=[],
+                operation_id="getImportStatus",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -570,7 +564,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    def create_import_validation(
+    def create_import_validation_job(
         self,
         *,
         data_source: Union[
@@ -581,8 +575,8 @@ class Import(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateImportValidationResponse:
-        r"""Validate content structure and format before import
+    ) -> models.CreateImportValidationJobResponse:
+        r"""Validate content structure and format before import by creating an import validation job
 
         # Validate Import Content
 
@@ -641,10 +635,7 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.CREATE_IMPORT_VALIDATION_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS[0]
 
         request = models.ValidateImportContent(
             data_source=utils.get_pydantic_model(
@@ -683,8 +674,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createImportValidation",
-                oauth2_scopes=[],
+                operation_id="createImportValidationJob",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -696,7 +687,7 @@ class Import(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "*"):
-            return models.CreateImportValidationResponse(
+            return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -725,7 +716,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def create_import_validation_async(
+    async def create_import_validation_job_async(
         self,
         *,
         data_source: Union[
@@ -736,8 +727,8 @@ class Import(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateImportValidationResponse:
-        r"""Validate content structure and format before import
+    ) -> models.CreateImportValidationJobResponse:
+        r"""Validate content structure and format before import by creating an import validation job
 
         # Validate Import Content
 
@@ -796,10 +787,7 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.CREATE_IMPORT_VALIDATION_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS[0]
 
         request = models.ValidateImportContent(
             data_source=utils.get_pydantic_model(
@@ -838,8 +826,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createImportValidation",
-                oauth2_scopes=[],
+                operation_id="createImportValidationJob",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -851,7 +839,7 @@ class Import(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "202", "*"):
-            return models.CreateImportValidationResponse(
+            return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -880,7 +868,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    def patch_import_content_validation(
+    def cancel_import(
         self,
         *,
         job_id: str,
@@ -948,12 +936,9 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CANCEL_IMPORT_OP_SERVERS[0]
 
-        request = models.PatchImportContentValidationRequest(
+        request = models.CancelImportRequest(
             job_id=job_id,
         )
 
@@ -985,8 +970,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="patchImportContentValidation",
-                oauth2_scopes=[],
+                operation_id="cancelImport",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1020,7 +1005,7 @@ class Import(BaseSDK):
 
         raise errors.EgainDefaultError("Unexpected response received", http_res)
 
-    async def patch_import_content_validation_async(
+    async def cancel_import_async(
         self,
         *,
         job_id: str,
@@ -1088,12 +1073,9 @@ class Import(BaseSDK):
         if server_url is not None:
             base_url = server_url
         else:
-            base_url = models.PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
+            base_url = models.CANCEL_IMPORT_OP_SERVERS[0]
 
-        request = models.PatchImportContentValidationRequest(
+        request = models.CancelImportRequest(
             job_id=job_id,
         )
 
@@ -1125,8 +1107,8 @@ class Import(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="patchImportContentValidation",
-                oauth2_scopes=[],
+                operation_id="cancelImport",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

@@ -6,13 +6,13 @@ from egain_api_python.utils import FieldMetadata, PathParamMetadata
 from typing_extensions import Annotated, TypedDict
 
 
-PATCH_IMPORT_CONTENT_VALIDATION_OP_SERVERS = [
+CANCEL_IMPORT_OP_SERVERS = [
     # Production Server
     "https://${API_DOMAIN}/knowledge/contentmgr/v4",
 ]
 
 
-class PatchImportContentValidationRequestTypedDict(TypedDict):
+class CancelImportRequestTypedDict(TypedDict):
     job_id: str
     r"""**Job ID Parameter**
 
@@ -28,7 +28,7 @@ class PatchImportContentValidationRequestTypedDict(TypedDict):
     """
 
 
-class PatchImportContentValidationRequest(BaseModel):
+class CancelImportRequest(BaseModel):
     job_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

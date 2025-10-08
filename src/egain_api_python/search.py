@@ -29,7 +29,8 @@ class Search(BaseSDK):
     ) -> models.AISearchResponse:
         r"""Get the best search results for a user query
 
-        Submit a user query and receive a list of search results.
+        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores. <br>**This endpoint is only available for Self Service environments.**
+
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
@@ -96,7 +97,7 @@ class Search(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="aiSearch",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -140,7 +141,8 @@ class Search(BaseSDK):
     ) -> models.AISearchResponse:
         r"""Get the best search results for a user query
 
-        Submit a user query and receive a list of search results.
+        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores. <br>**This endpoint is only available for Self Service environments.**
+
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
@@ -207,7 +209,7 @@ class Search(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="aiSearch",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

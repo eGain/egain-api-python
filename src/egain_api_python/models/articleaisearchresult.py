@@ -54,20 +54,6 @@ class ArticleAISearchResultCustomAttribute(BaseModel):
     r"""The custom attribute's type."""
 
 
-class OpensearchHighlightingRawTypedDict(TypedDict):
-    r"""Article content used for highlighting a keyword search result"""
-
-    article_content: NotRequired[List[str]]
-
-
-class OpensearchHighlightingRaw(BaseModel):
-    r"""Article content used for highlighting a keyword search result"""
-
-    article_content: Annotated[
-        Optional[List[str]], pydantic.Field(alias="articleContent")
-    ] = None
-
-
 class ArticleTypeAttributesTypedDict(TypedDict):
     r"""The type of the Article and its attributes."""
 
@@ -120,7 +106,7 @@ class ArticleAISearchResultTypedDict(TypedDict):
     source: ArticleAISearchResultSource
     r"""The source type."""
     snippet: str
-    r"""A snippet of the article content."""
+    r"""A semantic snippet of the article content."""
     topic_breadcrumb: List[TopicBreadcrumbTypedDict]
     r"""A list of topics from the root topic to this Article. There may be multiple paths."""
     relevance_score: float
@@ -135,8 +121,6 @@ class ArticleAISearchResultTypedDict(TypedDict):
     r"""An array of snippets belonging to the same article."""
     additional_snippet_count: NotRequired[int]
     r"""Number of additional snippets."""
-    opensearch_highlighting_raw: NotRequired[OpensearchHighlightingRawTypedDict]
-    r"""Article content used for highlighting a keyword search result"""
     contextual_summary: NotRequired[str]
     r"""Contextual Summary generated as part of metadata for embedding."""
     description: NotRequired[str]
@@ -172,7 +156,7 @@ class ArticleAISearchResult(BaseModel):
     r"""The source type."""
 
     snippet: str
-    r"""A snippet of the article content."""
+    r"""A semantic snippet of the article content."""
 
     topic_breadcrumb: Annotated[
         List[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
@@ -205,12 +189,6 @@ class ArticleAISearchResult(BaseModel):
         Optional[int], pydantic.Field(alias="additionalSnippetCount")
     ] = None
     r"""Number of additional snippets."""
-
-    opensearch_highlighting_raw: Annotated[
-        Optional[OpensearchHighlightingRaw],
-        pydantic.Field(alias="opensearchHighlightingRaw"),
-    ] = None
-    r"""Article content used for highlighting a keyword search result"""
 
     contextual_summary: Annotated[
         Optional[str], pydantic.Field(alias="contextualSummary")

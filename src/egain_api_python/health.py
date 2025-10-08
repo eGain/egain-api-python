@@ -68,9 +68,6 @@ class Health(BaseSDK):
             base_url = server_url
         else:
             base_url = models.GET_HEALTH_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
         req = self._build_request(
             method="GET",
             path="/import/content/health",
@@ -100,7 +97,7 @@ class Health(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getHealth",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -189,9 +186,6 @@ class Health(BaseSDK):
             base_url = server_url
         else:
             base_url = models.GET_HEALTH_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
         req = self._build_request_async(
             method="GET",
             path="/import/content/health",
@@ -221,7 +215,7 @@ class Health(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getHealth",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

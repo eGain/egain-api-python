@@ -1,4 +1,4 @@
-# PatchImportContentValidationRequest
+# CancelImportRequest
 
 
 ## Fields

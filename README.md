@@ -16,23 +16,31 @@ Knowledge Portal Manager APIs: ### License
   The following licenses are required to use the Knowledge Access APIs:
   * If the user is an agent, then the *Knowledge + AI* license is required.
   * If the user is a customer, the *Self-Service* and *Advanced Self-Service* licenses must be available.
-### API Resource Limits
-The following Resources have predefined limits for specific access attributes for Enterprise use.
 
-| Resource | Attribute | Enterprise
-| ---------------- | ---------------------------- | ----------
-| Article Reference Limits |Number of attachments used in any article | 50
-|  |Number of custom attributes in an article | 15
-|  |Number of publish views used in an article version | 20
-| Topic Reference Limits |User-defined topics in a department| 50000
-|  |Depth of topics  | 20
-|  |Topics at any level | 2500
-|  |Number of custom attributes in a topic | 15
-| Portal Reference Limits | Tag categories in a portal | 15
-|  |Topics to be included in a portal | 2500
-|  |Number of articles to display in announcements | 25
-|  |Maximum related articles in portal setting | 100
-|  |Usage links and link groups setup for a portal | 25
+### Tiers
+
+| Tier	|Tier Name|	Named Users |	Description
+| ---------- | ---------- | ---------- | ----------------------------
+| Tier 1 |  Starter |	Up to 10|	Designed for small-scale implementations or pilot environments
+| Tier 2 |	Growth	| Up to 1000|	Suitable for mid-scale deployments requiring moderate scalability
+| Tier 3 |	Enterprise	| Greater than 1000|	Supports large-scale environments with extended configuration options
+
+### API Resource Limits
+The following Resources have predefined limits for specific access attributes for Starter, Growth and Enterprise use.
+
+| Resource | Limits | Starter | Growth | Enterprise
+| ---------------- | ---------------------------- | ---------- | ---------- | ----------
+| Article Reference |Number of attachments used in any article | 25 | 50 |50
+|  |Number of custom attributes in an article | 10 | 25| 50 
+|  |Number of publish views used in an article version | 20 | 20 | 20
+| Topic Reference |User-defined topics in a department| 1000| 5000 | 50000
+|  |Depth of topics  | 5 | 20 | 20
+|  |Topics at any level | 500 | 2500 | 2500
+|  |Number of custom attributes in a topic | 10 | 10 | 10
+| Portal Reference | Tag categories in a portal | 15 | 15 | 15
+|  |Topics to be included in a portal | 100 | 500 | 5000 
+|  |Number of articles to display in announcements | 10 | 25 | 25
+|  |Usage links and link groups setup for a portal | 5 | 10 | 25
     
       
 
@@ -249,9 +257,6 @@ with Egain(
 <details open>
 <summary>Available methods</summary>
 
-### [aiservices](docs/sdks/aiservices/README.md)
-
-
 #### [aiservices.answers](docs/sdks/answers/README.md)
 
 * [get_best_answer](docs/sdks/answers/README.md#get_best_answer) - Get the best answer for a user query
@@ -260,23 +265,16 @@ with Egain(
 
 * [retrieve_chunks](docs/sdks/retrieve/README.md#retrieve_chunks) - Retrieve Chunks
 
-### [content](docs/sdks/content/README.md)
-
-
 #### [content.health](docs/sdks/health/README.md)
 
 * [get_health](docs/sdks/health/README.md#get_health) - Check service health status
 
 #### [content.import_](docs/sdks/import/README.md)
 
-* [create_import](docs/sdks/import/README.md#create_import) - Import content from external sources
-* [get_import_content](docs/sdks/import/README.md#get_import_content) - Get the current status of an import or validation job
-* [create_import_validation](docs/sdks/import/README.md#create_import_validation) - Validate content structure and format before import
-* [patch_import_content_validation](docs/sdks/import/README.md#patch_import_content_validation) - Cancel an import or validation job
-
-
-### [portal](docs/sdks/portalsdk/README.md)
-
+* [create_import_job](docs/sdks/import/README.md#create_import_job) - Import content from external sources by creating an import job
+* [get_import_status](docs/sdks/import/README.md#get_import_status) - Get the current status of an import or validation job
+* [create_import_validation_job](docs/sdks/import/README.md#create_import_validation_job) - Validate content structure and format before import by creating an import validation job
+* [cancel_import](docs/sdks/import/README.md#cancel_import) - Cancel an import or validation job
 
 #### [portal.article](docs/sdks/portalarticle/README.md)
 
@@ -521,7 +519,7 @@ with Egain(
     res = None
     try:
 
-        res = egain.content.import_.create_import(data_source={
+        res = egain.content.import_.create_import_job(data_source={
             "type": "AWS S3 bucket",
             "path": "s3://mybucket/myfolder/",
             "region": "us-east-1",
@@ -578,43 +576,6 @@ with Egain(
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Server Variables
-
-The default server `https://${API_DOMAIN}/knowledge/portalmgr/v4` contains variables and is set to `https://$api.egain.cloud/knowledge/portalmgr/v4` by default. To override default values, the following parameters are available when initializing the SDK client instance:
-
-| Variable     | Parameter         | Default             | Description |
-| ------------ | ----------------- | ------------------- | ----------- |
-| `API_DOMAIN` | `api_domain: str` | `"api.egain.cloud"` |             |
-
-#### Example
-
-```python
-from egain_api_python import Egain
-import os
-
-
-with Egain(
-    api_domain="<value>"
-    access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
-) as egain:
-
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    })
-
-    # Handle response
-    print(res)
-
-```
-
 ### Override Server URL Per-Client
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
@@ -624,7 +585,7 @@ import os
 
 
 with Egain(
-    server_url="https://$api.egain.cloud/knowledge/portalmgr/v4",
+    server_url="https://${API_DOMAIN}/knowledge/portalmgr/v4",
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
@@ -667,7 +628,7 @@ with Egain(
         ],
     }, channel={
         "name": "Eight Bank Website",
-    }, server_url="https://$api.egain.cloud/core/aiservices/v4")
+    }, server_url="https://${API_DOMAIN}/core/aiservices/v4")
 
     # Handle response
     print(res)

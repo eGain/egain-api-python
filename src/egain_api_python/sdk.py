@@ -11,7 +11,7 @@ from egain_api_python.types import OptionalNullable, UNSET
 import httpx
 import importlib
 import sys
-from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, cast
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
@@ -25,23 +25,31 @@ class Egain(BaseSDK):
     The following licenses are required to use the Knowledge Access APIs:
     * If the user is an agent, then the *Knowledge + AI* license is required.
     * If the user is a customer, the *Self-Service* and *Advanced Self-Service* licenses must be available.
-    ### API Resource Limits
-    The following Resources have predefined limits for specific access attributes for Enterprise use.
 
-    | Resource | Attribute | Enterprise
-    | ---------------- | ---------------------------- | ----------
-    | Article Reference Limits |Number of attachments used in any article | 50
-    |  |Number of custom attributes in an article | 15
-    |  |Number of publish views used in an article version | 20
-    | Topic Reference Limits |User-defined topics in a department| 50000
-    |  |Depth of topics  | 20
-    |  |Topics at any level | 2500
-    |  |Number of custom attributes in a topic | 15
-    | Portal Reference Limits | Tag categories in a portal | 15
-    |  |Topics to be included in a portal | 2500
-    |  |Number of articles to display in announcements | 25
-    |  |Maximum related articles in portal setting | 100
-    |  |Usage links and link groups setup for a portal | 25
+    ### Tiers
+
+    | Tier	|Tier Name|	Named Users |	Description
+    | ---------- | ---------- | ---------- | ----------------------------
+    | Tier 1 |  Starter |	Up to 10|	Designed for small-scale implementations or pilot environments
+    | Tier 2 |	Growth	| Up to 1000|	Suitable for mid-scale deployments requiring moderate scalability
+    | Tier 3 |	Enterprise	| Greater than 1000|	Supports large-scale environments with extended configuration options
+
+    ### API Resource Limits
+    The following Resources have predefined limits for specific access attributes for Starter, Growth and Enterprise use.
+
+    | Resource | Limits | Starter | Growth | Enterprise
+    | ---------------- | ---------------------------- | ---------- | ---------- | ----------
+    | Article Reference |Number of attachments used in any article | 25 | 50 |50
+    |  |Number of custom attributes in an article | 10 | 25| 50
+    |  |Number of publish views used in an article version | 20 | 20 | 20
+    | Topic Reference |User-defined topics in a department| 1000| 5000 | 50000
+    |  |Depth of topics  | 5 | 20 | 20
+    |  |Topics at any level | 500 | 2500 | 2500
+    |  |Number of custom attributes in a topic | 10 | 10 | 10
+    | Portal Reference | Tag categories in a portal | 15 | 15 | 15
+    |  |Topics to be included in a portal | 100 | 500 | 5000
+    |  |Number of articles to display in announcements | 10 | 25 | 25
+    |  |Usage links and link groups setup for a portal | 5 | 10 | 25
 
 
 
@@ -62,7 +70,6 @@ class Egain(BaseSDK):
         access_token: Optional[
             Union[Optional[str], Callable[[], Optional[str]]]
         ] = None,
-        api_domain: Optional[str] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -75,7 +82,6 @@ class Egain(BaseSDK):
         r"""Instantiates the SDK configuring it with the provided parameters.
 
         :param access_token: The access_token required for authentication
-        :param api_domain: Allows setting the API_DOMAIN variable for url substitution
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -115,11 +121,6 @@ class Egain(BaseSDK):
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
-        server_defaults: List[Dict[str, str]] = [
-            {
-                "API_DOMAIN": api_domain or "api.egain.cloud",
-            },
-        ]
 
         BaseSDK.__init__(
             self,
@@ -131,7 +132,6 @@ class Egain(BaseSDK):
                 security=security,
                 server_url=server_url,
                 server_idx=server_idx,
-                server_defaults=server_defaults,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,

@@ -5,17 +5,20 @@
 
 ### Available Operations
 
-* [create_import](#create_import) - Import content from external sources
-* [get_import_content](#get_import_content) - Get the current status of an import or validation job
-* [create_import_validation](#create_import_validation) - Validate content structure and format before import
-* [patch_import_content_validation](#patch_import_content_validation) - Cancel an import or validation job
+* [create_import_job](#create_import_job) - Import content from external sources by creating an import job
+* [get_import_status](#get_import_status) - Get the current status of an import or validation job
+* [create_import_validation_job](#create_import_validation_job) - Validate content structure and format before import by creating an import validation job
+* [cancel_import](#cancel_import) - Cancel an import or validation job
 
-## create_import
+## create_import_job
 
 # Import Content
 
 ## Overview
-This API initiates a bulk content import operation from Amazon S3 buckets. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+This API initiates a bulk content import operation from Data Sources. It creates an asynchronous import job that processes content in the background, allowing you to import large volumes of content without blocking your application.
+
+## Pre-requisties
+1. Content in Data Source needs to be in this format: [Guide to Data Import Format](../../../../../developer-portal/guides/ingestion/data-import-format-guide.md)
 
 ## How It Works
 1. **Job Creation**: The API creates an import job and returns a unique job ID
@@ -44,7 +47,7 @@ This API initiates a bulk content import operation from Amazon S3 buckets. It cr
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createImport" method="post" path="/import/content" -->
+<!-- UsageSnippet language="python" operationID="createImportJob" method="post" path="/import/content" -->
 ```python
 from egain_api_python import Egain
 from egain_api_python.utils import parse_datetime
@@ -55,7 +58,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.content.import_.create_import(data_source={
+    res = egain.content.import_.create_import_job(data_source={
         "type": "AWS S3 bucket",
         "path": "s3://mybucket/myfolder/",
         "region": "us-east-1",
@@ -81,7 +84,7 @@ with Egain(
 
 ### Response
 
-**[models.CreateImportResponse](../../models/createimportresponse.md)**
+**[models.CreateImportJobResponse](../../models/createimportjobresponse.md)**
 
 ### Errors
 
@@ -92,7 +95,7 @@ with Egain(
 | errors.WSErrorCommon        | 500                         | application/json            |
 | errors.EgainDefaultError    | 4XX, 5XX                    | \*/\*                       |
 
-## get_import_content
+## get_import_status
 
 # Get Import Job Status
 
@@ -128,7 +131,7 @@ Log files contain detailed information about:
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getImportContent" method="get" path="/import/content/{job_id}/status" -->
+<!-- UsageSnippet language="python" operationID="getImportStatus" method="get" path="/import/content/{job_id}/status" -->
 ```python
 from egain_api_python import Egain
 import os
@@ -138,7 +141,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.content.import_.get_import_content(job_id="7A84B875-6F75-4C7B-B137-0632B62DB0BD")
+    res = egain.content.import_.get_import_status(job_id="7A84B875-6F75-4C7B-B137-0632B62DB0BD")
 
     # Handle response
     print(res)
@@ -165,7 +168,7 @@ with Egain(
 | errors.WSErrorCommon     | 500                      | application/json         |
 | errors.EgainDefaultError | 4XX, 5XX                 | \*/\*                    |
 
-## create_import_validation
+## create_import_validation_job
 
 # Validate Import Content
 
@@ -212,7 +215,7 @@ This API enables users to validate content structure, format, and compliance bef
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createImportValidation" method="post" path="/import/content/validate" -->
+<!-- UsageSnippet language="python" operationID="createImportValidationJob" method="post" path="/import/content/validate" -->
 ```python
 from egain_api_python import Egain
 import os
@@ -222,7 +225,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.content.import_.create_import_validation(data_source={
+    res = egain.content.import_.create_import_validation_job(data_source={
         "type": "AWS S3 bucket",
         "path": "s3://mybucket/myfolder/",
         "region": "us-east-1",
@@ -244,7 +247,7 @@ with Egain(
 
 ### Response
 
-**[models.CreateImportValidationResponse](../../models/createimportvalidationresponse.md)**
+**[models.CreateImportValidationJobResponse](../../models/createimportvalidationjobresponse.md)**
 
 ### Errors
 
@@ -255,7 +258,7 @@ with Egain(
 | errors.WSErrorCommon        | 500                         | application/json            |
 | errors.EgainDefaultError    | 4XX, 5XX                    | \*/\*                       |
 
-## patch_import_content_validation
+## cancel_import
 
 # Cancel Import or Validation Job
 
@@ -302,7 +305,7 @@ This API allows users to cancel import or validation operations that are current
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="patchImportContentValidation" method="post" path="/import/content/{job_id}/cancel" -->
+<!-- UsageSnippet language="python" operationID="cancelImport" method="post" path="/import/content/{job_id}/cancel" -->
 ```python
 from egain_api_python import Egain
 import os
@@ -312,7 +315,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    egain.content.import_.patch_import_content_validation(job_id="7A84B875-6F75-4C7B-B137-0632B62DB0BD")
+    egain.content.import_.cancel_import(job_id="7A84B875-6F75-4C7B-B137-0632B62DB0BD")
 
     # Use the SDK ...
 

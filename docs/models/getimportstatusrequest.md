@@ -1,4 +1,4 @@
-# GetImportContentRequest
+# GetImportStatusRequest
 
 
 ## Fields

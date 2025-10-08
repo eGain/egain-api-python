@@ -31,7 +31,7 @@ class Retrieve(BaseSDK):
     ) -> models.RetrieveResponse:
         r"""Retrieve Chunks
 
-        The Retrieve API enables enterprises to directly access relevant content chunks from their organizational knowledge sources. It is designed for scenarios where developers want granular control over retrieved information, such as powering custom search, analytics, or retrieval-augmented generation (RAG) pipelines. <br><br> In addition to raw chunk retrieval, the API can return **Certified Answers** if it meets the 'Certified Answer' threshold score. Responses include relevance scores, metadata, and references to maintain transparency and flexibility. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material.
+        The Retrieve API enables enterprises to directly access relevant content chunks from their organizational knowledge sources. It is designed for scenarios where developers want granular control over retrieved information, such as powering custom search, analytics, or retrieval-augmented generation (RAG) pipelines. <br><br> In addition to raw chunk retrieval, the API can return **Certified Answers** if it meets the 'Certified Answer' threshold score. Responses include relevance scores, metadata, and references to maintain transparency and flexibility. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material. <br>**This endpoint is only available for Self Service environments.**
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
@@ -56,9 +56,6 @@ class Retrieve(BaseSDK):
             base_url = server_url
         else:
             base_url = models.RETRIEVE_CHUNKS_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
 
         request = models.RetrieveChunksRequest(
             q=q,
@@ -112,7 +109,7 @@ class Retrieve(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="retrieveChunks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -158,7 +155,7 @@ class Retrieve(BaseSDK):
     ) -> models.RetrieveResponse:
         r"""Retrieve Chunks
 
-        The Retrieve API enables enterprises to directly access relevant content chunks from their organizational knowledge sources. It is designed for scenarios where developers want granular control over retrieved information, such as powering custom search, analytics, or retrieval-augmented generation (RAG) pipelines. <br><br> In addition to raw chunk retrieval, the API can return **Certified Answers** if it meets the 'Certified Answer' threshold score. Responses include relevance scores, metadata, and references to maintain transparency and flexibility. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material.
+        The Retrieve API enables enterprises to directly access relevant content chunks from their organizational knowledge sources. It is designed for scenarios where developers want granular control over retrieved information, such as powering custom search, analytics, or retrieval-augmented generation (RAG) pipelines. <br><br> In addition to raw chunk retrieval, the API can return **Certified Answers** if it meets the 'Certified Answer' threshold score. Responses include relevance scores, metadata, and references to maintain transparency and flexibility. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material. <br>**This endpoint is only available for Self Service environments.**
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
@@ -183,9 +180,6 @@ class Retrieve(BaseSDK):
             base_url = server_url
         else:
             base_url = models.RETRIEVE_CHUNKS_OP_SERVERS[0]
-            url_variables = {
-                "API_DOMAIN": "api.egain.cloud",
-            }
 
         request = models.RetrieveChunksRequest(
             q=q,
@@ -239,7 +233,7 @@ class Retrieve(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="retrieveChunks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

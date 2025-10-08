@@ -111,7 +111,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="startCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -248,7 +248,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="startCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -369,7 +369,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="searchPriorToEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -490,7 +490,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="searchPriorToEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -599,7 +599,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -706,7 +706,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -813,7 +813,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="avertCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -920,7 +920,7 @@ class Escalation(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="avertCustomerEscalation",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
