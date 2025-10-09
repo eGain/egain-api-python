@@ -16,7 +16,7 @@ from typing import Callable, Dict, Optional, Tuple, Union
 
 
 SERVERS = [
-    "https://${API_DOMAIN}/knowledge/portalmgr/v4",
+    "https://api.aidev.egain.cloud/knowledge/portalmgr/v4",
     # Production Server
 ]
 """Contains the list of servers available to the SDK"""

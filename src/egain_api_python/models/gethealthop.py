@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 GET_HEALTH_OP_SERVERS = [
     # Production Server
-    "https://${API_DOMAIN}/knowledge/contentmgr/v4",
+    "https://api.aidev.egain.cloud/knowledge/contentmgr/v4",
 ]
 
 

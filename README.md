@@ -586,7 +586,7 @@ import os
 
 
 with Egain(
-    server_url="https://${API_DOMAIN}/knowledge/portalmgr/v4",
+    server_url="https://api.aidev.egain.cloud/knowledge/portalmgr/v4",
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
@@ -629,7 +629,7 @@ with Egain(
         ],
     }, channel={
         "name": "Eight Bank Website",
-    }, server_url="https://${API_DOMAIN}/core/aiservices/v4")
+    }, server_url="https://api.aidev.egain.cloud/core/aiservices/v4")
 
     # Handle response
     print(res)

@@ -17,7 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 RETRIEVE_CHUNKS_OP_SERVERS = [
     # aiservices
-    "https://${API_DOMAIN}/core/aiservices/v4",
+    "https://api.aidev.egain.cloud/core/aiservices/v4",
 ]
 
 
