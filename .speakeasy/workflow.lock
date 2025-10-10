@@ -2,8 +2,8 @@ speakeasyVersion: 1.636.3
 sources:
     Knowledge Portal Manager APIs:
         sourceNamespace: knowledge-portal-manager-ap-is
-        sourceRevisionDigest: sha256:670806534a4e347076018a5e3ac3eb69d1d22ed0e2e559de30b3672cb565c977
-        sourceBlobDigest: sha256:d5a0e814fa62a6b38ba49a1f2b083434ed396e6431e43427b8d54ed47f97c7a6
+        sourceRevisionDigest: sha256:a2ac60c64ee6243eab44a72c354a43019ca600b3205e4884e8347e9e8b1ce9a7
+        sourceBlobDigest: sha256:332dbd40bd864bf0c193da106175f5cd0afc673e8d4e04961fbb8bda87f0737c
         tags:
             - latest
             - 4.0.0
@@ -11,10 +11,10 @@ targets:
     egain:
         source: Knowledge Portal Manager APIs
         sourceNamespace: knowledge-portal-manager-ap-is
-        sourceRevisionDigest: sha256:670806534a4e347076018a5e3ac3eb69d1d22ed0e2e559de30b3672cb565c977
-        sourceBlobDigest: sha256:d5a0e814fa62a6b38ba49a1f2b083434ed396e6431e43427b8d54ed47f97c7a6
+        sourceRevisionDigest: sha256:a2ac60c64ee6243eab44a72c354a43019ca600b3205e4884e8347e9e8b1ce9a7
+        sourceBlobDigest: sha256:332dbd40bd864bf0c193da106175f5cd0afc673e8d4e04961fbb8bda87f0737c
         codeSamplesNamespace: knowledge-portal-manager-ap-is-python-code-samples
-        codeSamplesRevisionDigest: sha256:76b367789e2b2532e903f0be7f77c688906d8111ae00c0a6d84769ec258c9062
+        codeSamplesRevisionDigest: sha256:61bf39493aa96aa08a3735b43736b844357ce0d6090806d98388c62989303640
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

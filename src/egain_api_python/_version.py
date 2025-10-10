@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "egain-api-python"
-__version__: str = "0.1.7"
+__version__: str = "0.1.8"
 __openapi_doc_version__: str = "4.0.0"
 __gen_version__: str = "2.723.11"
-__user_agent__: str = "speakeasy-sdk/python 0.1.7 2.723.11 4.0.0 egain-api-python"
+__user_agent__: str = "speakeasy-sdk/python 0.1.8 2.723.11 4.0.0 egain-api-python"
 
 try:
     if __package__ is not None:
