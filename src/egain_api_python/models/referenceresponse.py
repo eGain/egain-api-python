@@ -4,7 +4,7 @@ from __future__ import annotations
 from .topicbreadcrumb import TopicBreadcrumb, TopicBreadcrumbTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -36,8 +36,7 @@ class ReferenceResponseTypedDict(TypedDict):
     r"""Source Type"""
     doc_name: NotRequired[str]
     r"""Name of the attachment, if an attachment was used as the source content."""
-    topic_breadcrumb: NotRequired[TopicBreadcrumbTypedDict]
-    r"""This schema contains one or more TopicSummary instances."""
+    topic_breadcrumb: NotRequired[List[TopicBreadcrumbTypedDict]]
 
 
 class ReferenceResponse(BaseModel):
@@ -59,6 +58,5 @@ class ReferenceResponse(BaseModel):
     r"""Name of the attachment, if an attachment was used as the source content."""
 
     topic_breadcrumb: Annotated[
-        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
+        Optional[List[TopicBreadcrumb]], pydantic.Field(alias="topicBreadcrumb")
     ] = None
-    r"""This schema contains one or more TopicSummary instances."""

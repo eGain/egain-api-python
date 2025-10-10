@@ -629,7 +629,7 @@ with Egain(
         ],
     }, channel={
         "name": "Eight Bank Website",
-    }, server_url="https://api.aidev.egain.cloud/core/aiservices/v4")
+    }, server_url="https://${API_DOMAIN}/core/aiservices/v4")
 
     # Handle response
     print(res)

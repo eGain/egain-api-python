@@ -9,7 +9,7 @@ from egain_api_python.errors import EgainError
 MAX_MESSAGE_LEN = 10_000
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class EgainDefaultError(EgainError):
     """The fallback error class if no more specific error class is matched."""
 

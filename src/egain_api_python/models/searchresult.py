@@ -4,7 +4,7 @@ from __future__ import annotations
 from .topicbreadcrumb import TopicBreadcrumb, TopicBreadcrumbTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -47,8 +47,7 @@ class SearchResultTypedDict(TypedDict):
     doc_name: NotRequired[str]
     r"""Name of the attachment, if an attachment was used as the source content."""
     snippet_type: NotRequired[SnippetType]
-    topic_breadcrumb: NotRequired[TopicBreadcrumbTypedDict]
-    r"""This schema contains one or more TopicSummary instances."""
+    topic_breadcrumb: NotRequired[List[TopicBreadcrumbTypedDict]]
 
 
 class SearchResult(BaseModel):
@@ -80,6 +79,5 @@ class SearchResult(BaseModel):
     ] = None
 
     topic_breadcrumb: Annotated[
-        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
+        Optional[List[TopicBreadcrumb]], pydantic.Field(alias="topicBreadcrumb")
     ] = None
-    r"""This schema contains one or more TopicSummary instances."""

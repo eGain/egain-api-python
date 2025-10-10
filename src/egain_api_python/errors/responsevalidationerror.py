@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from egain_api_python.errors import EgainError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ResponseValidationError(EgainError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 

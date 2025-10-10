@@ -58,7 +58,7 @@ class ServiceUnavailableErrorData(BaseModel):
     """
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ServiceUnavailableError(EgainError):
     r"""## Service is Unhealthy
 

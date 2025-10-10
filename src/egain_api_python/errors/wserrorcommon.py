@@ -32,7 +32,7 @@ class WSErrorCommonData(BaseModel):
     """
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class WSErrorCommon(EgainError):
     r"""Bad Request"""
 

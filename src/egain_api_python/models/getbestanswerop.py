@@ -17,7 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 GET_BEST_ANSWER_OP_SERVERS = [
     # aiservices
-    "https://api.aidev.egain.cloud/core/aiservices/v4",
+    "https://${API_DOMAIN}/core/aiservices/v4",
 ]
 
 

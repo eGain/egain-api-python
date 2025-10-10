@@ -34,7 +34,7 @@ class SchemasWSErrorCommonData(BaseModel):
     """
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class SchemasWSErrorCommon(EgainError):
     r"""Preconditions failed"""
 
