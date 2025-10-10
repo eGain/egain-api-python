@@ -22,12 +22,12 @@ class AdditionalSnippetsTypedDict(TypedDict):
     r"""The name of the Article or source content."""
     doc_type: AdditionalSnippetsDocType
     r"""Format of the source document (HTML, Doc, or PDF)."""
-    doc_name: str
-    r"""Name of the attachment, if an attachment was used as the source content."""
     snippet: str
     r"""A snippet of the article content."""
     relevance_score: float
     r"""Generated confidence score (0.0-1.0) for the snippet's relevance to the query."""
+    doc_name: NotRequired[str]
+    r"""Name of the attachment, if an attachment was used as the source content."""
     keyword_snippet: NotRequired[str]
     r"""A keyword snippet of the article content."""
 
@@ -42,14 +42,14 @@ class AdditionalSnippets(BaseModel):
     doc_type: Annotated[AdditionalSnippetsDocType, pydantic.Field(alias="docType")]
     r"""Format of the source document (HTML, Doc, or PDF)."""
 
-    doc_name: Annotated[str, pydantic.Field(alias="docName")]
-    r"""Name of the attachment, if an attachment was used as the source content."""
-
     snippet: str
     r"""A snippet of the article content."""
 
     relevance_score: Annotated[float, pydantic.Field(alias="relevanceScore")]
     r"""Generated confidence score (0.0-1.0) for the snippet's relevance to the query."""
+
+    doc_name: Annotated[Optional[str], pydantic.Field(alias="docName")] = None
+    r"""Name of the attachment, if an attachment was used as the source content."""
 
     keyword_snippet: Annotated[
         Optional[str], pydantic.Field(alias="keywordSnippet")

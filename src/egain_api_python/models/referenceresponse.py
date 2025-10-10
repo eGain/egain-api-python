@@ -36,7 +36,7 @@ class ReferenceResponseTypedDict(TypedDict):
     r"""Source Type"""
     doc_name: NotRequired[str]
     r"""Name of the attachment, if an attachment was used as the source content."""
-    topic_bread_crumb: NotRequired[TopicBreadcrumbTypedDict]
+    topic_breadcrumb: NotRequired[TopicBreadcrumbTypedDict]
     r"""This schema contains one or more TopicSummary instances."""
 
 
@@ -58,7 +58,7 @@ class ReferenceResponse(BaseModel):
     doc_name: Annotated[Optional[str], pydantic.Field(alias="docName")] = None
     r"""Name of the attachment, if an attachment was used as the source content."""
 
-    topic_bread_crumb: Annotated[
-        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadCrumb")
+    topic_breadcrumb: Annotated[
+        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
     ] = None
     r"""This schema contains one or more TopicSummary instances."""

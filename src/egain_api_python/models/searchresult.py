@@ -47,7 +47,7 @@ class SearchResultTypedDict(TypedDict):
     doc_name: NotRequired[str]
     r"""Name of the attachment, if an attachment was used as the source content."""
     snippet_type: NotRequired[SnippetType]
-    topic_bread_crumb: NotRequired[TopicBreadcrumbTypedDict]
+    topic_breadcrumb: NotRequired[TopicBreadcrumbTypedDict]
     r"""This schema contains one or more TopicSummary instances."""
 
 
@@ -79,7 +79,7 @@ class SearchResult(BaseModel):
         Optional[SnippetType], pydantic.Field(alias="snippetType")
     ] = None
 
-    topic_bread_crumb: Annotated[
-        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadCrumb")
+    topic_breadcrumb: Annotated[
+        Optional[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
     ] = None
     r"""This schema contains one or more TopicSummary instances."""
