@@ -10,10 +10,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 SearchResultDocType = Literal[
     "HTML",
-    "Doc",
-    "Pdf",
+    "DOCX",
+    "PDF",
+    "PPTX",
 ]
-r"""Format of the source document (HTML, Doc, or PDF)."""
+r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
 
 
 SearchResultSource = Literal[
@@ -37,7 +38,7 @@ class SearchResultTypedDict(TypedDict):
     name: str
     r"""The name of the Article or source content."""
     doc_type: SearchResultDocType
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
     source: SearchResultSource
     r"""The repository or system where the content originated (e.g., eGain Article, eGain Attachment)."""
     snippet: str
@@ -60,7 +61,7 @@ class SearchResult(BaseModel):
     r"""The name of the Article or source content."""
 
     doc_type: Annotated[SearchResultDocType, pydantic.Field(alias="docType")]
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
 
     source: SearchResultSource
     r"""The repository or system where the content originated (e.g., eGain Article, eGain Attachment)."""

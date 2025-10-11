@@ -1,6 +1,6 @@
 # ReferenceResponseDocType
 
-Format of the source document (HTML, Doc, or PDF).
+Format of the source document (HTML, DOCX, PPTX, or PDF).
 
 
 ## Values
@@ -8,5 +8,6 @@ Format of the source document (HTML, Doc, or PDF).
 | Name   | Value  |
 | ------ | ------ |
 | `HTML` | HTML   |
-| `DOC`  | Doc    |
+| `DOCX` | DOCX   |
 | `PDF`  | PDF    |
+| `PPTX` | PPTX   |

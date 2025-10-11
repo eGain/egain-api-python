@@ -10,10 +10,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 ReferenceResponseDocType = Literal[
     "HTML",
-    "Doc",
+    "DOCX",
     "PDF",
+    "PPTX",
 ]
-r"""Format of the source document (HTML, Doc, or PDF)."""
+r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
 
 
 ReferenceResponseSource = Literal[
@@ -31,7 +32,7 @@ class ReferenceResponseTypedDict(TypedDict):
     name: str
     r"""The name of the Article or source content."""
     doc_type: ReferenceResponseDocType
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
     source: ReferenceResponseSource
     r"""Source Type"""
     doc_name: NotRequired[str]
@@ -49,7 +50,7 @@ class ReferenceResponse(BaseModel):
     r"""The name of the Article or source content."""
 
     doc_type: Annotated[ReferenceResponseDocType, pydantic.Field(alias="docType")]
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX, or PDF)."""
 
     source: ReferenceResponseSource
     r"""Source Type"""
