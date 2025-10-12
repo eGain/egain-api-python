@@ -162,7 +162,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -194,7 +194,7 @@ async def main():
         access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
     ) as egain:
 
-        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
             "PROD-1234": [
                 "PROD-2000",
                 "PROD-2003",
@@ -234,7 +234,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -258,147 +258,143 @@ with Egain(
 <details open>
 <summary>Available methods</summary>
 
-#### [aiservices.answers](docs/sdks/answers/README.md)
+#### [aiservices.answers](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/answers/README.md)
 
-* [get_best_answer](docs/sdks/answers/README.md#get_best_answer) - Get the best answer for a user query
+* [get_best_answer](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/answers/README.md#get_best_answer) - Get the best answer for a user query
 
-#### [aiservices.retrieve](docs/sdks/retrieve/README.md)
+#### [aiservices.retrieve](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/retrieve/README.md)
 
-* [retrieve_chunks](docs/sdks/retrieve/README.md#retrieve_chunks) - Retrieve Chunks
+* [retrieve_chunks](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/retrieve/README.md#retrieve_chunks) - Retrieve Chunks
 
-#### [content.health](docs/sdks/health/README.md)
+#### [content.import_](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/import/README.md)
 
-* [get_health](docs/sdks/health/README.md#get_health) - Check service health status
+* [create_import_job](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/import/README.md#create_import_job) - Import content from external sources by creating an import job
+* [get_import_status](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/import/README.md#get_import_status) - Get the current status of an import or validation job
+* [create_import_validation_job](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/import/README.md#create_import_validation_job) - Validate content structure and format before import by creating an import validation job
+* [cancel_import](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/import/README.md#cancel_import) - Cancel an import or validation job
 
-#### [content.import_](docs/sdks/import/README.md)
+#### [portal.article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md)
 
-* [create_import_job](docs/sdks/import/README.md#create_import_job) - Import content from external sources by creating an import job
-* [get_import_status](docs/sdks/import/README.md#get_import_status) - Get the current status of an import or validation job
-* [create_import_validation_job](docs/sdks/import/README.md#create_import_validation_job) - Validate content structure and format before import by creating an import validation job
-* [cancel_import](docs/sdks/import/README.md#cancel_import) - Cancel an import or validation job
+* [get_article_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_by_id) - Get Article by ID
+* [get_article_by_id_with_editions](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_by_id_with_editions) - Get Article By ID with Editions
+* [get_article_edition_details](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_edition_details) - Get Article Edition Details
+* [add_to_reply](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#add_to_reply) - Add Article to Reply
+* [add_as_reference](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#add_as_reference) - Add as Reference
+* [get_articles_in_topic](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_articles_in_topic) - Get Articles in Topic
+* [get_article_attachment_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_attachment_by_id) - Get Article Attachment By ID
+* [get_attachment_by_id_in_portal](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_attachment_by_id_in_portal) - Get Article Attachment in Portal
+* [get_related_articles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_related_articles) - Get Related Articles
+* [get_announcement_articles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_announcement_articles) - Get Announcement Articles
+* [get_article_ratings](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_ratings) - Get Article Ratings
+* [rate_article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#rate_article) - Rate an Article
+* [get_pending_compliance_articles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_pending_compliance_articles) - Get Pending Article Compliances
+* [get_acknowledged_compliance_articles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_acknowledged_compliance_articles) - Get Acknowledged Article Compliances
+* [comply_article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#comply_article) - Comply With an Article
+* [get_my_subscription](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_my_subscription) - My Subscription
+* [subscribe_article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#subscribe_article) - Subscribe to an Article
+* [unsubscribe_article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#unsubscribe_article) - Unsubscribe to an Article
+* [get_article_permissions_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_permissions_by_id) - Get Article Permissions By ID
+* [get_article_personalization](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalarticle/README.md#get_article_personalization) - Get Article Personalization Details
 
-#### [portal.article](docs/sdks/portalarticle/README.md)
+#### [portal.articlelists](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/articlelists/README.md)
 
-* [get_article_by_id](docs/sdks/portalarticle/README.md#get_article_by_id) - Get Article by ID
-* [get_article_by_id_with_editions](docs/sdks/portalarticle/README.md#get_article_by_id_with_editions) - Get Article By ID with Editions
-* [get_article_edition_details](docs/sdks/portalarticle/README.md#get_article_edition_details) - Get Article Edition Details
-* [add_to_reply](docs/sdks/portalarticle/README.md#add_to_reply) - Add Article to Reply
-* [add_as_reference](docs/sdks/portalarticle/README.md#add_as_reference) - Add as Reference
-* [get_articles_in_topic](docs/sdks/portalarticle/README.md#get_articles_in_topic) - Get Articles in Topic
-* [get_article_attachment_by_id](docs/sdks/portalarticle/README.md#get_article_attachment_by_id) - Get Article Attachment By ID
-* [get_attachment_by_id_in_portal](docs/sdks/portalarticle/README.md#get_attachment_by_id_in_portal) - Get Article Attachment in Portal
-* [get_related_articles](docs/sdks/portalarticle/README.md#get_related_articles) - Get Related Articles
-* [get_announcement_articles](docs/sdks/portalarticle/README.md#get_announcement_articles) - Get Announcement Articles
-* [get_article_ratings](docs/sdks/portalarticle/README.md#get_article_ratings) - Get Article Ratings
-* [rate_article](docs/sdks/portalarticle/README.md#rate_article) - Rate an Article
-* [get_pending_compliance_articles](docs/sdks/portalarticle/README.md#get_pending_compliance_articles) - Get Pending Article Compliances
-* [get_acknowledged_compliance_articles](docs/sdks/portalarticle/README.md#get_acknowledged_compliance_articles) - Get Acknowledged Article Compliances
-* [comply_article](docs/sdks/portalarticle/README.md#comply_article) - Comply With an Article
-* [get_my_subscription](docs/sdks/portalarticle/README.md#get_my_subscription) - My Subscription
-* [subscribe_article](docs/sdks/portalarticle/README.md#subscribe_article) - Subscribe to an Article
-* [unsubscribe_article](docs/sdks/portalarticle/README.md#unsubscribe_article) - Unsubscribe to an Article
-* [get_article_permissions_by_id](docs/sdks/portalarticle/README.md#get_article_permissions_by_id) - Get Article Permissions By ID
-* [get_article_personalization](docs/sdks/portalarticle/README.md#get_article_personalization) - Get Article Personalization Details
+* [get_all_article_lists](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/articlelists/README.md#get_all_article_lists) - Get All Article Lists
+* [get_article_list_details](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/articlelists/README.md#get_article_list_details) - Get Article List by ID
 
-#### [portal.articlelists](docs/sdks/articlelists/README.md)
+#### [portal.attachment](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalattachment/README.md)
 
-* [get_all_article_lists](docs/sdks/articlelists/README.md#get_all_article_lists) - Get All Article Lists
-* [get_article_list_details](docs/sdks/articlelists/README.md#get_article_list_details) - Get Article List by ID
+* [create_signed_url](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalattachment/README.md#create_signed_url) - Generate Signed URL to Upload API
+* [upload_attachment](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalattachment/README.md#upload_attachment) - Upload Attachment
 
-#### [portal.attachment](docs/sdks/portalattachment/README.md)
+#### [portal.bookmark](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalbookmark/README.md)
 
-* [create_signed_url](docs/sdks/portalattachment/README.md#create_signed_url) - Generate Signed URL to Upload API
-* [upload_attachment](docs/sdks/portalattachment/README.md#upload_attachment) - Upload Attachment
+* [addbookmark](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalbookmark/README.md#addbookmark) - Add a Bookmark
+* [getbookmark](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalbookmark/README.md#getbookmark) - Get All Bookmarks for a Portal
+* [deletebookmark](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalbookmark/README.md#deletebookmark) - Delete a Bookmark
 
-#### [portal.bookmark](docs/sdks/portalbookmark/README.md)
+#### [portal.connectorssearchevents](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/connectorssearchevents/README.md)
 
-* [addbookmark](docs/sdks/portalbookmark/README.md#addbookmark) - Add a Bookmark
-* [getbookmark](docs/sdks/portalbookmark/README.md#getbookmark) - Get All Bookmarks for a Portal
-* [deletebookmark](docs/sdks/portalbookmark/README.md#deletebookmark) - Delete a Bookmark
+* [create_search_result_event_for_connectors](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/connectorssearchevents/README.md#create_search_result_event_for_connectors) - Event for Search Using Connectors
+* [create_viewed_search_results_event_for_connectors](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/connectorssearchevents/README.md#create_viewed_search_results_event_for_connectors) - Event for Viewed Search Results Using Connectors
 
-#### [portal.connectorssearchevents](docs/sdks/connectorssearchevents/README.md)
+#### [portal.escalation](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/escalation/README.md)
 
-* [create_search_result_event_for_connectors](docs/sdks/connectorssearchevents/README.md#create_search_result_event_for_connectors) - Event for Search Using Connectors
-* [create_viewed_search_results_event_for_connectors](docs/sdks/connectorssearchevents/README.md#create_viewed_search_results_event_for_connectors) - Event for Viewed Search Results Using Connectors
+* [start_customer_escalation](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/escalation/README.md#start_customer_escalation) - Start Customer Escalation
+* [search_prior_to_escalation](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/escalation/README.md#search_prior_to_escalation) - Search Prior To Customer Escalation
+* [complete_customer_escalation](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/escalation/README.md#complete_customer_escalation) - Complete Customer Escalation
+* [avert_customer_escalation](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/escalation/README.md#avert_customer_escalation) - Avert Customer Escalation
 
-#### [portal.escalation](docs/sdks/escalation/README.md)
+#### [portal.export](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/export/README.md)
 
-* [start_customer_escalation](docs/sdks/escalation/README.md#start_customer_escalation) - Start Customer Escalation
-* [search_prior_to_escalation](docs/sdks/escalation/README.md#search_prior_to_escalation) - Search Prior To Customer Escalation
-* [complete_customer_escalation](docs/sdks/escalation/README.md#complete_customer_escalation) - Complete Customer Escalation
-* [avert_customer_escalation](docs/sdks/escalation/README.md#avert_customer_escalation) - Avert Customer Escalation
+* [export_content](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/export/README.md#export_content) - Export Knowledge
+* [export_status](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/export/README.md#export_status) - Get Export Job Status
 
-#### [portal.export](docs/sdks/export/README.md)
+#### [portal.federatedsearchevent](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/federatedsearchevent/README.md)
 
-* [export_content](docs/sdks/export/README.md#export_content) - Export Knowledge
-* [export_status](docs/sdks/export/README.md#export_status) - Get Export Job Status
+* [create_federated_search_result_event](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/federatedsearchevent/README.md#create_federated_search_result_event) - Event For Viewed Federated Search Result
 
-#### [portal.federatedsearchevent](docs/sdks/federatedsearchevent/README.md)
+#### [portal.general](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/general/README.md)
 
-* [create_federated_search_result_event](docs/sdks/federatedsearchevent/README.md#create_federated_search_result_event) - Event For Viewed Federated Search Result
+* [get_all_portals](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/general/README.md#get_all_portals) - Get All Portals
+* [get_my_portals](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/general/README.md#get_my_portals) - Get All Portals Accessible To User
+* [get_portal_details_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/general/README.md#get_portal_details_by_id) - Get Portal Details By ID
+* [get_tag_categories_for_interest_for_portal](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/general/README.md#get_tag_categories_for_interest_for_portal) - Get Tag Categories for Interest for a Portal
 
-#### [portal.general](docs/sdks/general/README.md)
+#### [portal.guidedhelp](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md)
 
-* [get_all_portals](docs/sdks/general/README.md#get_all_portals) - Get All Portals
-* [get_my_portals](docs/sdks/general/README.md#get_my_portals) - Get All Portals Accessible To User
-* [get_portal_details_by_id](docs/sdks/general/README.md#get_portal_details_by_id) - Get Portal Details By ID
-* [get_tag_categories_for_interest_for_portal](docs/sdks/general/README.md#get_tag_categories_for_interest_for_portal) - Get Tag Categories for Interest for a Portal
+* [get_all_casebases_releases](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_all_casebases_releases) - Get Available Casebases Releases
+* [get_casebase_release_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_casebase_release_by_id) - Get Details of a Casebase Release
+* [get_cluster_by_casebase_release_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_cluster_by_casebase_release_id) - Get Cluster Details of a Casebase Release
+* [get_all_profiles_in_portal](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_all_profiles_in_portal) - Get All Profiles Available in Portal
+* [start_gh_search](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#start_gh_search) - Start a Guided Help Search
+* [step_gh_search](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#step_gh_search) - Perform a Step in a Guided Help Search
+* [get_all_cases](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_all_cases) - Get All Cases of a Cluster in Release
+* [get_case_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_case_by_id) - Get Details of a Case
+* [accept_gh_solution](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#accept_gh_solution) - Accept Solution
+* [reject_gh_solution](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#reject_gh_solution) - Reject Solution
+* [create_quickpick](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#create_quickpick) - Create Quickpick
+* [get_all_quick_picks](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#get_all_quick_picks) - Get All Quickpicks for a Portal
+* [restore_quickpick](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/guidedhelp/README.md#restore_quickpick) - Resume a Quickpick
 
-#### [portal.guidedhelp](docs/sdks/guidedhelp/README.md)
+#### [portal.populararticles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/populararticles/README.md)
 
-* [get_all_casebases_releases](docs/sdks/guidedhelp/README.md#get_all_casebases_releases) - Get Available Casebases Releases
-* [get_casebase_release_by_id](docs/sdks/guidedhelp/README.md#get_casebase_release_by_id) - Get Details of a Casebase Release
-* [get_cluster_by_casebase_release_id](docs/sdks/guidedhelp/README.md#get_cluster_by_casebase_release_id) - Get Cluster Details of a Casebase Release
-* [get_all_profiles_in_portal](docs/sdks/guidedhelp/README.md#get_all_profiles_in_portal) - Get All Profiles Available in Portal
-* [start_gh_search](docs/sdks/guidedhelp/README.md#start_gh_search) - Start a Guided Help Search
-* [step_gh_search](docs/sdks/guidedhelp/README.md#step_gh_search) - Perform a Step in a Guided Help Search
-* [get_all_cases](docs/sdks/guidedhelp/README.md#get_all_cases) - Get All Cases of a Cluster in Release
-* [get_case_by_id](docs/sdks/guidedhelp/README.md#get_case_by_id) - Get Details of a Case
-* [accept_gh_solution](docs/sdks/guidedhelp/README.md#accept_gh_solution) - Accept Solution
-* [reject_gh_solution](docs/sdks/guidedhelp/README.md#reject_gh_solution) - Reject Solution
-* [create_quickpick](docs/sdks/guidedhelp/README.md#create_quickpick) - Create Quickpick
-* [get_all_quick_picks](docs/sdks/guidedhelp/README.md#get_all_quick_picks) - Get All Quickpicks for a Portal
-* [restore_quickpick](docs/sdks/guidedhelp/README.md#restore_quickpick) - Resume a Quickpick
+* [getpopulararticles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/populararticles/README.md#getpopulararticles) - Get Popular Articles
 
-#### [portal.populararticles](docs/sdks/populararticles/README.md)
+#### [portal.search](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/search/README.md)
 
-* [getpopulararticles](docs/sdks/populararticles/README.md#getpopulararticles) - Get Popular Articles
+* [ai_search](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/search/README.md#ai_search) - Get the best search results for a user query
 
-#### [portal.search](docs/sdks/search/README.md)
+#### [portal.suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md)
 
-* [ai_search](docs/sdks/search/README.md#ai_search) - Get the best search results for a user query
+* [make_suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#make_suggestion) - Make a Suggestion
+* [modify_suggestions](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#modify_suggestions) - Modify Suggestion
+* [search_suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#search_suggestion) - Get Suggestion by Status
+* [get_suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion) - Get Suggestion by ID
+* [delete_suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#delete_suggestion) - Delete a Suggestion
+* [get_related_articles_for_suggestion](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#get_related_articles_for_suggestion) - Get Related Articles for Suggestion
+* [get_suggestion_comments](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_comments) - Get Suggestion Comments
+* [get_suggestion_attachments](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_attachments) - Get Suggestion Attachments
+* [get_suggestion_attachment_by_id](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_attachment_by_id) - Get Suggestion Attachment by ID
 
-#### [portal.suggestion](docs/sdks/portalsuggestion/README.md)
+#### [portal.topic](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaltopic/README.md)
 
-* [make_suggestion](docs/sdks/portalsuggestion/README.md#make_suggestion) - Make a Suggestion
-* [modify_suggestions](docs/sdks/portalsuggestion/README.md#modify_suggestions) - Modify Suggestion
-* [search_suggestion](docs/sdks/portalsuggestion/README.md#search_suggestion) - Get Suggestion by Status
-* [get_suggestion](docs/sdks/portalsuggestion/README.md#get_suggestion) - Get Suggestion by ID
-* [delete_suggestion](docs/sdks/portalsuggestion/README.md#delete_suggestion) - Delete a Suggestion
-* [get_related_articles_for_suggestion](docs/sdks/portalsuggestion/README.md#get_related_articles_for_suggestion) - Get Related Articles for Suggestion
-* [get_suggestion_comments](docs/sdks/portalsuggestion/README.md#get_suggestion_comments) - Get Suggestion Comments
-* [get_suggestion_attachments](docs/sdks/portalsuggestion/README.md#get_suggestion_attachments) - Get Suggestion Attachments
-* [get_suggestion_attachment_by_id](docs/sdks/portalsuggestion/README.md#get_suggestion_attachment_by_id) - Get Suggestion Attachment by ID
+* [get_topic_breadcrumb_for_article](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaltopic/README.md#get_topic_breadcrumb_for_article) - Get Topic Breadcrumb for Article
+* [getchildtopics](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaltopic/README.md#getchildtopics) - Get Immediate Child Topics
+* [getancestortopics](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaltopic/README.md#getancestortopics) - Get All Ancestor Topics
+* [getalltopics](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaltopic/README.md#getalltopics) - Get All Topics
 
-#### [portal.topic](docs/sdks/portaltopic/README.md)
+#### [portal.userdetails](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaluserdetails/README.md)
 
-* [get_topic_breadcrumb_for_article](docs/sdks/portaltopic/README.md#get_topic_breadcrumb_for_article) - Get Topic Breadcrumb for Article
-* [getchildtopics](docs/sdks/portaltopic/README.md#getchildtopics) - Get Immediate Child Topics
-* [getancestortopics](docs/sdks/portaltopic/README.md#getancestortopics) - Get All Ancestor Topics
-* [getalltopics](docs/sdks/portaltopic/README.md#getalltopics) - Get All Topics
+* [get_user_details](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaluserdetails/README.md#get_user_details) - Get User Details
 
-#### [portal.userdetails](docs/sdks/portaluserdetails/README.md)
+#### [portal.usermilestones](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/usermilestones/README.md)
 
-* [get_user_details](docs/sdks/portaluserdetails/README.md#get_user_details) - Get User Details
+* [get_user_milestones](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/usermilestones/README.md#get_user_milestones) - Get User Milestones
 
-#### [portal.usermilestones](docs/sdks/usermilestones/README.md)
+#### [portal.userprofile](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaluserprofile/README.md)
 
-* [get_user_milestones](docs/sdks/usermilestones/README.md#get_user_milestones) - Get User Milestones
-
-#### [portal.userprofile](docs/sdks/portaluserprofile/README.md)
-
-* [get_all_user_profiles](docs/sdks/portaluserprofile/README.md#get_all_user_profiles) - Get All User Profiles Assigned to User
-* [select_user_profile](docs/sdks/portaluserprofile/README.md#select_user_profile) - Select User Profile
+* [get_all_user_profiles](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaluserprofile/README.md#get_all_user_profiles) - Get All User Profiles Assigned to User
+* [select_user_profile](https://github.com/eGain/egain-api-typescript/blob/main/docs/sdks/portaluserprofile/README.md#select_user_profile) - Select User Profile
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -445,7 +441,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -475,7 +471,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -554,7 +550,7 @@ with Egain(
 * [`EgainError`](./src/egain_api_python/errors/egainerror.py): The base class for HTTP error responses.
   * [`WSErrorCommon`](./src/egain_api_python/errors/wserrorcommon.py): Bad Request. *
 
-<details><summary>Less common errors (7)</summary>
+<details><summary>Less common errors (6)</summary>
 
 <br />
 
@@ -565,8 +561,7 @@ with Egain(
 
 
 **Inherit from [`EgainError`](./src/egain_api_python/errors/egainerror.py)**:
-* [`SchemasWSErrorCommon`](./src/egain_api_python/errors/schemaswserrorcommon.py): Preconditions failed. Status code `412`. Applicable to 2 of 79 methods.*
-* [`ServiceUnavailableError`](./src/egain_api_python/errors/serviceunavailableerror.py): ## Service is Unhealthy  The Import Content service is experiencing critical issues and may not be able to process requests properly.  **Health Status Details:** - **Overall Status**: Service is unhealthy and may not function correctly  **Response Information:** - **Status**: Current health state (unhealthy) - **Timestamp**: When health check was performed - **Version**: Current API version - **Issues**: List of detected health problems. Status code `503`. Applicable to 1 of 79 methods.*
+* [`SchemasWSErrorCommon`](./src/egain_api_python/errors/schemaswserrorcommon.py): Preconditions failed. Status code `412`. Applicable to 2 of 78 methods.*
 * [`ResponseValidationError`](./src/egain_api_python/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -590,7 +585,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -619,7 +614,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", filter_user_profile_id="PROD-3210", language="en-US", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",

@@ -9,10 +9,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 AdditionalSnippetsDocType = Literal[
     "HTML",
-    "Doc",
-    "Pdf",
+    "DOCX",
+    "PDF",
+    "PPTX",
 ]
-r"""Format of the source document (HTML, Doc, or PDF)."""
+r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
 
 
 class AdditionalSnippetsTypedDict(TypedDict):
@@ -21,7 +22,7 @@ class AdditionalSnippetsTypedDict(TypedDict):
     name: str
     r"""The name of the Article or source content."""
     doc_type: AdditionalSnippetsDocType
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
     snippet: str
     r"""A snippet of the article content."""
     relevance_score: float
@@ -40,7 +41,7 @@ class AdditionalSnippets(BaseModel):
     r"""The name of the Article or source content."""
 
     doc_type: Annotated[AdditionalSnippetsDocType, pydantic.Field(alias="docType")]
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
 
     snippet: str
     r"""A snippet of the article content."""

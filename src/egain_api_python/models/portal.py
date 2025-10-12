@@ -14,7 +14,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class PortalTypedDict(TypedDict):
     id: str
-    r"""The alphanumeric ID of the portal.<br><br>A topic ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    r"""The alphanumeric ID of the portal.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
     name: str
     r"""The name of the portal."""
     department_id: NotRequired[str]
@@ -45,7 +45,7 @@ class PortalTypedDict(TypedDict):
 
 class Portal(BaseModel):
     id: str
-    r"""The alphanumeric ID of the portal.<br><br>A topic ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    r"""The alphanumeric ID of the portal.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
     name: str
     r"""The name of the portal."""

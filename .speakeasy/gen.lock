@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ee4acf09-a651-4ad3-acc5-0580d6879989
 management:
-  docChecksum: 531a73bf5746712872be07fd4201de32
+  docChecksum: 796c0d7d678ecf264e6aba98e92ceffb
   docVersion: 4.0.0
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.1.9
-  configChecksum: 40b5a6dc0ac43a19658f412eb8f0669b
+  releaseVersion: 0.1.10
+  configChecksum: c796a69728017687858b6a4f80233175
   published: true
 features:
   python:
@@ -40,7 +40,6 @@ generatedFiles:
   - .vscode/settings.json
   - USAGE.md
   - docs/errors/schemaswserrorcommon.md
-  - docs/errors/serviceunavailableerror.md
   - docs/errors/wserrorcommon.md
   - docs/models/acceptghsolutionrequest.md
   - docs/models/acceptlanguage.md
@@ -56,8 +55,8 @@ generatedFiles:
   - docs/models/addtoreplyrequest.md
   - docs/models/aisearchrequest.md
   - docs/models/aisearchresponse.md
-  - docs/models/aisearchresponsechannel.md
-  - docs/models/aisearchresponsetype.md
+  - docs/models/aitopicbreadcrumb.md
+  - docs/models/aitopicsummary.md
   - docs/models/allaccessibleportals.md
   - docs/models/answer.md
   - docs/models/answeredquestion.md
@@ -81,7 +80,6 @@ generatedFiles:
   - docs/models/articleaisearchresult.md
   - docs/models/articleaisearchresultcustomattribute.md
   - docs/models/articleaisearchresultdoctype.md
-  - docs/models/articleaisearchresultlink.md
   - docs/models/articleaisearchresultsource.md
   - docs/models/articleaisearchresulttype.md
   - docs/models/articleattachment.md
@@ -145,7 +143,6 @@ generatedFiles:
   - docs/models/compliancearticleresults.md
   - docs/models/complianceforarticle.md
   - docs/models/complyarticlerequest.md
-  - docs/models/components.md
   - docs/models/componentsschemastag.md
   - docs/models/componentsschemastagcategory.md
   - docs/models/componentsschemastaggroup.md
@@ -174,7 +171,6 @@ generatedFiles:
   - docs/models/customattribute.md
   - docs/models/customattributetype.md
   - docs/models/customer.md
-  - docs/models/database.md
   - docs/models/datadestination.md
   - docs/models/deletebookmarkrequest.md
   - docs/models/deletesuggestionrequest.md
@@ -196,9 +192,7 @@ generatedFiles:
   - docs/models/exportstatusrequest.md
   - docs/models/exportstatusresults.md
   - docs/models/exportstatusstatus.md
-  - docs/models/externalservices.md
   - docs/models/feedbackarticleforsuggestion.md
-  - docs/models/filesystem.md
   - docs/models/filters.md
   - docs/models/filterstatus.md
   - docs/models/folderbreadcrumb.md
@@ -231,8 +225,6 @@ generatedFiles:
   - docs/models/getcasebyidrequest.md
   - docs/models/getchildtopicsrequest.md
   - docs/models/getclusterbycasebasereleaseidrequest.md
-  - docs/models/gethealthresponse.md
-  - docs/models/gethealthstatus.md
   - docs/models/getimportstatusrequest.md
   - docs/models/getmyportalsrequest.md
   - docs/models/getmysubscriptionrequest.md
@@ -299,7 +291,6 @@ generatedFiles:
   - docs/models/portal.md
   - docs/models/portalresult.md
   - docs/models/portalsettings.md
-  - docs/models/processingengine.md
   - docs/models/profile.md
   - docs/models/profileresult.md
   - docs/models/publishprofile.md
@@ -354,7 +345,6 @@ generatedFiles:
   - docs/models/searchsuggestionrequest.md
   - docs/models/security.md
   - docs/models/selectuserprofilerequest.md
-  - docs/models/serviceunavailablestatus.md
   - docs/models/sessioncontextvariable.md
   - docs/models/shorturl.md
   - docs/models/snippetforstructuredauthoring.md
@@ -370,7 +360,6 @@ generatedFiles:
   - docs/models/startghsearchresponse.md
   - docs/models/startquestionandanswer.md
   - docs/models/stepghsearchrequest.md
-  - docs/models/storage.md
   - docs/models/stringattributevalue.md
   - docs/models/structuredauthoringfields.md
   - docs/models/subscribearticlerequest.md
@@ -421,7 +410,6 @@ generatedFiles:
   - docs/sdks/federatedsearchevent/README.md
   - docs/sdks/general/README.md
   - docs/sdks/guidedhelp/README.md
-  - docs/sdks/health/README.md
   - docs/sdks/import/README.md
   - docs/sdks/populararticles/README.md
   - docs/sdks/portalarticle/README.md
@@ -452,7 +440,6 @@ generatedFiles:
   - src/egain_api_python/errors/__init__.py
   - src/egain_api_python/errors/egaindefaulterror.py
   - src/egain_api_python/errors/egainerror.py
-  - src/egain_api_python/errors/gethealthop.py
   - src/egain_api_python/errors/no_response_error.py
   - src/egain_api_python/errors/responsevalidationerror.py
   - src/egain_api_python/errors/schemas_wserrorcommon.py
@@ -462,7 +449,6 @@ generatedFiles:
   - src/egain_api_python/federatedsearchevent.py
   - src/egain_api_python/general.py
   - src/egain_api_python/guidedhelp.py
-  - src/egain_api_python/health.py
   - src/egain_api_python/httpclient.py
   - src/egain_api_python/import_.py
   - src/egain_api_python/models/__init__.py
@@ -477,6 +463,8 @@ generatedFiles:
   - src/egain_api_python/models/addtoreplyop.py
   - src/egain_api_python/models/aisearchop.py
   - src/egain_api_python/models/aisearchresponse.py
+  - src/egain_api_python/models/aitopicbreadcrumb.py
+  - src/egain_api_python/models/aitopicsummary.py
   - src/egain_api_python/models/allaccessibleportals.py
   - src/egain_api_python/models/answer.py
   - src/egain_api_python/models/answeredquestion.py
@@ -604,7 +592,6 @@ generatedFiles:
   - src/egain_api_python/models/getcasebyidop.py
   - src/egain_api_python/models/getchildtopicsop.py
   - src/egain_api_python/models/getclusterbycasebasereleaseidop.py
-  - src/egain_api_python/models/gethealthop.py
   - src/egain_api_python/models/getimportstatusop.py
   - src/egain_api_python/models/getmyportalsop.py
   - src/egain_api_python/models/getmysubscriptionop.py

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from .additionalsnippets import AdditionalSnippets, AdditionalSnippetsTypedDict
+from .aitopicbreadcrumb import AITopicBreadcrumb, AITopicBreadcrumbTypedDict
 from .schemas_tags import SchemasTags, SchemasTagsTypedDict
-from .topicbreadcrumb import TopicBreadcrumb, TopicBreadcrumbTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
 from typing import Any, List, Literal, Optional
@@ -12,10 +12,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 ArticleAISearchResultDocType = Literal[
     "HTML",
-    "Doc",
-    "Pdf",
+    "DOCX",
+    "PDF",
+    "PPTX",
 ]
-r"""Format of the source document (HTML, Doc, or PDF)."""
+r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
 
 
 ArticleAISearchResultSource = Literal[
@@ -75,25 +76,6 @@ class ArticleTypeAttributes(BaseModel):
     r"""The ID of the Article Type."""
 
 
-class ArticleAISearchResultLinkTypedDict(TypedDict):
-    r"""Defines the relationship between this resource and another object."""
-
-    rel: NotRequired[str]
-    r"""Defines the relationship between a linked resource and the current object. <br><br> For example: self, prev, next or an object name such as 'user', 'folder' etc."""
-    href: NotRequired[str]
-    r"""The URL that specifies the link's destination."""
-
-
-class ArticleAISearchResultLink(BaseModel):
-    r"""Defines the relationship between this resource and another object."""
-
-    rel: Optional[str] = None
-    r"""Defines the relationship between a linked resource and the current object. <br><br> For example: self, prev, next or an object name such as 'user', 'folder' etc."""
-
-    href: Optional[str] = None
-    r"""The URL that specifies the link's destination."""
-
-
 class ArticleAISearchResultTypedDict(TypedDict):
     r"""Represents a single document or snippet returned by search, along with its metadata and relevance score."""
 
@@ -102,12 +84,12 @@ class ArticleAISearchResultTypedDict(TypedDict):
     name: str
     r"""The name of the Article or source content."""
     doc_type: ArticleAISearchResultDocType
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
     source: ArticleAISearchResultSource
     r"""The source type."""
     snippet: str
     r"""A semantic snippet of the article content."""
-    topic_breadcrumb: List[TopicBreadcrumbTypedDict]
+    topic_breadcrumb: List[AITopicBreadcrumbTypedDict]
     r"""A list of topics from the root topic to this Article. There may be multiple paths."""
     relevance_score: float
     r"""Generated confidence score (0.0-1.0) for the snippet's relevance to the query."""
@@ -123,21 +105,14 @@ class ArticleAISearchResultTypedDict(TypedDict):
     r"""Number of additional snippets."""
     contextual_summary: NotRequired[str]
     r"""Contextual Summary generated as part of metadata for embedding."""
-    description: NotRequired[str]
-    r"""A description of the Article. The maximum allowed Article description size is 1 KB."""
-    summary: NotRequired[str]
-    r"""A brief summary of the Article, provided as metadata. 1 KB max size limit."""
-    last_modified_date: NotRequired[str]
+    modified_date: NotRequired[str]
     r"""The date on which the Article was last modified."""
     header_path: NotRequired[str]
     r"""The header path of the snippet retrieved."""
     tag_categories: NotRequired[List[SchemasTagsTypedDict]]
     r"""An array of tag categories. Note that the total number of tag categories cannot exceed 20."""
-    keywords: NotRequired[str]
     article_type_attributes: NotRequired[ArticleTypeAttributesTypedDict]
     r"""The type of the Article and its attributes."""
-    link: NotRequired[ArticleAISearchResultLinkTypedDict]
-    r"""Defines the relationship between this resource and another object."""
 
 
 class ArticleAISearchResult(BaseModel):
@@ -150,7 +125,7 @@ class ArticleAISearchResult(BaseModel):
     r"""The name of the Article or source content."""
 
     doc_type: Annotated[ArticleAISearchResultDocType, pydantic.Field(alias="docType")]
-    r"""Format of the source document (HTML, Doc, or PDF)."""
+    r"""Format of the source document (HTML, DOCX, PPTX or PDF)."""
 
     source: ArticleAISearchResultSource
     r"""The source type."""
@@ -159,7 +134,7 @@ class ArticleAISearchResult(BaseModel):
     r"""A semantic snippet of the article content."""
 
     topic_breadcrumb: Annotated[
-        List[TopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
+        List[AITopicBreadcrumb], pydantic.Field(alias="topicBreadcrumb")
     ]
     r"""A list of topics from the root topic to this Article. There may be multiple paths."""
 
@@ -195,15 +170,7 @@ class ArticleAISearchResult(BaseModel):
     ] = None
     r"""Contextual Summary generated as part of metadata for embedding."""
 
-    description: Optional[str] = None
-    r"""A description of the Article. The maximum allowed Article description size is 1 KB."""
-
-    summary: Optional[str] = None
-    r"""A brief summary of the Article, provided as metadata. 1 KB max size limit."""
-
-    last_modified_date: Annotated[
-        Optional[str], pydantic.Field(alias="lastModifiedDate")
-    ] = None
+    modified_date: Annotated[Optional[str], pydantic.Field(alias="modifiedDate")] = None
     r"""The date on which the Article was last modified."""
 
     header_path: Annotated[Optional[str], pydantic.Field(alias="headerPath")] = None
@@ -214,12 +181,7 @@ class ArticleAISearchResult(BaseModel):
     ] = None
     r"""An array of tag categories. Note that the total number of tag categories cannot exceed 20."""
 
-    keywords: Optional[str] = None
-
     article_type_attributes: Annotated[
         Optional[ArticleTypeAttributes], pydantic.Field(alias="articleTypeAttributes")
     ] = None
     r"""The type of the Article and its attributes."""
-
-    link: Optional[ArticleAISearchResultLink] = None
-    r"""Defines the relationship between this resource and another object."""

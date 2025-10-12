@@ -15,8 +15,8 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
+        language: models.LanguageCodeParameter,
         filter_user_profile_id: Optional[str] = None,
-        language: Optional[models.LanguageCodeParameter] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         channel: Optional[
@@ -42,8 +42,8 @@ class Retrieve(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param filter_user_profile_id:
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param filter_user_profile_id:
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
@@ -146,8 +146,8 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
+        language: models.LanguageCodeParameter,
         filter_user_profile_id: Optional[str] = None,
-        language: Optional[models.LanguageCodeParameter] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         channel: Optional[
@@ -173,8 +173,8 @@ class Retrieve(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param filter_user_profile_id:
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param filter_user_profile_id:
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:

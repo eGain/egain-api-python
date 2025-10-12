@@ -2,33 +2,10 @@
 
 from __future__ import annotations
 from .articleaisearchresult import ArticleAISearchResult, ArticleAISearchResultTypedDict
-from .paginationinfo import PaginationInfo, PaginationInfoTypedDict
 from egain_api_python.types import BaseModel
 import pydantic
-from typing import List, Literal, Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-AISearchResponseType = Literal[
-    "portal",
-    "custom",
-]
-r"""The channel where the query originated, e.g., directly from the portal or via a custom integration."""
-
-
-class AISearchResponseChannelTypedDict(TypedDict):
-    type: AISearchResponseType
-    r"""The channel where the query originated, e.g., directly from the portal or via a custom integration."""
-    name: NotRequired[str]
-    r"""The name of the channel."""
-
-
-class AISearchResponseChannel(BaseModel):
-    type: AISearchResponseType
-    r"""The channel where the query originated, e.g., directly from the portal or via a custom integration."""
-
-    name: Optional[str] = None
-    r"""The name of the channel."""
 
 
 class SearchResultsTypedDict(TypedDict):
@@ -44,20 +21,10 @@ class SearchResults(BaseModel):
 
 
 class AISearchResponseTypedDict(TypedDict):
-    channel: NotRequired[AISearchResponseChannelTypedDict]
-    search_results: NotRequired[SearchResultsTypedDict]
+    search_results: SearchResultsTypedDict
     r"""Top search results with relevance scores"""
-    pagination_info: NotRequired[PaginationInfoTypedDict]
 
 
 class AISearchResponse(BaseModel):
-    channel: Optional[AISearchResponseChannel] = None
-
-    search_results: Annotated[
-        Optional[SearchResults], pydantic.Field(alias="searchResults")
-    ] = None
+    search_results: Annotated[SearchResults, pydantic.Field(alias="searchResults")]
     r"""Top search results with relevance scores"""
-
-    pagination_info: Annotated[
-        Optional[PaginationInfo], pydantic.Field(alias="paginationInfo")
-    ] = None

@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class ShortURLTypedDict(TypedDict):
     id: NotRequired[str]
-    r"""The alphanumeric ID of the short URL.<br><br>A topic ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    r"""The alphanumeric ID of the short URL.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
     template_name: NotRequired[str]
     r"""Name of template"""
     short_url_name: NotRequired[str]
@@ -19,7 +19,7 @@ class ShortURLTypedDict(TypedDict):
 
 class ShortURL(BaseModel):
     id: Optional[str] = None
-    r"""The alphanumeric ID of the short URL.<br><br>A topic ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    r"""The alphanumeric ID of the short URL.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
     template_name: Annotated[Optional[str], pydantic.Field(alias="templateName")] = None
     r"""Name of template"""

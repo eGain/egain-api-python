@@ -14,12 +14,12 @@ class AiSearchRequestTypedDict(TypedDict):
     r"""The search query string. The string must be escaped as required by the URL syntax rules."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    language: LanguageCodeParameter
+    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
     filter_user_profile_id: NotRequired[str]
     r"""The ID of the user profile.
 
     """
-    language: NotRequired[LanguageCodeParameter]
-    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
     filter_tags: NotRequired[Dict[str, List[str]]]
     r"""An object where each key is a **Category Tag ID** (numeric string),
     and each value is an array of **Tag IDs** for that category.
@@ -29,10 +29,6 @@ class AiSearchRequestTypedDict(TypedDict):
     r"""An array of topic IDs. It is used to restrict search results to specific topics."""
     article_custom_additional_attributes: NotRequired[str]
     r"""One or more comma-separated names for article custom attributes defined by the user to be returned."""
-    pagenum: NotRequired[int]
-    r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
-    pagesize: NotRequired[int]
-    r"""Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum."""
 
 
 class AiSearchRequest(BaseModel):
@@ -48,6 +44,13 @@ class AiSearchRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
+    language: Annotated[
+        LanguageCodeParameter,
+        pydantic.Field(alias="$lang"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ]
+    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
+
     filter_user_profile_id: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[userProfileID]"),
@@ -56,13 +59,6 @@ class AiSearchRequest(BaseModel):
     r"""The ID of the user profile.
 
     """
-
-    language: Annotated[
-        Optional[LanguageCodeParameter],
-        pydantic.Field(alias="$lang"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
 
     filter_tags: Annotated[
         Optional[Dict[str, List[str]]],
@@ -87,17 +83,3 @@ class AiSearchRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""One or more comma-separated names for article custom attributes defined by the user to be returned."""
-
-    pagenum: Annotated[
-        Optional[int],
-        pydantic.Field(alias="$pagenum"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 1
-    r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
-
-    pagesize: Annotated[
-        Optional[int],
-        pydantic.Field(alias="$pagesize"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = 10
-    r"""Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum."""

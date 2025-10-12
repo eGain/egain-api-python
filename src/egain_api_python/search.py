@@ -15,13 +15,11 @@ class Search(BaseSDK):
         *,
         q: str,
         portal_id: str,
+        language: models.LanguageCodeParameter,
         filter_user_profile_id: Optional[str] = None,
-        language: Optional[models.LanguageCodeParameter] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         article_custom_additional_attributes: Optional[str] = None,
-        pagenum: Optional[int] = 1,
-        pagesize: Optional[int] = 10,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -34,13 +32,11 @@ class Search(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param filter_user_profile_id: The ID of the user profile.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param filter_user_profile_id: The ID of the user profile.
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param article_custom_additional_attributes: One or more comma-separated names for article custom attributes defined by the user to be returned.
-        :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
-        :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -64,8 +60,6 @@ class Search(BaseSDK):
             filter_tags=filter_tags,
             filter_topic_ids=filter_topic_ids,
             article_custom_additional_attributes=article_custom_additional_attributes,
-            pagenum=pagenum,
-            pagesize=pagesize,
         )
 
         req = self._build_request(
@@ -127,13 +121,11 @@ class Search(BaseSDK):
         *,
         q: str,
         portal_id: str,
+        language: models.LanguageCodeParameter,
         filter_user_profile_id: Optional[str] = None,
-        language: Optional[models.LanguageCodeParameter] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         article_custom_additional_attributes: Optional[str] = None,
-        pagenum: Optional[int] = 1,
-        pagesize: Optional[int] = 10,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -146,13 +138,11 @@ class Search(BaseSDK):
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param filter_user_profile_id: The ID of the user profile.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param filter_user_profile_id: The ID of the user profile.
         :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param article_custom_additional_attributes: One or more comma-separated names for article custom attributes defined by the user to be returned.
-        :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
-        :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -176,8 +166,6 @@ class Search(BaseSDK):
             filter_tags=filter_tags,
             filter_topic_ids=filter_topic_ids,
             article_custom_additional_attributes=article_custom_additional_attributes,
-            pagenum=pagenum,
-            pagesize=pagesize,
         )
 
         req = self._build_request_async(

@@ -8,7 +8,6 @@ import sys
 
 if TYPE_CHECKING:
     from .egaindefaulterror import EgainDefaultError
-    from .gethealthop import ServiceUnavailableError, ServiceUnavailableErrorData
     from .no_response_error import NoResponseError
     from .responsevalidationerror import ResponseValidationError
     from .schemas_wserrorcommon import SchemasWSErrorCommon, SchemasWSErrorCommonData
@@ -21,16 +20,12 @@ __all__ = [
     "ResponseValidationError",
     "SchemasWSErrorCommon",
     "SchemasWSErrorCommonData",
-    "ServiceUnavailableError",
-    "ServiceUnavailableErrorData",
     "WSErrorCommon",
     "WSErrorCommonData",
 ]
 
 _dynamic_imports: dict[str, str] = {
     "EgainDefaultError": ".egaindefaulterror",
-    "ServiceUnavailableError": ".gethealthop",
-    "ServiceUnavailableErrorData": ".gethealthop",
     "NoResponseError": ".no_response_error",
     "ResponseValidationError": ".responsevalidationerror",
     "SchemasWSErrorCommon": ".schemas_wserrorcommon",

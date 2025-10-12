@@ -2,14 +2,12 @@
 
 from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
-from egain_api_python.health import Health
 from egain_api_python.import_ import Import
 from typing import Optional
 
 
 class Content(BaseSDK):
     import_: Import
-    health: Health
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -20,4 +18,3 @@ class Content(BaseSDK):
 
     def _init_sdks(self):
         self.import_ = Import(self.sdk_configuration, parent_ref=self.parent_ref)
-        self.health = Health(self.sdk_configuration, parent_ref=self.parent_ref)

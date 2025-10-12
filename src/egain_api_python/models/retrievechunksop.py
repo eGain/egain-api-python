@@ -26,9 +26,9 @@ class RetrieveChunksRequestTypedDict(TypedDict):
     r"""The search query string. The string must be escaped as required by the URL syntax rules."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
-    filter_user_profile_id: NotRequired[str]
-    language: NotRequired[LanguageCodeParameter]
+    language: LanguageCodeParameter
     r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
+    filter_user_profile_id: NotRequired[str]
     filter_tags: NotRequired[Dict[str, List[str]]]
     r"""An object where each key is a **Category Tag ID** (numeric string),
     and each value is an array of **Tag IDs** for that category.
@@ -52,18 +52,18 @@ class RetrieveChunksRequest(BaseModel):
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
+    language: Annotated[
+        LanguageCodeParameter,
+        pydantic.Field(alias="$lang"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ]
+    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
+
     filter_user_profile_id: Annotated[
         Optional[str],
         pydantic.Field(alias="$filter[userProfileID]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-
-    language: Annotated[
-        Optional[LanguageCodeParameter],
-        pydantic.Field(alias="$lang"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used."""
 
     filter_tags: Annotated[
         Optional[Dict[str, List[str]]],
