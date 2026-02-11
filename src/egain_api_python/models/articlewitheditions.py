@@ -58,6 +58,7 @@ class ArticleWithEditionsTypedDict(TypedDict):
     modified_by: NotRequired[ModifiedByTypedDict]
     owned_by: NotRequired[OwnedByTypedDict]
     created_date: NotRequired[str]
+    r"""The date on which the Article was created. The timezone of the date will be in UTC."""
     custom_attributes: NotRequired[List[CustomAttributeTypedDict]]
     r"""A list of custom attributes."""
     department_id: NotRequired[str]
@@ -73,7 +74,7 @@ class ArticleWithEditionsTypedDict(TypedDict):
     is_subscribed: NotRequired[bool]
     r"""Indicates whether the Article is subscribed for notifications."""
     modified_date: NotRequired[str]
-    r"""The date on which the Article was last modified."""
+    r"""The date on which the Article was last modified. The timezone of the date will be in UTC."""
     language_code: NotRequired[LanguageCode]
     r"""Language code of the resource's language."""
     link: NotRequired[LinkTypedDict]
@@ -160,6 +161,7 @@ class ArticleWithEditions(BaseModel):
     owned_by: Annotated[Optional[OwnedBy], pydantic.Field(alias="ownedBy")] = None
 
     created_date: Annotated[Optional[str], pydantic.Field(alias="createdDate")] = None
+    r"""The date on which the Article was created. The timezone of the date will be in UTC."""
 
     custom_attributes: Annotated[
         Optional[List[CustomAttribute]], pydantic.Field(alias="customAttributes")
@@ -191,7 +193,7 @@ class ArticleWithEditions(BaseModel):
     r"""Indicates whether the Article is subscribed for notifications."""
 
     modified_date: Annotated[Optional[str], pydantic.Field(alias="modifiedDate")] = None
-    r"""The date on which the Article was last modified."""
+    r"""The date on which the Article was last modified. The timezone of the date will be in UTC."""
 
     language_code: Annotated[
         Optional[LanguageCode], pydantic.Field(alias="languageCode")

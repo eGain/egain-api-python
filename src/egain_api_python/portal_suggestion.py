@@ -695,7 +695,7 @@ class PortalSuggestion(BaseSDK):
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param filter_status: The search filter applied to the list of suggestions by a user.
         :param sort: Objects returned in server response are sorted based on the attribute supplied under $sort.
-        :param order: Common query parameter $order.
+        :param order: Common query parameter $order.<br>_Default value_: asc
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.<br>Valid range of 5-75<br>_Default value_: 25
         :param retries: Override the default retry configuration for this method
@@ -817,7 +817,7 @@ class PortalSuggestion(BaseSDK):
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param filter_status: The search filter applied to the list of suggestions by a user.
         :param sort: Objects returned in server response are sorted based on the attribute supplied under $sort.
-        :param order: Common query parameter $order.
+        :param order: Common query parameter $order.<br>_Default value_: asc
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.<br>Valid range of 5-75<br>_Default value_: 25
         :param retries: Override the default retry configuration for this method

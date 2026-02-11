@@ -7,8 +7,8 @@ from typing_extensions import Annotated, TypedDict
 
 
 GET_IMPORT_STATUS_OP_SERVERS = [
-    # Production Server - Try it Out does not function
-    "http://nop",
+    # Production Server
+    "https://api.aidev.egain.cloud//knowledge/contentmgr/v4",
 ]
 
 

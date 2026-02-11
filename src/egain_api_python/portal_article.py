@@ -33,6 +33,7 @@ class PortalArticle(BaseSDK):
 
         ## Overview
         * The Get Article by ID API allows a user to retrieve an Article using its ID.
+        * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
         * Additional Article attributes and contextual views can be specified in the query parameters.
 
         * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -179,6 +180,7 @@ class PortalArticle(BaseSDK):
 
         ## Overview
         * The Get Article by ID API allows a user to retrieve an Article using its ID.
+        * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
         * Additional Article attributes and contextual views can be specified in the query parameters.
 
         * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -527,12 +529,12 @@ class PortalArticle(BaseSDK):
         r"""Get Article Edition Details
 
         ## Overview
-        * This API allows a user to retrieve an article with all its editions.
+        * This API retrieves the details of an article edition.
 
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param article_id: The ID of the Article. Both numeric and alternate ID formats are supported.<br><br>Valid numerical IDs are 15-19 digits long.
-        :param publish_view_id: Publish View Id of the article on which operation is performed.
+        :param publish_view_id: The ID of a Publish View Id.<br><br>A Publish View Id ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The language used for fetching the details of a resource. Resources available in different languages may differ from each other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -634,12 +636,12 @@ class PortalArticle(BaseSDK):
         r"""Get Article Edition Details
 
         ## Overview
-        * This API allows a user to retrieve an article with all its editions.
+        * This API retrieves the details of an article edition.
 
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param article_id: The ID of the Article. Both numeric and alternate ID formats are supported.<br><br>Valid numerical IDs are 15-19 digits long.
-        :param publish_view_id: Publish View Id of the article on which operation is performed.
+        :param publish_view_id: The ID of a Publish View Id.<br><br>A Publish View Id ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The language used for fetching the details of a resource. Resources available in different languages may differ from each other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

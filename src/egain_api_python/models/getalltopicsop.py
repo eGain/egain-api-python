@@ -21,6 +21,8 @@ class GetalltopicsRequestTypedDict(TypedDict):
     r"""The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses)."""
     portal_id: str
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+    search_profile_id: NotRequired[str]
+    r"""Search Profile ID"""
     level: NotRequired[int]
     r"""Depth of the topic hierarchy to be returned in the response."""
     language: NotRequired[LanguageQueryParameter]
@@ -69,6 +71,13 @@ class GetalltopicsRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
     r"""The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
+
+    search_profile_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="searchProfileId"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Search Profile ID"""
 
     level: Annotated[
         Optional[int],

@@ -30,6 +30,7 @@
 
 ## Overview
   * The Get Article by ID API allows a user to retrieve an Article using its ID.
+    * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
     * Additional Article attributes and contextual views can be specified in the query parameters.
 
   * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -152,7 +153,7 @@ with Egain(
 ## get_article_edition_details
 
 ## Overview
-  * This API allows a user to retrieve an article with all its editions.
+  * This API retrieves the details of an article edition.
 
 
 ### Example Usage
@@ -167,7 +168,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.portal.article.get_article_edition_details(accept_language="en-US", article_id="PROD-2996", publish_view_id="959500000204621", language="en-US")
+    res = egain.portal.article.get_article_edition_details(accept_language="en-US", article_id="PROD-2996", publish_view_id="PROD-3020", language="en-US")
 
     # Handle response
     print(res)
@@ -179,8 +180,8 @@ with Egain(
 | Parameter                                                                                                                        | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      | Example                                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `accept_language`                                                                                                                | [models.AcceptLanguage](../../models/acceptlanguage.md)                                                                          | :heavy_check_mark:                                                                                                               | The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).  | en-US                                                                                                                            |
-| `article_id`                                                                                                                     | *str*                                                                                                                            | :heavy_check_mark:                                                                                                               | The ID of the Article. Both numeric and alternate ID formats are supported.<br><br>Valid numerical IDs are 15-19 digits long.    |                                                                                                                                  |
-| `publish_view_id`                                                                                                                | *str*                                                                                                                            | :heavy_check_mark:                                                                                                               | Publish View Id of the article on which operation is performed.                                                                  | 959500000204621                                                                                                                  |
+| `article_id`                                                                                                                     | *str*                                                                                                                            | :heavy_check_mark:                                                                                                               | The ID of the Article. Both numeric and alternate ID formats are supported.<br><br>Valid numerical IDs are 15-19 digits long.    | PROD-2996                                                                                                                        |
+| `publish_view_id`                                                                                                                | *str*                                                                                                                            | :heavy_check_mark:                                                                                                               | The ID of a Publish View Id.<br><br>A Publish View Id ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits. | PROD-3020                                                                                                                        |
 | `language`                                                                                                                       | [models.MandatoryLanguageQueryParameter](../../models/mandatorylanguagequeryparameter.md)                                        | :heavy_check_mark:                                                                                                               | The language used for fetching the details of a resource. Resources available in different languages may differ from each other. | en-US                                                                                                                            |
 | `retries`                                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                 | :heavy_minus_sign:                                                                                                               | Configuration to override the default retry behavior of the client.                                                              |                                                                                                                                  |
 

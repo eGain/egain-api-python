@@ -733,6 +733,7 @@ class PortalTopic(BaseSDK):
         *,
         accept_language: models.AcceptLanguage,
         portal_id: str,
+        search_profile_id: Optional[str] = None,
         level: Optional[int] = None,
         language: Optional[models.LanguageQueryParameter] = None,
         topic_additional_attributes: Optional[
@@ -754,6 +755,7 @@ class PortalTopic(BaseSDK):
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
+        :param search_profile_id: Search Profile ID
         :param level: Depth of the topic hierarchy to be returned in the response.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param topic_additional_attributes: The attributes of a topic to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' returns all attributes.  #### Default Attributes These topic attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the topic. | name  | The name of the topic. | articleCountInTopic | Number of articles in this topic. | articleCountInTopicTree  | Number of articles in this topic and all sub-topics. | createdBy.id | The ID of the user that created the topic.  | createdDate | The date when the topic was created. | departmentId | ID of the department for which this topic belongs to.  | topicHomeArticleId | The ID of the article used as the home page of this topic. | modifiedBy.id | The ID of the user that last modified the topic.  | modifiedDate | The date when the topic was last modified on. | childCount | Total number of children sub-topis below the current topic | subTopicIds | Array with the list of sub-topics | parentTopicId | ID of the parent topic. -1 if it is the root topic.
@@ -778,6 +780,7 @@ class PortalTopic(BaseSDK):
         request = models.GetalltopicsRequest(
             accept_language=accept_language,
             portal_id=portal_id,
+            search_profile_id=search_profile_id,
             level=level,
             language=language,
             topic_additional_attributes=topic_additional_attributes,
@@ -856,6 +859,7 @@ class PortalTopic(BaseSDK):
         *,
         accept_language: models.AcceptLanguage,
         portal_id: str,
+        search_profile_id: Optional[str] = None,
         level: Optional[int] = None,
         language: Optional[models.LanguageQueryParameter] = None,
         topic_additional_attributes: Optional[
@@ -877,6 +881,7 @@ class PortalTopic(BaseSDK):
 
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
+        :param search_profile_id: Search Profile ID
         :param level: Depth of the topic hierarchy to be returned in the response.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param topic_additional_attributes: The attributes of a topic to be returned *in addition to* the default list of attributes, listed below. Multiple additional attributes can be specified using a comma-separated list. Passing 'all' returns all attributes.  #### Default Attributes These topic attributes are always returned:  | Name | Description  | ---- | ----------- | id | The ID of the topic. | name  | The name of the topic. | articleCountInTopic | Number of articles in this topic. | articleCountInTopicTree  | Number of articles in this topic and all sub-topics. | createdBy.id | The ID of the user that created the topic.  | createdDate | The date when the topic was created. | departmentId | ID of the department for which this topic belongs to.  | topicHomeArticleId | The ID of the article used as the home page of this topic. | modifiedBy.id | The ID of the user that last modified the topic.  | modifiedDate | The date when the topic was last modified on. | childCount | Total number of children sub-topis below the current topic | subTopicIds | Array with the list of sub-topics | parentTopicId | ID of the parent topic. -1 if it is the root topic.
@@ -901,6 +906,7 @@ class PortalTopic(BaseSDK):
         request = models.GetalltopicsRequest(
             accept_language=accept_language,
             portal_id=portal_id,
+            search_profile_id=search_profile_id,
             level=level,
             language=language,
             topic_additional_attributes=topic_additional_attributes,

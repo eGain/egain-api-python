@@ -2,12 +2,14 @@
 
 from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
+from egain_api_python.aiservices_prompt import AiservicesPrompt
 from egain_api_python.answers import Answers
 from egain_api_python.retrieve import Retrieve
 from typing import Optional
 
 
 class Aiservices(BaseSDK):
+    prompt: AiservicesPrompt
     retrieve: Retrieve
     answers: Answers
 
@@ -19,5 +21,8 @@ class Aiservices(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
+        self.prompt = AiservicesPrompt(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.retrieve = Retrieve(self.sdk_configuration, parent_ref=self.parent_ref)
         self.answers = Answers(self.sdk_configuration, parent_ref=self.parent_ref)

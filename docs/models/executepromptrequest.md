@@ -1,0 +1,9 @@
+# ExecutePromptRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `prompt_id`                                                                                      | *str*                                                                                            | :heavy_check_mark:                                                                               | ID of the prompt template from the AI console. Only published and active prompt IDs are allowed. |
+| `execute_prompt`                                                                                 | [Optional[models.ExecutePrompt]](../models/executeprompt.md)                                     | :heavy_minus_sign:                                                                               | N/A                                                                                              |

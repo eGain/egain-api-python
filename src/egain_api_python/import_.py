@@ -25,7 +25,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateImportJobResponse:
-        r"""Import content from external sources by creating an import job
+        r"""Create Import Job
 
         # Import Content
 
@@ -41,6 +41,8 @@ class Import(BaseSDK):
         3. **Status Monitoring**: Use the job ID to monitor progress via the Status API
         4. **Completion**: Job completes when all content is processed or errors occur
 
+        **Note:** After a successful import, please allow for a brief delay before the content is fully available for use. The system's search service synchronizes all new and updated content every 30 minutes.
+
         ## Supported Operations
         - **Import**: Add new content to the knowledge base
         - **Update**: Modify existing content
@@ -50,14 +52,9 @@ class Import(BaseSDK):
         - Shared file path
 
         ## Best Practices
-        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact
+        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact.  Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
         - **Monitoring**: Regularly check job status and logs for any issues
         - **Error Handling**: Review failed items and retry with corrections
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>Content can only be imported in user's home department.</li><li>User must have 'Author' role.</li><li>Content can only be imported if the user has all the required languages assigned.</li></ul>|
 
 
         :param data_source:
@@ -135,12 +132,10 @@ class Import(BaseSDK):
             return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "412", "application/json"):
+        if utils.match_response(http_res, ["406", "412"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
@@ -176,7 +171,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateImportJobResponse:
-        r"""Import content from external sources by creating an import job
+        r"""Create Import Job
 
         # Import Content
 
@@ -192,6 +187,8 @@ class Import(BaseSDK):
         3. **Status Monitoring**: Use the job ID to monitor progress via the Status API
         4. **Completion**: Job completes when all content is processed or errors occur
 
+        **Note:** After a successful import, please allow for a brief delay before the content is fully available for use. The system's search service synchronizes all new and updated content every 30 minutes.
+
         ## Supported Operations
         - **Import**: Add new content to the knowledge base
         - **Update**: Modify existing content
@@ -201,14 +198,9 @@ class Import(BaseSDK):
         - Shared file path
 
         ## Best Practices
-        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact
+        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact.  Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
         - **Monitoring**: Regularly check job status and logs for any issues
         - **Error Handling**: Review failed items and retry with corrections
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>Content can only be imported in user's home department.</li><li>User must have 'Author' role.</li><li>Content can only be imported if the user has all the required languages assigned.</li></ul>|
 
 
         :param data_source:
@@ -286,12 +278,10 @@ class Import(BaseSDK):
             return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "412", "application/json"):
+        if utils.match_response(http_res, ["406", "412"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
@@ -321,7 +311,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ImportStatus:
-        r"""Get the current status of an import or validation job
+        r"""Get Job Status
 
         # Get Import Job Status
 
@@ -347,12 +337,6 @@ class Import(BaseSDK):
         - Content processing steps
         - Validation results
         - Error details with context
-
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>User must have 'Author' role.</li><li>The job must have been created by the logged in user, or the logged in user must have 'View' permissions on the user who created the job.</li></ul>|
 
 
         :param job_id: **Job ID Parameter**  The unique identifier for the import or validation job. This ID was returned when the job was created via the Import or Validate API.  **Format:** UUID v4 (e.g., 7A84B875-6F75-4C7B-B137-0632B62DB0BD)  **Example Usage:** ```bash GET /import/content/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
@@ -418,10 +402,15 @@ class Import(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.ImportStatus, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "406", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.SchemasWSErrorCommonData, http_res
+            )
+            raise errors.SchemasWSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -447,7 +436,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ImportStatus:
-        r"""Get the current status of an import or validation job
+        r"""Get Job Status
 
         # Get Import Job Status
 
@@ -473,12 +462,6 @@ class Import(BaseSDK):
         - Content processing steps
         - Validation results
         - Error details with context
-
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>User must have 'Author' role.</li><li>The job must have been created by the logged in user, or the logged in user must have 'View' permissions on the user who created the job.</li></ul>|
 
 
         :param job_id: **Job ID Parameter**  The unique identifier for the import or validation job. This ID was returned when the job was created via the Import or Validate API.  **Format:** UUID v4 (e.g., 7A84B875-6F75-4C7B-B137-0632B62DB0BD)  **Example Usage:** ```bash GET /import/content/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
@@ -544,10 +527,15 @@ class Import(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.ImportStatus, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "406", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.SchemasWSErrorCommonData, http_res
+            )
+            raise errors.SchemasWSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -576,7 +564,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateImportValidationJobResponse:
-        r"""Validate content structure and format before import by creating an import validation job
+        r"""Create Validation Job
 
         # Validate Import Content
 
@@ -614,11 +602,6 @@ class Import(BaseSDK):
         - **Fix Issues**: Address validation errors before proceeding with import
         - **Test Small Batches**: Validate with small content samples first
         - **Iterate**: Use validation feedback to improve content quality
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>User must have 'Author' role.</li><li>Content can only be imported if the user has all the required languages assigned.</li></ul>|
 
 
         :param data_source:
@@ -690,12 +673,10 @@ class Import(BaseSDK):
             return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "412", "application/json"):
+        if utils.match_response(http_res, ["406", "412"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
@@ -728,7 +709,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateImportValidationJobResponse:
-        r"""Validate content structure and format before import by creating an import validation job
+        r"""Create Validation Job
 
         # Validate Import Content
 
@@ -766,11 +747,6 @@ class Import(BaseSDK):
         - **Fix Issues**: Address validation errors before proceeding with import
         - **Test Small Batches**: Validate with small content samples first
         - **Iterate**: Use validation feedback to improve content quality
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<ul><li>User must be a department user.</li><li>User must have 'Author' role.</li><li>Content can only be imported if the user has all the required languages assigned.</li></ul>|
 
 
         :param data_source:
@@ -842,12 +818,10 @@ class Import(BaseSDK):
             return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "412", "application/json"):
+        if utils.match_response(http_res, ["406", "412"], "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
@@ -877,7 +851,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Cancel an import or validation job
+        r"""Cancel Job
 
         # Cancel Import or Validation Job
 
@@ -915,11 +889,6 @@ class Import(BaseSDK):
         - **Monitor Jobs**: Regularly check job status to identify candidates for cancellation
         - **Plan Cancellations**: Schedule cancellations during low-usage periods
         - **Resource Planning**: Consider resource impact before cancelling large jobs
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<li>User must be a department user.</li><li>Content can only be validated for user's home department.</li><li>User must have 'Author' role.</li><li>The job must have been created by the logged in user, or the logged in user must have 'Edit' permissions on the user who created the job.</li></ul>|
 
 
         :param job_id: **Job ID Parameter**  The unique identifier for the import or validation job. This ID was returned when the job was created via the Import or Validate API.  **Format:** UUID v4 (e.g., 7A84B875-6F75-4C7B-B137-0632B62DB0BD)  **Example Usage:** ```bash GET /import/content/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
@@ -984,11 +953,14 @@ class Import(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["401", "403", "404", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "406", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.SchemasWSErrorCommonData, http_res
+            )
+            raise errors.SchemasWSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -1014,7 +986,7 @@ class Import(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Cancel an import or validation job
+        r"""Cancel Job
 
         # Cancel Import or Validation Job
 
@@ -1052,11 +1024,6 @@ class Import(BaseSDK):
         - **Monitor Jobs**: Regularly check job status to identify candidates for cancellation
         - **Plan Cancellations**: Schedule cancellations during low-usage periods
         - **Resource Planning**: Consider resource impact before cancelling large jobs
-
-        ## Permissions
-        | Actor | Permission |
-        | ------- | --------|
-        | User |<li>User must be a department user.</li><li>Content can only be validated for user's home department.</li><li>User must have 'Author' role.</li><li>The job must have been created by the logged in user, or the logged in user must have 'Edit' permissions on the user who created the job.</li></ul>|
 
 
         :param job_id: **Job ID Parameter**  The unique identifier for the import or validation job. This ID was returned when the job was created via the Import or Validate API.  **Format:** UUID v4 (e.g., 7A84B875-6F75-4C7B-B137-0632B62DB0BD)  **Example Usage:** ```bash GET /import/content/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
@@ -1121,11 +1088,14 @@ class Import(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["401", "403", "404", "406"], "application/json"
-        ):
+        if utils.match_response(http_res, ["401", "403", "404"], "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "406", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.SchemasWSErrorCommonData, http_res
+            )
+            raise errors.SchemasWSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)

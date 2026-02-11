@@ -53,10 +53,22 @@ SuggestionCode = Literal[
     "da-DK",
     "sv-SE",
     "ru-RU",
-    "fr-CA",
     "zh-CN",
     "ja-JP",
     "ko-KR",
+    "de-AT",
+    "th-TH",
+    "vi-VN",
+    "id-ID",
+    "ms-MY",
+    "fil-PH",
+    "fr-CA",
+    "hi-IN",
+    "uk-UA",
+    "bg-BG",
+    "sk-SK",
+    "sl-SI",
+    "sr-RS",
 ]
 r"""The language that describes the details of the resource. Resources available in different languages may differ from each other."""
 
@@ -75,6 +87,17 @@ Label = Literal[
     "Chinese",
     "Japanese",
     "Korean",
+    "Thai",
+    "Vietnamese",
+    "Indonesian",
+    "Malay",
+    "Filipino",
+    "Hindi",
+    "Ukrainian",
+    "Bulgarian",
+    "Slovak",
+    "Slovene",
+    "Serbian",
 ]
 r"""The name of the language."""
 

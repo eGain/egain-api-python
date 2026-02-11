@@ -53,10 +53,22 @@ CreateSuggestionCode = Literal[
     "da-DK",
     "sv-SE",
     "ru-RU",
-    "fr-CA",
     "zh-CN",
     "ja-JP",
     "ko-KR",
+    "de-AT",
+    "th-TH",
+    "vi-VN",
+    "id-ID",
+    "ms-MY",
+    "fil-PH",
+    "fr-CA",
+    "hi-IN",
+    "uk-UA",
+    "bg-BG",
+    "sk-SK",
+    "sl-SI",
+    "sr-RS",
 ]
 r"""The code of the language."""
 

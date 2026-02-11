@@ -56,19 +56,16 @@ ResourceType = Literal[
 ]
 
 
-DestinationType = Literal[
-    "AWS S3 bucket",
-    "Shared file path",
-]
+DestinationType = Literal["AWS S3 bucket",]
 r"""Type of data destination"""
 
 
-class KnowledgeExportCredentialsTypedDict(TypedDict):
+class CredentialsTypedDict(TypedDict):
     access_key: NotRequired[str]
     secret_key: NotRequired[str]
 
 
-class KnowledgeExportCredentials(BaseModel):
+class Credentials(BaseModel):
     access_key: Annotated[Optional[str], pydantic.Field(alias="accessKey")] = None
 
     secret_key: Annotated[Optional[str], pydantic.Field(alias="secretKey")] = None
@@ -78,10 +75,10 @@ class DataDestinationTypedDict(TypedDict):
     destination_type: DestinationType
     r"""Type of data destination"""
     path: str
-    r"""Path of the data destination"""
+    r"""Path of the data destination. For S3 bucket, it can be root or a folder."""
     region: NotRequired[str]
     r"""Region of the data destination"""
-    credentials: NotRequired[KnowledgeExportCredentialsTypedDict]
+    credentials: NotRequired[CredentialsTypedDict]
 
 
 class DataDestination(BaseModel):
@@ -91,12 +88,12 @@ class DataDestination(BaseModel):
     r"""Type of data destination"""
 
     path: str
-    r"""Path of the data destination"""
+    r"""Path of the data destination. For S3 bucket, it can be root or a folder."""
 
     region: Optional[str] = None
     r"""Region of the data destination"""
 
-    credentials: Optional[KnowledgeExportCredentials] = None
+    credentials: Optional[Credentials] = None
 
 
 class KnowledgeExportTypedDict(TypedDict):
@@ -105,10 +102,12 @@ class KnowledgeExportTypedDict(TypedDict):
     language: KnowledgeExportLanguageTypedDict
     r"""The Knowledge Base language in which the content is created."""
     resource_types: List[ResourceType]
-    r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list. Details of a single portal are exported.
+    r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list: {articles, topics, portals, all}.
+    Details of a single portal are exported.
     Articles whose state is Published are returned.
-    | Portal Attribute Name | Description
-    | ------------------------------- | -----------
+
+    Portal Attribute Name | Description
+    ------------------------------- | -----------
     | id | The ID of the Portal in Readable format.
     | alternateId | The system-generated ID of the Portal in long format.
     | name  | The name of the Portal.
@@ -151,6 +150,7 @@ class KnowledgeExportTypedDict(TypedDict):
     | averageRating | Average rating of the Article.
     | timesRated | Number or times the Article was rated.
     | availabilityDate | The date the Article is set to be available.
+    | modifiedDate | The date that the Article was last modified on.
     | articleMacro | The macro of the Article.
     | content | path to the Article content in .html format.
     | customAttributes | One or more comma-separated names for Article custom attributes defined by the user to be returned.
@@ -171,10 +171,12 @@ class KnowledgeExport(BaseModel):
     r"""The Knowledge Base language in which the content is created."""
 
     resource_types: Annotated[List[ResourceType], pydantic.Field(alias="resourceTypes")]
-    r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list. Details of a single portal are exported.
+    r"""Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list: {articles, topics, portals, all}.
+    Details of a single portal are exported.
     Articles whose state is Published are returned.
-    | Portal Attribute Name | Description
-    | ------------------------------- | -----------
+
+    Portal Attribute Name | Description
+    ------------------------------- | -----------
     | id | The ID of the Portal in Readable format.
     | alternateId | The system-generated ID of the Portal in long format.
     | name  | The name of the Portal.
@@ -217,6 +219,7 @@ class KnowledgeExport(BaseModel):
     | averageRating | Average rating of the Article.
     | timesRated | Number or times the Article was rated.
     | availabilityDate | The date the Article is set to be available.
+    | modifiedDate | The date that the Article was last modified on.
     | articleMacro | The macro of the Article.
     | content | path to the Article content in .html format.
     | customAttributes | One or more comma-separated names for Article custom attributes defined by the user to be returned.

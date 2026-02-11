@@ -36,7 +36,7 @@ class SchemasWSErrorCommonData(BaseModel):
 
 @dataclass(unsafe_hash=True)
 class SchemasWSErrorCommon(EgainError):
-    r"""Preconditions failed"""
+    r"""Not acceptable"""
 
     data: SchemasWSErrorCommonData = field(hash=False)
 

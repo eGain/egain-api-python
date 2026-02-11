@@ -15,7 +15,7 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
-        language: models.LanguageCodeParameter,
+        language: models.RequiredLanguageCode,
         filter_user_profile_id: Optional[str] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
@@ -23,6 +23,7 @@ class Retrieve(BaseSDK):
             Union[models.RetrieveRequestChannel, models.RetrieveRequestChannelTypedDict]
         ] = None,
         event_id: Optional[str] = None,
+        client_session_id: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -40,15 +41,16 @@ class Retrieve(BaseSDK):
         Responses for both chunks and certified answers include relevance scores and metadata. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material.
 
 
-        :param q: The search query string. The string must be escaped as required by the URL syntax rules.
+        :param q: The search query string.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.
         :param filter_user_profile_id:
-        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.  **Note**:   - The '$filter[tags]' query parameter JSON value should be url encoded.   - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.   - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}   - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
         :param event_id: Unique ID for this specific API call or event.
-        :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
+        :param client_session_id: Session ID passed by the client for this specific API call or event.
+        :param session_id: eGain Session ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -76,6 +78,7 @@ class Retrieve(BaseSDK):
                     channel, Optional[models.RetrieveRequestChannel]
                 ),
                 event_id=event_id,
+                client_session_id=client_session_id,
                 session_id=session_id,
             ),
         )
@@ -146,7 +149,7 @@ class Retrieve(BaseSDK):
         *,
         q: str,
         portal_id: str,
-        language: models.LanguageCodeParameter,
+        language: models.RequiredLanguageCode,
         filter_user_profile_id: Optional[str] = None,
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
@@ -154,6 +157,7 @@ class Retrieve(BaseSDK):
             Union[models.RetrieveRequestChannel, models.RetrieveRequestChannelTypedDict]
         ] = None,
         event_id: Optional[str] = None,
+        client_session_id: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -171,15 +175,16 @@ class Retrieve(BaseSDK):
         Responses for both chunks and certified answers include relevance scores and metadata. By leveraging the Retrieve API, organizations can build tailored experiences while retaining confidence in the source material.
 
 
-        :param q: The search query string. The string must be escaped as required by the URL syntax rules.
+        :param q: The search query string.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
-        :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
+        :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.
         :param filter_user_profile_id:
-        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.  **Note**:   - The '$filter[tags]' query parameter JSON value should be url encoded.   - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.   - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}   - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param channel:
         :param event_id: Unique ID for this specific API call or event.
-        :param session_id: ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
+        :param client_session_id: Session ID passed by the client for this specific API call or event.
+        :param session_id: eGain Session ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -207,6 +212,7 @@ class Retrieve(BaseSDK):
                     channel, Optional[models.RetrieveRequestChannel]
                 ),
                 event_id=event_id,
+                client_session_id=client_session_id,
                 session_id=session_id,
             ),
         )

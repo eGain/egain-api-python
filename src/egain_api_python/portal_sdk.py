@@ -4,7 +4,6 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from egain_api_python.articlelists import Articlelists
 from egain_api_python.connectorssearchevents import Connectorssearchevents
-from egain_api_python.escalation import Escalation
 from egain_api_python.export import Export
 from egain_api_python.federatedsearchevent import Federatedsearchevent
 from egain_api_python.general import General
@@ -36,7 +35,6 @@ class PortalSDK(BaseSDK):
     suggestion: PortalSuggestion
     usermilestones: Usermilestones
     federatedsearchevent: Federatedsearchevent
-    escalation: Escalation
     connectorssearchevents: Connectorssearchevents
     attachment: PortalAttachment
     export: Export
@@ -78,7 +76,6 @@ class PortalSDK(BaseSDK):
         self.federatedsearchevent = Federatedsearchevent(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
-        self.escalation = Escalation(self.sdk_configuration, parent_ref=self.parent_ref)
         self.connectorssearchevents = Connectorssearchevents(
             self.sdk_configuration, parent_ref=self.parent_ref
         )

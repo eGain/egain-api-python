@@ -26,7 +26,7 @@ class GetMyPortalsRequestTypedDict(TypedDict):
     sort: NotRequired[SortIDNameDepartment]
     r"""Objects returned in server response are sorted based on the attribute supplied under $sort. <br>_Default value_: name."""
     order: NotRequired[Order]
-    r"""Common query parameter $order."""
+    r"""Common query parameter $order.<br>_Default value_: asc"""
     pagenum: NotRequired[int]
     r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
     pagesize: NotRequired[int]
@@ -80,7 +80,7 @@ class GetMyPortalsRequest(BaseModel):
         pydantic.Field(alias="$order"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Common query parameter $order."""
+    r"""Common query parameter $order.<br>_Default value_: asc"""
 
     pagenum: Annotated[
         Optional[int],

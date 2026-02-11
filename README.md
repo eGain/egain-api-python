@@ -58,7 +58,6 @@ For more information about the API: [Full SDK Documentation](https://github.com/
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
-  * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -162,7 +161,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="What is a loan?", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-1030", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -172,7 +171,7 @@ with Egain(
         ],
     }, channel={
         "name": "Eight Bank Website",
-    })
+    }, event_id="6154589f-b43f-4471-b2c7-92c6c888a664", client_session_id="6154589f-b43f-4471-b2c7-92c6c888a643", session_id="6154589f-b43f-4471-b2c7-92c6c888a689")
 
     # Handle response
     print(res)
@@ -194,7 +193,7 @@ async def main():
         access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
     ) as egain:
 
-        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
+        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="What is a loan?", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-1030", filter_tags={
             "PROD-1234": [
                 "PROD-2000",
                 "PROD-2003",
@@ -204,7 +203,7 @@ async def main():
             ],
         }, channel={
             "name": "Eight Bank Website",
-        })
+        }, event_id="6154589f-b43f-4471-b2c7-92c6c888a664", client_session_id="6154589f-b43f-4471-b2c7-92c6c888a643", session_id="6154589f-b43f-4471-b2c7-92c6c888a689")
 
         # Handle response
         print(res)
@@ -234,17 +233,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    })
+    res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False)
 
     # Handle response
     print(res)
@@ -260,7 +249,11 @@ with Egain(
 
 #### [aiservices.answers](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/answers/README.md)
 
-* [get_best_answer](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/answers/README.md#get_best_answer) - Get the best answer for a user query
+* [get_best_answer](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/answers/README.md#get_best_answer) - Generate an Answer
+
+#### [aiservices.prompt](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/aiservicesprompt/README.md)
+
+* [execute_prompt](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/aiservicesprompt/README.md#execute_prompt) - Execute a predefined prompt
 
 #### [aiservices.retrieve](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/retrieve/README.md)
 
@@ -268,10 +261,10 @@ with Egain(
 
 #### [content.import_](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md)
 
-* [create_import_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_job) - Import content from external sources by creating an import job
-* [get_import_status](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_import_status) - Get the current status of an import or validation job
-* [create_import_validation_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_validation_job) - Validate content structure and format before import by creating an import validation job
-* [cancel_import](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#cancel_import) - Cancel an import or validation job
+* [create_import_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_job) - Create Import Job
+* [get_import_status](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_import_status) - Get Job Status
+* [create_import_validation_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_validation_job) - Create Validation Job
+* [cancel_import](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#cancel_import) - Cancel Job
 
 #### [portal.article](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md)
 
@@ -304,7 +297,6 @@ with Egain(
 #### [portal.attachment](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalattachment/README.md)
 
 * [create_signed_url](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalattachment/README.md#create_signed_url) - Generate Signed URL to Upload API
-* [upload_attachment](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalattachment/README.md#upload_attachment) - Upload Attachment
 
 #### [portal.bookmark](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalbookmark/README.md)
 
@@ -316,13 +308,6 @@ with Egain(
 
 * [create_search_result_event_for_connectors](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/connectorssearchevents/README.md#create_search_result_event_for_connectors) - Event for Search Using Connectors
 * [create_viewed_search_results_event_for_connectors](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/connectorssearchevents/README.md#create_viewed_search_results_event_for_connectors) - Event for Viewed Search Results Using Connectors
-
-#### [portal.escalation](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/escalation/README.md)
-
-* [start_customer_escalation](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/escalation/README.md#start_customer_escalation) - Start Customer Escalation
-* [search_prior_to_escalation](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/escalation/README.md#search_prior_to_escalation) - Search Prior To Customer Escalation
-* [complete_customer_escalation](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/escalation/README.md#complete_customer_escalation) - Complete Customer Escalation
-* [avert_customer_escalation](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/escalation/README.md#avert_customer_escalation) - Avert Customer Escalation
 
 #### [portal.export](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/export/README.md)
 
@@ -362,7 +347,7 @@ with Egain(
 
 #### [portal.search](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/search/README.md)
 
-* [ai_search](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/search/README.md#ai_search) - Get the best search results for a user query
+* [ai_search](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/search/README.md#ai_search) - Hybrid Search
 
 #### [portal.suggestion](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md)
 
@@ -396,34 +381,13 @@ with Egain(
 * [get_all_user_profiles](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portaluserprofile/README.md#get_all_user_profiles) - Get All User Profiles Assigned to User
 * [select_user_profile](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portaluserprofile/README.md#select_user_profile) - Select User Profile
 
+### [prompt](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/prompt/README.md)
+
+* [get_prompt_templates](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/prompt/README.md#get_prompt_templates) - Get Prompt Templates
+* [get_prompt_template_by_id](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/prompt/README.md#get_prompt_template_by_id) - Get Prompt Template By ID
+
 </details>
 <!-- End Available Resources and Operations [operations] -->
-
-<!-- Start File uploads [file-upload] -->
-## File uploads
-
-Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
-
-> [!TIP]
->
-> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
->
-
-```python
-from egain_api_python import Egain
-import os
-
-
-with Egain(
-    access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
-) as egain:
-
-    egain.portal.attachment.upload_attachment(accept_language="en-US", signature="<value>", request_body=open("example.file", "rb"))
-
-    # Use the SDK ...
-
-```
-<!-- End File uploads [file-upload] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -441,17 +405,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    },
+    res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -471,17 +425,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    })
+    res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False)
 
     # Handle response
     print(res)
@@ -492,7 +436,7 @@ with Egain(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`EgainError`](./src/egain_api_python/errors/egainerror.py) is the base class for all HTTP error responses. It has the following properties:
+[`EgainError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/egainerror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -506,7 +450,6 @@ with Egain(
 ### Example
 ```python
 from egain_api_python import Egain, errors
-from egain_api_python.utils import parse_datetime
 import os
 
 
@@ -516,14 +459,7 @@ with Egain(
     res = None
     try:
 
-        res = egain.content.import_.create_import_job(data_source={
-            "type": "AWS S3 bucket",
-            "path": "s3://mybucket/myfolder/",
-            "region": "us-east-1",
-            "credentials": {},
-        }, operation="import", schedule_time={
-            "date_": parse_datetime("2024-03-01T10:00:00.000Z"),
-        })
+        res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False)
 
         # Handle response
         print(res)
@@ -538,19 +474,17 @@ with Egain(
         print(e.raw_response)
 
         # Depending on the method different errors may be thrown
-        if isinstance(e, errors.WSErrorCommon):
-            print(e.data.code)  # str
-            print(e.data.developer_message)  # str
-            print(e.data.details)  # Optional[List[models.WSErrorCommonDetail]]
-            print(e.data.user_message)  # Optional[str]
+        if isinstance(e, errors.BadRequestError):
+            print(e.data.code)  # Optional[int]
+            print(e.data.developer_message)  # Optional[str]
 ```
 
 ### Error Classes
 **Primary errors:**
-* [`EgainError`](./src/egain_api_python/errors/egainerror.py): The base class for HTTP error responses.
-  * [`WSErrorCommon`](./src/egain_api_python/errors/wserrorcommon.py): Bad Request. *
+* [`EgainError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/egainerror.py): The base class for HTTP error responses.
+  * [`WSErrorCommon`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/wserrorcommon.py): Bad Request. *
 
-<details><summary>Less common errors (6)</summary>
+<details><summary>Less common errors (7)</summary>
 
 <br />
 
@@ -560,9 +494,10 @@ with Egain(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`EgainError`](./src/egain_api_python/errors/egainerror.py)**:
-* [`SchemasWSErrorCommon`](./src/egain_api_python/errors/schemaswserrorcommon.py): Preconditions failed. Status code `412`. Applicable to 2 of 78 methods.*
-* [`ResponseValidationError`](./src/egain_api_python/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`EgainError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/egainerror.py)**:
+* [`SchemasWSErrorCommon`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/schemaswserrorcommon.py): Not acceptable. Applicable to 4 of 76 methods.*
+* [`BadRequestError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/badrequesterror.py): Bad Request. Status code `400`. Applicable to 1 of 76 methods.*
+* [`ResponseValidationError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
@@ -585,17 +520,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    })
+    res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False)
 
     # Handle response
     print(res)
@@ -614,17 +539,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
-        "PROD-1234": [
-            "PROD-2000",
-            "PROD-2003",
-        ],
-        "PROD-2005": [
-            "PROD-2007",
-        ],
-    }, channel={
-        "name": "Eight Bank Website",
-    }, server_url="https://api.aidev.egain.cloud/core/aiservices/v4")
+    res = egain.aiservices.prompt.execute_prompt(prompt_id="<id>", department="Service", language_code="en-US", event_type="generate", client_session_id="123e4567-e89b-12d3-a456-426614174000", streaming=False, server_url="https://api.aidev.egain.cloud/core/aiservices/v4")
 
     # Handle response
     print(res)

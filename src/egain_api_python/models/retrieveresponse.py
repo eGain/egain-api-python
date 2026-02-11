@@ -23,7 +23,9 @@ class RetrieveResponseAnswerTypedDict(TypedDict):
     answer_type: RetrieveResponseAnswerType
     r"""Specifies that the answer produced was a certified answer."""
     relevance_score: float
-    r"""Confidence score (0.0-1.0) reflecting how well the answer matches the query."""
+    r"""Query-specific relevance score (0.0-1.0) that reflects how well the result matches the user query. It represents a direct relevance comparison between the query and the returned snippet.
+
+    """
 
 
 class RetrieveResponseAnswer(BaseModel):
@@ -41,7 +43,9 @@ class RetrieveResponseAnswer(BaseModel):
     r"""Specifies that the answer produced was a certified answer."""
 
     relevance_score: Annotated[float, pydantic.Field(alias="relevanceScore")]
-    r"""Confidence score (0.0-1.0) reflecting how well the answer matches the query."""
+    r"""Query-specific relevance score (0.0-1.0) that reflects how well the result matches the user query. It represents a direct relevance comparison between the query and the returned snippet.
+
+    """
 
 
 RetrieveResponseType = Literal[
@@ -70,12 +74,14 @@ class RetrieveResponseTypedDict(TypedDict):
     search_results: List[SearchResultTypedDict]
     r"""Top search results with relevance scores and metadata."""
     session_id: str
-    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
+    r"""eGain Session ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
     answer: NotRequired[RetrieveResponseAnswerTypedDict]
     r"""If a certified answer is given. The answer object will be present. <br><br> This will be shown only if certified answers are configured and the certified answer meets the configured threshold."""
     channel: NotRequired[RetrieveResponseChannelTypedDict]
     event_id: NotRequired[str]
     r"""Unique ID for this specific API call or event."""
+    client_session_id: NotRequired[str]
+    r"""Session ID passed by the client for this specific API call or event."""
 
 
 class RetrieveResponse(BaseModel):
@@ -83,7 +89,7 @@ class RetrieveResponse(BaseModel):
     r"""Top search results with relevance scores and metadata."""
 
     session_id: Annotated[str, pydantic.Field(alias="sessionId")]
-    r"""ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
+    r"""eGain Session ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
 
     answer: Optional[RetrieveResponseAnswer] = None
     r"""If a certified answer is given. The answer object will be present. <br><br> This will be shown only if certified answers are configured and the certified answer meets the configured threshold."""
@@ -92,3 +98,8 @@ class RetrieveResponse(BaseModel):
 
     event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
     r"""Unique ID for this specific API call or event."""
+
+    client_session_id: Annotated[
+        Optional[str], pydantic.Field(alias="clientSessionId")
+    ] = None
+    r"""Session ID passed by the client for this specific API call or event."""

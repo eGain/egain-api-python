@@ -6,7 +6,7 @@ from egain_api_python._hooks import HookContext
 from egain_api_python.types import OptionalNullable, UNSET
 from egain_api_python.utils import get_security_from_env
 from egain_api_python.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Dict, List, Mapping, Optional
+from typing import Any, Dict, List, Mapping, Optional
 
 
 class Search(BaseSDK):
@@ -20,23 +20,27 @@ class Search(BaseSDK):
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         article_custom_additional_attributes: Optional[str] = None,
+        pagenum: Optional[int] = 1,
+        pagesize: Optional[int] = 20,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AISearchResponse:
-        r"""Get the best search results for a user query
+    ) -> Optional[models.AISearchResponse]:
+        r"""Hybrid Search
 
-        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores. <br>**This endpoint is only available for Self Service environments.**
+        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores.
 
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
         :param filter_user_profile_id: The ID of the user profile.
-        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.  **Note**:   - The '$filter[tags]' query parameter JSON value should be url encoded.   - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.   - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}   - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param article_custom_additional_attributes: One or more comma-separated names for article custom attributes defined by the user to be returned.
+        :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
+        :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -60,6 +64,8 @@ class Search(BaseSDK):
             filter_tags=filter_tags,
             filter_topic_ids=filter_topic_ids,
             article_custom_additional_attributes=article_custom_additional_attributes,
+            pagenum=pagenum,
+            pagesize=pagesize,
         )
 
         req = self._build_request(
@@ -97,18 +103,29 @@ class Search(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.AISearchResponse, http_res)
-        if utils.match_response(http_res, ["400", "4XX"], "*"):
+        if utils.match_response(http_res, "204", "*"):
+            return None
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text
             )
-        if utils.match_response(http_res, ["500", "5XX"], "*"):
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text
@@ -126,23 +143,27 @@ class Search(BaseSDK):
         filter_tags: Optional[Dict[str, List[str]]] = None,
         filter_topic_ids: Optional[List[str]] = None,
         article_custom_additional_attributes: Optional[str] = None,
+        pagenum: Optional[int] = 1,
+        pagesize: Optional[int] = 20,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AISearchResponse:
-        r"""Get the best search results for a user query
+    ) -> Optional[models.AISearchResponse]:
+        r"""Hybrid Search
 
-        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores. <br>**This endpoint is only available for Self Service environments.**
+        The Search API is a hybrid search service that combines semantic understanding with keyword precision to deliver fast, contextual, and relevant results from your enterprise knowledge base. It enables secure, role-aware access to articles, FAQs, and documentation across customer, agent, and employee interfaces. Each query returns a ranked list of results with snippets, metadata, and relevance scores.
 
 
         :param q: The search query string. The string must be escaped as required by the URL syntax rules.
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other. <br><br> If lang is not passed, then the portal's default language is used.
         :param filter_user_profile_id: The ID of the user profile.
-        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.
+        :param filter_tags: An object where each key is a **Category Tag ID** (numeric string),   and each value is an array of **Tag IDs** for that category.  **Note**:   - The '$filter[tags]' query parameter JSON value should be url encoded.   - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.   - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}   - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
         :param filter_topic_ids: An array of topic IDs. It is used to restrict search results to specific topics.
         :param article_custom_additional_attributes: One or more comma-separated names for article custom attributes defined by the user to be returned.
+        :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
+        :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -166,6 +187,8 @@ class Search(BaseSDK):
             filter_tags=filter_tags,
             filter_topic_ids=filter_topic_ids,
             article_custom_additional_attributes=article_custom_additional_attributes,
+            pagenum=pagenum,
+            pagesize=pagesize,
         )
 
         req = self._build_request_async(
@@ -203,18 +226,29 @@ class Search(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.AISearchResponse, http_res)
-        if utils.match_response(http_res, ["400", "4XX"], "*"):
+        if utils.match_response(http_res, "204", "*"):
+            return None
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text
             )
-        if utils.match_response(http_res, ["500", "5XX"], "*"):
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text

@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from egain_api_python.aiservices import Aiservices
     from egain_api_python.content import Content
     from egain_api_python.portal_sdk import PortalSDK
+    from egain_api_python.prompt import Prompt
 
 
 class Egain(BaseSDK):
@@ -57,10 +58,13 @@ class Egain(BaseSDK):
     """
 
     aiservices: "Aiservices"
+    prompt: "Prompt"
+    r"""APIs for AssistGPT"""
     content: "Content"
     portal: "PortalSDK"
     _sub_sdk_map = {
         "aiservices": ("egain_api_python.aiservices", "Aiservices"),
+        "prompt": ("egain_api_python.prompt", "Prompt"),
         "content": ("egain_api_python.content", "Content"),
         "portal": ("egain_api_python.portal_sdk", "PortalSDK"),
     }

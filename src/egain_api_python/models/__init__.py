@@ -29,6 +29,7 @@ if TYPE_CHECKING:
         SearchResults,
         SearchResultsTypedDict,
     )
+    from .aispaginationinfo import AISPaginationInfo, AISPaginationInfoTypedDict
     from .aitopicbreadcrumb import AITopicBreadcrumb, AITopicBreadcrumbTypedDict
     from .aitopicsummary import AITopicSummary, AITopicSummaryTypedDict
     from .allaccessibleportals import (
@@ -102,16 +103,6 @@ if TYPE_CHECKING:
     from .articleresult import ArticleResult, ArticleResultTypedDict
     from .articleresultadditionalattributes import ArticleResultAdditionalAttributes
     from .articleresults import ArticleResults, ArticleResultsTypedDict
-    from .articlesearchresult import (
-        ArticleSearchResult,
-        ArticleSearchResultTypedDict,
-        SnippetForStructuredAuthoring,
-        SnippetForStructuredAuthoringTypedDict,
-    )
-    from .articlesearchresults import (
-        ArticleSearchResults,
-        ArticleSearchResultsTypedDict,
-    )
     from .articlesort import ArticleSort
     from .articlesortorder import ArticleSortOrder
     from .articletype import ArticleType, ArticleTypeTypedDict, TypeName
@@ -134,10 +125,6 @@ if TYPE_CHECKING:
     from .attachments import Attachments, AttachmentsTypedDict
     from .attachmentsummary import AttachmentSummary, AttachmentSummaryTypedDict
     from .attachmentupload import AttachmentUpload, AttachmentUploadTypedDict
-    from .avertcustomerescalationop import (
-        AvertCustomerEscalationRequest,
-        AvertCustomerEscalationRequestTypedDict,
-    )
     from .bookmark import Bookmark, BookmarkTypedDict
     from .bookmarkresult import BookmarkResult, BookmarkResultTypedDict
     from .bookmarkstatus import BookmarkStatus, BookmarkStatusTypedDict
@@ -165,10 +152,6 @@ if TYPE_CHECKING:
     from .clusterresults import ClusterResults, ClusterResultsTypedDict
     from .comment import Comment, CommentTypedDict
     from .comments import Comments, CommentsTypedDict
-    from .completecustomerescalationop import (
-        CompleteCustomerEscalationRequest,
-        CompleteCustomerEscalationRequestTypedDict,
-    )
     from .compliancearticleresult import (
         ComplianceArticleResult,
         ComplianceArticleResultTypedDict,
@@ -209,8 +192,6 @@ if TYPE_CHECKING:
         ConfigurableAttributes,
         ConfigurableAttributesTypedDict,
     )
-    from .contactperson import ContactPerson, ContactPersonTypedDict
-    from .contacts import Contacts, ContactsTypedDict
     from .createbookmark import CreateBookmark, CreateBookmarkTypedDict, UserType
     from .createdby import CreatedBy, CreatedByTypedDict
     from .createfederatedsearchevent import (
@@ -273,6 +254,10 @@ if TYPE_CHECKING:
         CustomAttributeType,
         CustomAttributeTypedDict,
     )
+    from .datasourcecredentials import (
+        DataSourceCredentials,
+        DataSourceCredentialsTypedDict,
+    )
     from .deletebookmarkop import DeletebookmarkRequest, DeletebookmarkRequestTypedDict
     from .deletesuggestionop import (
         DeleteSuggestionRequest,
@@ -295,8 +280,30 @@ if TYPE_CHECKING:
         EditionWithContentAccessTagsTypedDict,
         EditionWithContentTypedDict,
     )
-    from .email import Email, EmailTypedDict
-    from .exportcontentop import ExportContentResponse, ExportContentResponseTypedDict
+    from .executeprompt import (
+        EventTypeRequestBody,
+        ExecutePrompt,
+        ExecutePromptTypedDict,
+        LanguageCodeRequestBody,
+    )
+    from .executepromptop import (
+        EXECUTE_PROMPT_OP_SERVERS,
+        ExecutePromptRequest,
+        ExecutePromptRequestTypedDict,
+    )
+    from .executepromptresponse import (
+        EventRegistration,
+        ExecutePromptResponse,
+        ExecutePromptResponseEventType,
+        ExecutePromptResponseTypedDict,
+        SessionStatus,
+    )
+    from .exportcontentop import (
+        ExportContentRequest,
+        ExportContentRequestTypedDict,
+        ExportContentResponse,
+        ExportContentResponseTypedDict,
+    )
     from .exportstatus import (
         ExportStatus,
         ExportStatusProgress,
@@ -428,6 +435,21 @@ if TYPE_CHECKING:
         GetPortalDetailsByIDRequest,
         GetPortalDetailsByIDRequestTypedDict,
     )
+    from .getprompttemplatebyidop import (
+        GET_PROMPT_TEMPLATE_BY_ID_OP_SERVERS,
+        GetPromptTemplateByIDLanguageCode,
+        GetPromptTemplateByIDRequest,
+        GetPromptTemplateByIDRequestTypedDict,
+    )
+    from .getprompttemplatesop import (
+        GET_PROMPT_TEMPLATES_OP_SERVERS,
+        GetPromptTemplatesLanguageCode,
+        GetPromptTemplatesRequest,
+        GetPromptTemplatesRequestTypedDict,
+        GetPromptTemplatesResponse,
+        GetPromptTemplatesResponseTypedDict,
+        GetPromptTemplatesUseFor,
+    )
     from .getrelatedarticlesforsuggestionop import (
         GetRelatedArticlesForSuggestionRequest,
         GetRelatedArticlesForSuggestionRequestTypedDict,
@@ -468,8 +490,6 @@ if TYPE_CHECKING:
     from .image import Image, ImageTypedDict
     from .importcontent import (
         ImportContent,
-        ImportContentCredentials,
-        ImportContentCredentialsTypedDict,
         ImportContentDataSource,
         ImportContentDataSourceTypedDict,
         ImportContentType,
@@ -493,13 +513,13 @@ if TYPE_CHECKING:
     from .kblanguages import KbLanguages, KbLanguagesTypedDict
     from .knowledgeexport import (
         ArticleCategories,
+        Credentials,
+        CredentialsTypedDict,
         DataDestination,
         DataDestinationTypedDict,
         DestinationType,
         KnowledgeExport,
         KnowledgeExportCode,
-        KnowledgeExportCredentials,
-        KnowledgeExportCredentialsTypedDict,
         KnowledgeExportLanguage,
         KnowledgeExportLanguageTypedDict,
         KnowledgeExportTypedDict,
@@ -527,7 +547,6 @@ if TYPE_CHECKING:
         ModifySuggestionsRequest,
         ModifySuggestionsRequestTypedDict,
     )
-    from .optionalarticleattributes import OptionalArticleAttributes
     from .order import Order
     from .ownedby import OwnedBy, OwnedByTypedDict
     from .paginationinfo import PaginationInfo, PaginationInfoTypedDict
@@ -541,7 +560,6 @@ if TYPE_CHECKING:
         PublishViews,
         PublishViewsTypedDict,
     )
-    from .phone import Phone, PhoneTypedDict
     from .portal import Portal, PortalTypedDict
     from .portalresult import PortalResult, PortalResultTypedDict
     from .portalsettings import (
@@ -551,6 +569,15 @@ if TYPE_CHECKING:
     )
     from .profile import Profile, ProfileTypedDict
     from .profileresult import ProfileResult, ProfileResultTypedDict
+    from .prompttemplate import (
+        AppliesTo,
+        DisplayAt,
+        OutputFormat,
+        PromptTemplate,
+        PromptTemplateTypedDict,
+        ReviewStatus,
+        UseFor,
+    )
     from .publishprofile import PublishProfile, PublishProfileTypedDict
     from .publishview import (
         PublishView,
@@ -575,6 +602,8 @@ if TYPE_CHECKING:
         RejectGHSolutionRequestTypedDict,
     )
     from .relatedquestions import RelatedQuestions, RelatedQuestionsTypedDict
+    from .replacement import Replacement, ReplacementTypedDict
+    from .requiredlanguagecode import RequiredLanguageCode
     from .restorequickpickop import (
         RestoreQuickpickRequest,
         RestoreQuickpickRequestTypedDict,
@@ -630,9 +659,10 @@ if TYPE_CHECKING:
         SearchFilterAttributeTypedDict,
         ValueType,
     )
-    from .searchpriortoescalationop import (
-        SearchPriorToEscalationRequest,
-        SearchPriorToEscalationRequestTypedDict,
+    from .searchreplacement import (
+        SearchReplacement,
+        SearchReplacementType,
+        SearchReplacementTypedDict,
     )
     from .searchresult import (
         SearchResult,
@@ -659,21 +689,6 @@ if TYPE_CHECKING:
     from .sortidname import SortIDName
     from .sortidnamedepartment import SortIDNameDepartment
     from .stage import Stage, StageTypedDict
-    from .startcustomerescalationop import (
-        StartCustomerEscalationRequest,
-        StartCustomerEscalationRequestTypedDict,
-        StartCustomerEscalationResponse,
-        StartCustomerEscalationResponseTypedDict,
-    )
-    from .startescalationrequest import (
-        Captcha,
-        CaptchaTypedDict,
-        ChannelEnum,
-        Customer,
-        CustomerTypedDict,
-        StartEscalationRequest,
-        StartEscalationRequestTypedDict,
-    )
     from .startghsearchop import (
         StartGHSearchRequest,
         StartGHSearchRequestTypedDict,
@@ -683,6 +698,11 @@ if TYPE_CHECKING:
     from .startquestionandanswer import (
         StartQuestionAndAnswer,
         StartQuestionAndAnswerTypedDict,
+    )
+    from .staticreplacement import (
+        StaticReplacement,
+        StaticReplacementType,
+        StaticReplacementTypedDict,
     )
     from .stepghsearchop import StepGHSearchRequest, StepGHSearchRequestTypedDict
     from .stringattributevalue import (
@@ -733,18 +753,12 @@ if TYPE_CHECKING:
         UnsubscribeArticleRequest,
         UnsubscribeArticleRequestTypedDict,
     )
-    from .uploadattachmentop import (
-        UploadAttachmentRequest,
-        UploadAttachmentRequestTypedDict,
-    )
     from .userdetails import UserDetails, UserDetailsTypedDict
     from .userprofile import UserProfile, UserProfileTypedDict
     from .userprofiles import UserProfiles, UserProfilesTypedDict
     from .userview import UserView, UserViewTypedDict
     from .validateimportcontent import (
         ValidateImportContent,
-        ValidateImportContentCredentials,
-        ValidateImportContentCredentialsTypedDict,
         ValidateImportContentDataSource,
         ValidateImportContentDataSourceTypedDict,
         ValidateImportContentType,
@@ -756,6 +770,8 @@ if TYPE_CHECKING:
     from .wserrorcommon import WSErrorCommonDetail, WSErrorCommonDetailTypedDict
 
 __all__ = [
+    "AISPaginationInfo",
+    "AISPaginationInfoTypedDict",
     "AISearchResponse",
     "AISearchResponseTypedDict",
     "AITopicBreadcrumb",
@@ -808,6 +824,7 @@ __all__ = [
     "AnswersResponseChannelTypedDict",
     "AnswersResponseType",
     "AnswersResponseTypedDict",
+    "AppliesTo",
     "Article",
     "ArticleAISearchResult",
     "ArticleAISearchResultCustomAttribute",
@@ -845,10 +862,6 @@ __all__ = [
     "ArticleResultTypedDict",
     "ArticleResults",
     "ArticleResultsTypedDict",
-    "ArticleSearchResult",
-    "ArticleSearchResultTypedDict",
-    "ArticleSearchResults",
-    "ArticleSearchResultsTypedDict",
     "ArticleSort",
     "ArticleSortOrder",
     "ArticleType",
@@ -874,8 +887,6 @@ __all__ = [
     "AttachmentUploadTypedDict",
     "Attachments",
     "AttachmentsTypedDict",
-    "AvertCustomerEscalationRequest",
-    "AvertCustomerEscalationRequestTypedDict",
     "Bookmark",
     "BookmarkResult",
     "BookmarkResultTypedDict",
@@ -887,8 +898,6 @@ __all__ = [
     "CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS",
     "CancelImportRequest",
     "CancelImportRequestTypedDict",
-    "Captcha",
-    "CaptchaTypedDict",
     "Case",
     "CaseAdditionalAttributes",
     "CaseAnswer",
@@ -913,7 +922,6 @@ __all__ = [
     "CasebaseSearchSettingsTypedDict",
     "CasebaseStatus",
     "CasebaseTypedDict",
-    "ChannelEnum",
     "ClusterID",
     "ClusterIDTypedDict",
     "ClusterResult",
@@ -924,8 +932,6 @@ __all__ = [
     "CommentTypedDict",
     "Comments",
     "CommentsTypedDict",
-    "CompleteCustomerEscalationRequest",
-    "CompleteCustomerEscalationRequestTypedDict",
     "ComplianceArticleResult",
     "ComplianceArticleResultAdditionalAttributes",
     "ComplianceArticleResultTypedDict",
@@ -945,10 +951,6 @@ __all__ = [
     "ConfigurableAttributeTypedDict",
     "ConfigurableAttributes",
     "ConfigurableAttributesTypedDict",
-    "ContactPerson",
-    "ContactPersonTypedDict",
-    "Contacts",
-    "ContactsTypedDict",
     "CreateBookmark",
     "CreateBookmarkTypedDict",
     "CreateFederatedSearchEvent",
@@ -984,13 +986,15 @@ __all__ = [
     "CreatedByTypedDict",
     "CreatedDateAndTime",
     "CreatedDateAndTimeTypedDict",
+    "Credentials",
+    "CredentialsTypedDict",
     "CustomAttribute",
     "CustomAttributeType",
     "CustomAttributeTypedDict",
-    "Customer",
-    "CustomerTypedDict",
     "DataDestination",
     "DataDestinationTypedDict",
+    "DataSourceCredentials",
+    "DataSourceCredentialsTypedDict",
     "DeleteSuggestionRequest",
     "DeleteSuggestionRequestTypedDict",
     "DeletebookmarkRequest",
@@ -1000,6 +1004,7 @@ __all__ = [
     "DestinationType",
     "DetailField",
     "DetailFieldTypedDict",
+    "DisplayAt",
     "DisplayField",
     "DisplayFieldTypedDict",
     "DueDateDateAndTime",
@@ -1008,6 +1013,7 @@ __all__ = [
     "DynamicClusterTypedDict",
     "DynamicSearch",
     "DynamicSearchTypedDict",
+    "EXECUTE_PROMPT_OP_SERVERS",
     "Edition",
     "EditionPublishProfile",
     "EditionPublishProfileTypedDict",
@@ -1016,8 +1022,17 @@ __all__ = [
     "EditionWithContentAccessTags",
     "EditionWithContentAccessTagsTypedDict",
     "EditionWithContentTypedDict",
-    "Email",
-    "EmailTypedDict",
+    "EventRegistration",
+    "EventTypeRequestBody",
+    "ExecutePrompt",
+    "ExecutePromptRequest",
+    "ExecutePromptRequestTypedDict",
+    "ExecutePromptResponse",
+    "ExecutePromptResponseEventType",
+    "ExecutePromptResponseTypedDict",
+    "ExecutePromptTypedDict",
+    "ExportContentRequest",
+    "ExportContentRequestTypedDict",
     "ExportContentResponse",
     "ExportContentResponseTypedDict",
     "ExportStatus",
@@ -1040,6 +1055,8 @@ __all__ = [
     "FolderSummaryTypedDict",
     "GET_BEST_ANSWER_OP_SERVERS",
     "GET_IMPORT_STATUS_OP_SERVERS",
+    "GET_PROMPT_TEMPLATES_OP_SERVERS",
+    "GET_PROMPT_TEMPLATE_BY_ID_OP_SERVERS",
     "GHSearchRequest",
     "GHSearchRequestTypedDict",
     "GHSearchResult",
@@ -1103,6 +1120,15 @@ __all__ = [
     "GetPendingComplianceArticlesRequestTypedDict",
     "GetPortalDetailsByIDRequest",
     "GetPortalDetailsByIDRequestTypedDict",
+    "GetPromptTemplateByIDLanguageCode",
+    "GetPromptTemplateByIDRequest",
+    "GetPromptTemplateByIDRequestTypedDict",
+    "GetPromptTemplatesLanguageCode",
+    "GetPromptTemplatesRequest",
+    "GetPromptTemplatesRequestTypedDict",
+    "GetPromptTemplatesResponse",
+    "GetPromptTemplatesResponseTypedDict",
+    "GetPromptTemplatesUseFor",
     "GetRelatedArticlesForSuggestionRequest",
     "GetRelatedArticlesForSuggestionRequestTypedDict",
     "GetRelatedArticlesRequest",
@@ -1136,8 +1162,6 @@ __all__ = [
     "Image",
     "ImageTypedDict",
     "ImportContent",
-    "ImportContentCredentials",
-    "ImportContentCredentialsTypedDict",
     "ImportContentDataSource",
     "ImportContentDataSourceTypedDict",
     "ImportContentType",
@@ -1158,8 +1182,6 @@ __all__ = [
     "KbLanguagesTypedDict",
     "KnowledgeExport",
     "KnowledgeExportCode",
-    "KnowledgeExportCredentials",
-    "KnowledgeExportCredentialsTypedDict",
     "KnowledgeExportLanguage",
     "KnowledgeExportLanguageTypedDict",
     "KnowledgeExportTypedDict",
@@ -1168,6 +1190,7 @@ __all__ = [
     "Label",
     "LanguageCode",
     "LanguageCodeParameter",
+    "LanguageCodeRequestBody",
     "LanguageQueryParameter",
     "LastModifiedDateAndTime",
     "LastModifiedDateAndTimeTypedDict",
@@ -1194,8 +1217,8 @@ __all__ = [
     "ModifySuggestionsRequestTypedDict",
     "Name",
     "Operation",
-    "OptionalArticleAttributes",
     "Order",
+    "OutputFormat",
     "OwnedBy",
     "OwnedByTypedDict",
     "PaginationInfo",
@@ -1204,8 +1227,6 @@ __all__ = [
     "PersonalizationAccessTags",
     "PersonalizationAccessTagsTypedDict",
     "PersonalizationTypedDict",
-    "Phone",
-    "PhoneTypedDict",
     "Portal",
     "PortalResult",
     "PortalResultTypedDict",
@@ -1216,6 +1237,8 @@ __all__ = [
     "ProfileResult",
     "ProfileResultTypedDict",
     "ProfileTypedDict",
+    "PromptTemplate",
+    "PromptTemplateTypedDict",
     "PublishProfile",
     "PublishProfileTypedDict",
     "PublishView",
@@ -1249,6 +1272,9 @@ __all__ = [
     "RelatedArticleForCreateUpdateDeleteSuggestionTypedDict",
     "RelatedQuestions",
     "RelatedQuestionsTypedDict",
+    "Replacement",
+    "ReplacementTypedDict",
+    "RequiredLanguageCode",
     "ResourceType",
     "RestoreQuickpickRequest",
     "RestoreQuickpickRequestTypedDict",
@@ -1268,6 +1294,7 @@ __all__ = [
     "RetrieveResponseChannelTypedDict",
     "RetrieveResponseType",
     "RetrieveResponseTypedDict",
+    "ReviewStatus",
     "Role",
     "RoleTemplate",
     "RoleTemplateTypedDict",
@@ -1294,8 +1321,9 @@ __all__ = [
     "SearchFilterAttribute",
     "SearchFilterAttributeTypedDict",
     "SearchLearningLevel",
-    "SearchPriorToEscalationRequest",
-    "SearchPriorToEscalationRequestTypedDict",
+    "SearchReplacement",
+    "SearchReplacementType",
+    "SearchReplacementTypedDict",
     "SearchResult",
     "SearchResultDocType",
     "SearchResultSource",
@@ -1310,29 +1338,25 @@ __all__ = [
     "SelectUserProfileRequestTypedDict",
     "SessionContextVariable",
     "SessionContextVariableTypedDict",
+    "SessionStatus",
     "ShortURL",
     "ShortURLTypedDict",
-    "SnippetForStructuredAuthoring",
-    "SnippetForStructuredAuthoringTypedDict",
     "SnippetType",
     "SortIDName",
     "SortIDNameDepartment",
     "Stage",
     "StageTypedDict",
-    "StartCustomerEscalationRequest",
-    "StartCustomerEscalationRequestTypedDict",
-    "StartCustomerEscalationResponse",
-    "StartCustomerEscalationResponseTypedDict",
     "StartDateDateAndTime",
     "StartDateDateAndTimeTypedDict",
-    "StartEscalationRequest",
-    "StartEscalationRequestTypedDict",
     "StartGHSearchRequest",
     "StartGHSearchRequestTypedDict",
     "StartGHSearchResponse",
     "StartGHSearchResponseTypedDict",
     "StartQuestionAndAnswer",
     "StartQuestionAndAnswerTypedDict",
+    "StaticReplacement",
+    "StaticReplacementType",
+    "StaticReplacementTypedDict",
     "StepGHSearchRequest",
     "StepGHSearchRequestTypedDict",
     "StringAttributeValue",
@@ -1382,8 +1406,7 @@ __all__ = [
     "TypeName",
     "UnsubscribeArticleRequest",
     "UnsubscribeArticleRequestTypedDict",
-    "UploadAttachmentRequest",
-    "UploadAttachmentRequestTypedDict",
+    "UseFor",
     "UserDetails",
     "UserDetailsTypedDict",
     "UserProfile",
@@ -1394,8 +1417,6 @@ __all__ = [
     "UserView",
     "UserViewTypedDict",
     "ValidateImportContent",
-    "ValidateImportContentCredentials",
-    "ValidateImportContentCredentialsTypedDict",
     "ValidateImportContentDataSource",
     "ValidateImportContentDataSourceTypedDict",
     "ValidateImportContentType",
@@ -1436,6 +1457,8 @@ _dynamic_imports: dict[str, str] = {
     "AISearchResponseTypedDict": ".aisearchresponse",
     "SearchResults": ".aisearchresponse",
     "SearchResultsTypedDict": ".aisearchresponse",
+    "AISPaginationInfo": ".aispaginationinfo",
+    "AISPaginationInfoTypedDict": ".aispaginationinfo",
     "AITopicBreadcrumb": ".aitopicbreadcrumb",
     "AITopicBreadcrumbTypedDict": ".aitopicbreadcrumb",
     "AITopicSummary": ".aitopicsummary",
@@ -1503,12 +1526,6 @@ _dynamic_imports: dict[str, str] = {
     "ArticleResultAdditionalAttributes": ".articleresultadditionalattributes",
     "ArticleResults": ".articleresults",
     "ArticleResultsTypedDict": ".articleresults",
-    "ArticleSearchResult": ".articlesearchresult",
-    "ArticleSearchResultTypedDict": ".articlesearchresult",
-    "SnippetForStructuredAuthoring": ".articlesearchresult",
-    "SnippetForStructuredAuthoringTypedDict": ".articlesearchresult",
-    "ArticleSearchResults": ".articlesearchresults",
-    "ArticleSearchResultsTypedDict": ".articlesearchresults",
     "ArticleSort": ".articlesort",
     "ArticleSortOrder": ".articlesortorder",
     "ArticleType": ".articletype",
@@ -1532,8 +1549,6 @@ _dynamic_imports: dict[str, str] = {
     "AttachmentSummaryTypedDict": ".attachmentsummary",
     "AttachmentUpload": ".attachmentupload",
     "AttachmentUploadTypedDict": ".attachmentupload",
-    "AvertCustomerEscalationRequest": ".avertcustomerescalationop",
-    "AvertCustomerEscalationRequestTypedDict": ".avertcustomerescalationop",
     "Bookmark": ".bookmark",
     "BookmarkTypedDict": ".bookmark",
     "BookmarkResult": ".bookmarkresult",
@@ -1578,8 +1593,6 @@ _dynamic_imports: dict[str, str] = {
     "CommentTypedDict": ".comment",
     "Comments": ".comments",
     "CommentsTypedDict": ".comments",
-    "CompleteCustomerEscalationRequest": ".completecustomerescalationop",
-    "CompleteCustomerEscalationRequestTypedDict": ".completecustomerescalationop",
     "ComplianceArticleResult": ".compliancearticleresult",
     "ComplianceArticleResultTypedDict": ".compliancearticleresult",
     "ComplianceArticleResultAdditionalAttributes": ".compliancearticleresultadditionalattributes",
@@ -1603,10 +1616,6 @@ _dynamic_imports: dict[str, str] = {
     "ConfigurableAttributeTypedDict": ".configurableattribute",
     "ConfigurableAttributes": ".configurableattributes",
     "ConfigurableAttributesTypedDict": ".configurableattributes",
-    "ContactPerson": ".contactperson",
-    "ContactPersonTypedDict": ".contactperson",
-    "Contacts": ".contacts",
-    "ContactsTypedDict": ".contacts",
     "CreateBookmark": ".createbookmark",
     "CreateBookmarkTypedDict": ".createbookmark",
     "UserType": ".createbookmark",
@@ -1649,6 +1658,8 @@ _dynamic_imports: dict[str, str] = {
     "CustomAttribute": ".customattribute",
     "CustomAttributeType": ".customattribute",
     "CustomAttributeTypedDict": ".customattribute",
+    "DataSourceCredentials": ".datasourcecredentials",
+    "DataSourceCredentialsTypedDict": ".datasourcecredentials",
     "DeletebookmarkRequest": ".deletebookmarkop",
     "DeletebookmarkRequestTypedDict": ".deletebookmarkop",
     "DeleteSuggestionRequest": ".deletesuggestionop",
@@ -1671,8 +1682,20 @@ _dynamic_imports: dict[str, str] = {
     "EditionWithContentAccessTags": ".editionwithcontent",
     "EditionWithContentAccessTagsTypedDict": ".editionwithcontent",
     "EditionWithContentTypedDict": ".editionwithcontent",
-    "Email": ".email",
-    "EmailTypedDict": ".email",
+    "EventTypeRequestBody": ".executeprompt",
+    "ExecutePrompt": ".executeprompt",
+    "ExecutePromptTypedDict": ".executeprompt",
+    "LanguageCodeRequestBody": ".executeprompt",
+    "EXECUTE_PROMPT_OP_SERVERS": ".executepromptop",
+    "ExecutePromptRequest": ".executepromptop",
+    "ExecutePromptRequestTypedDict": ".executepromptop",
+    "EventRegistration": ".executepromptresponse",
+    "ExecutePromptResponse": ".executepromptresponse",
+    "ExecutePromptResponseEventType": ".executepromptresponse",
+    "ExecutePromptResponseTypedDict": ".executepromptresponse",
+    "SessionStatus": ".executepromptresponse",
+    "ExportContentRequest": ".exportcontentop",
+    "ExportContentRequestTypedDict": ".exportcontentop",
     "ExportContentResponse": ".exportcontentop",
     "ExportContentResponseTypedDict": ".exportcontentop",
     "ExportStatus": ".exportstatus",
@@ -1760,6 +1783,17 @@ _dynamic_imports: dict[str, str] = {
     "GetpopulararticlesRequestTypedDict": ".getpopulararticlesop",
     "GetPortalDetailsByIDRequest": ".getportaldetailsbyidop",
     "GetPortalDetailsByIDRequestTypedDict": ".getportaldetailsbyidop",
+    "GET_PROMPT_TEMPLATE_BY_ID_OP_SERVERS": ".getprompttemplatebyidop",
+    "GetPromptTemplateByIDLanguageCode": ".getprompttemplatebyidop",
+    "GetPromptTemplateByIDRequest": ".getprompttemplatebyidop",
+    "GetPromptTemplateByIDRequestTypedDict": ".getprompttemplatebyidop",
+    "GET_PROMPT_TEMPLATES_OP_SERVERS": ".getprompttemplatesop",
+    "GetPromptTemplatesLanguageCode": ".getprompttemplatesop",
+    "GetPromptTemplatesRequest": ".getprompttemplatesop",
+    "GetPromptTemplatesRequestTypedDict": ".getprompttemplatesop",
+    "GetPromptTemplatesResponse": ".getprompttemplatesop",
+    "GetPromptTemplatesResponseTypedDict": ".getprompttemplatesop",
+    "GetPromptTemplatesUseFor": ".getprompttemplatesop",
     "GetRelatedArticlesForSuggestionRequest": ".getrelatedarticlesforsuggestionop",
     "GetRelatedArticlesForSuggestionRequestTypedDict": ".getrelatedarticlesforsuggestionop",
     "GetRelatedArticlesRequest": ".getrelatedarticlesop",
@@ -1789,8 +1823,6 @@ _dynamic_imports: dict[str, str] = {
     "Image": ".image",
     "ImageTypedDict": ".image",
     "ImportContent": ".importcontent",
-    "ImportContentCredentials": ".importcontent",
-    "ImportContentCredentialsTypedDict": ".importcontent",
     "ImportContentDataSource": ".importcontent",
     "ImportContentDataSourceTypedDict": ".importcontent",
     "ImportContentType": ".importcontent",
@@ -1814,13 +1846,13 @@ _dynamic_imports: dict[str, str] = {
     "KbLanguages": ".kblanguages",
     "KbLanguagesTypedDict": ".kblanguages",
     "ArticleCategories": ".knowledgeexport",
+    "Credentials": ".knowledgeexport",
+    "CredentialsTypedDict": ".knowledgeexport",
     "DataDestination": ".knowledgeexport",
     "DataDestinationTypedDict": ".knowledgeexport",
     "DestinationType": ".knowledgeexport",
     "KnowledgeExport": ".knowledgeexport",
     "KnowledgeExportCode": ".knowledgeexport",
-    "KnowledgeExportCredentials": ".knowledgeexport",
-    "KnowledgeExportCredentialsTypedDict": ".knowledgeexport",
     "KnowledgeExportLanguage": ".knowledgeexport",
     "KnowledgeExportLanguageTypedDict": ".knowledgeexport",
     "KnowledgeExportTypedDict": ".knowledgeexport",
@@ -1851,7 +1883,6 @@ _dynamic_imports: dict[str, str] = {
     "ModifySuggestionTypedDict": ".modifysuggestion",
     "ModifySuggestionsRequest": ".modifysuggestionsop",
     "ModifySuggestionsRequestTypedDict": ".modifysuggestionsop",
-    "OptionalArticleAttributes": ".optionalarticleattributes",
     "Order": ".order",
     "OwnedBy": ".ownedby",
     "OwnedByTypedDict": ".ownedby",
@@ -1865,8 +1896,6 @@ _dynamic_imports: dict[str, str] = {
     "PersonalizationTypedDict": ".personalization",
     "PublishViews": ".personalization",
     "PublishViewsTypedDict": ".personalization",
-    "Phone": ".phone",
-    "PhoneTypedDict": ".phone",
     "Portal": ".portal",
     "PortalTypedDict": ".portal",
     "PortalResult": ".portalresult",
@@ -1878,6 +1907,13 @@ _dynamic_imports: dict[str, str] = {
     "ProfileTypedDict": ".profile",
     "ProfileResult": ".profileresult",
     "ProfileResultTypedDict": ".profileresult",
+    "AppliesTo": ".prompttemplate",
+    "DisplayAt": ".prompttemplate",
+    "OutputFormat": ".prompttemplate",
+    "PromptTemplate": ".prompttemplate",
+    "PromptTemplateTypedDict": ".prompttemplate",
+    "ReviewStatus": ".prompttemplate",
+    "UseFor": ".prompttemplate",
     "PublishProfile": ".publishprofile",
     "PublishProfileTypedDict": ".publishprofile",
     "PublishView": ".publishview",
@@ -1906,6 +1942,9 @@ _dynamic_imports: dict[str, str] = {
     "RejectGHSolutionRequestTypedDict": ".rejectghsolutionop",
     "RelatedQuestions": ".relatedquestions",
     "RelatedQuestionsTypedDict": ".relatedquestions",
+    "Replacement": ".replacement",
+    "ReplacementTypedDict": ".replacement",
+    "RequiredLanguageCode": ".requiredlanguagecode",
     "RestoreQuickpickRequest": ".restorequickpickop",
     "RestoreQuickpickRequestTypedDict": ".restorequickpickop",
     "RETRIEVE_CHUNKS_OP_SERVERS": ".retrievechunksop",
@@ -1952,8 +1991,9 @@ _dynamic_imports: dict[str, str] = {
     "SearchFilterAttribute": ".searchfilterattribute",
     "SearchFilterAttributeTypedDict": ".searchfilterattribute",
     "ValueType": ".searchfilterattribute",
-    "SearchPriorToEscalationRequest": ".searchpriortoescalationop",
-    "SearchPriorToEscalationRequestTypedDict": ".searchpriortoescalationop",
+    "SearchReplacement": ".searchreplacement",
+    "SearchReplacementType": ".searchreplacement",
+    "SearchReplacementTypedDict": ".searchreplacement",
     "SearchResult": ".searchresult",
     "SearchResultDocType": ".searchresult",
     "SearchResultSource": ".searchresult",
@@ -1974,23 +2014,15 @@ _dynamic_imports: dict[str, str] = {
     "SortIDNameDepartment": ".sortidnamedepartment",
     "Stage": ".stage",
     "StageTypedDict": ".stage",
-    "StartCustomerEscalationRequest": ".startcustomerescalationop",
-    "StartCustomerEscalationRequestTypedDict": ".startcustomerescalationop",
-    "StartCustomerEscalationResponse": ".startcustomerescalationop",
-    "StartCustomerEscalationResponseTypedDict": ".startcustomerescalationop",
-    "Captcha": ".startescalationrequest",
-    "CaptchaTypedDict": ".startescalationrequest",
-    "ChannelEnum": ".startescalationrequest",
-    "Customer": ".startescalationrequest",
-    "CustomerTypedDict": ".startescalationrequest",
-    "StartEscalationRequest": ".startescalationrequest",
-    "StartEscalationRequestTypedDict": ".startescalationrequest",
     "StartGHSearchRequest": ".startghsearchop",
     "StartGHSearchRequestTypedDict": ".startghsearchop",
     "StartGHSearchResponse": ".startghsearchop",
     "StartGHSearchResponseTypedDict": ".startghsearchop",
     "StartQuestionAndAnswer": ".startquestionandanswer",
     "StartQuestionAndAnswerTypedDict": ".startquestionandanswer",
+    "StaticReplacement": ".staticreplacement",
+    "StaticReplacementType": ".staticreplacement",
+    "StaticReplacementTypedDict": ".staticreplacement",
     "StepGHSearchRequest": ".stepghsearchop",
     "StepGHSearchRequestTypedDict": ".stepghsearchop",
     "StringAttributeValue": ".stringattributevalue",
@@ -2039,8 +2071,6 @@ _dynamic_imports: dict[str, str] = {
     "TopicTreeResultTypedDict": ".topictreeresult",
     "UnsubscribeArticleRequest": ".unsubscribearticleop",
     "UnsubscribeArticleRequestTypedDict": ".unsubscribearticleop",
-    "UploadAttachmentRequest": ".uploadattachmentop",
-    "UploadAttachmentRequestTypedDict": ".uploadattachmentop",
     "UserDetails": ".userdetails",
     "UserDetailsTypedDict": ".userdetails",
     "UserProfile": ".userprofile",
@@ -2050,8 +2080,6 @@ _dynamic_imports: dict[str, str] = {
     "UserView": ".userview",
     "UserViewTypedDict": ".userview",
     "ValidateImportContent": ".validateimportcontent",
-    "ValidateImportContentCredentials": ".validateimportcontent",
-    "ValidateImportContentCredentialsTypedDict": ".validateimportcontent",
     "ValidateImportContentDataSource": ".validateimportcontent",
     "ValidateImportContentDataSourceTypedDict": ".validateimportcontent",
     "ValidateImportContentType": ".validateimportcontent",

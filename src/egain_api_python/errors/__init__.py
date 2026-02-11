@@ -8,12 +8,15 @@ import sys
 
 if TYPE_CHECKING:
     from .egaindefaulterror import EgainDefaultError
+    from .executepromptop import BadRequestError, BadRequestErrorData
     from .no_response_error import NoResponseError
     from .responsevalidationerror import ResponseValidationError
     from .schemas_wserrorcommon import SchemasWSErrorCommon, SchemasWSErrorCommonData
     from .wserrorcommon import WSErrorCommon, WSErrorCommonData
 
 __all__ = [
+    "BadRequestError",
+    "BadRequestErrorData",
     "EgainDefaultError",
     "EgainError",
     "NoResponseError",
@@ -26,6 +29,8 @@ __all__ = [
 
 _dynamic_imports: dict[str, str] = {
     "EgainDefaultError": ".egaindefaulterror",
+    "BadRequestError": ".executepromptop",
+    "BadRequestErrorData": ".executepromptop",
     "NoResponseError": ".no_response_error",
     "ResponseValidationError": ".responsevalidationerror",
     "SchemasWSErrorCommon": ".schemas_wserrorcommon",

@@ -23,12 +23,21 @@ class AiSearchRequestTypedDict(TypedDict):
     filter_tags: NotRequired[Dict[str, List[str]]]
     r"""An object where each key is a **Category Tag ID** (numeric string),
     and each value is an array of **Tag IDs** for that category.
+    **Note**:
+    - The '$filter[tags]' query parameter JSON value should be url encoded.
+    - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.
+    - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}
+    - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
 
     """
     filter_topic_ids: NotRequired[List[str]]
     r"""An array of topic IDs. It is used to restrict search results to specific topics."""
     article_custom_additional_attributes: NotRequired[str]
     r"""One or more comma-separated names for article custom attributes defined by the user to be returned."""
+    pagenum: NotRequired[int]
+    r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
+    pagesize: NotRequired[int]
+    r"""Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum."""
 
 
 class AiSearchRequest(BaseModel):
@@ -67,6 +76,11 @@ class AiSearchRequest(BaseModel):
     ] = None
     r"""An object where each key is a **Category Tag ID** (numeric string),
     and each value is an array of **Tag IDs** for that category.
+    **Note**:
+    - The '$filter[tags]' query parameter JSON value should be url encoded.
+    - Some developer tools for invoking APIs may not url encode the '$filter[tags]' query parameter JSON value by default. Ensure that only url encoded values are used.
+    - Example of JSON value: {\"BASE-40845\":[\"BASE-40849\",\"BASE-40853\"]}
+    - Example of URL encoded value: %7B%22BASE-40845%22%3A%5B%22BASE-40849%22%2C%22BASE-40853%22%5D%7D
 
     """
 
@@ -83,3 +97,17 @@ class AiSearchRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""One or more comma-separated names for article custom attributes defined by the user to be returned."""
+
+    pagenum: Annotated[
+        Optional[int],
+        pydantic.Field(alias="$pagenum"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize."""
+
+    pagesize: Annotated[
+        Optional[int],
+        pydantic.Field(alias="$pagesize"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 20
+    r"""Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum."""

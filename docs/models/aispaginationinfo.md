@@ -1,0 +1,11 @@
+# AISPaginationInfo
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `count`                                                                                 | *Optional[int]*                                                                         | :heavy_minus_sign:                                                                      | The total number of pages.                                                              |
+| `pagenum`                                                                               | *Optional[int]*                                                                         | :heavy_minus_sign:                                                                      | The page number requested. Page numbers start from 1.                                   |
+| `pagesize`                                                                              | *Optional[int]*                                                                         | :heavy_minus_sign:                                                                      | The number of objects requested per page. The maximum number of objects per page is 75. |
+| `link`                                                                                  | List[[models.Link](../models/link.md)]                                                  | :heavy_minus_sign:                                                                      | Can include the *prev* and *next* link.                                                 |

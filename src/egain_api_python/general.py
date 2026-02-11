@@ -269,7 +269,7 @@ class General(BaseSDK):
         :param filter_text: Portal name starting with a specific character are considered to filter the result.
         :param short_url_template: The Name of the template used while creating Short URL.
         :param sort: Objects returned in server response are sorted based on the attribute supplied under $sort. <br>_Default value_: name.
-        :param order: Common query parameter $order.
+        :param order: Common query parameter $order.<br>_Default value_: asc
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.<br>Valid range of 5-75<br>_Default value_: 25
         :param retries: Override the default retry configuration for this method
@@ -399,7 +399,7 @@ class General(BaseSDK):
         :param filter_text: Portal name starting with a specific character are considered to filter the result.
         :param short_url_template: The Name of the template used while creating Short URL.
         :param sort: Objects returned in server response are sorted based on the attribute supplied under $sort. <br>_Default value_: name.
-        :param order: Common query parameter $order.
+        :param order: Common query parameter $order.<br>_Default value_: asc
         :param pagenum: Pagination parameter that specifies the page number of results to be returned. Used in conjunction with $pagesize.
         :param pagesize: Pagination parameter that specifies the number of results per page. Used in conjunction with $pagenum.<br>Valid range of 5-75<br>_Default value_: 25
         :param retries: Override the default retry configuration for this method

@@ -91,8 +91,10 @@ class ArticleAISearchResultTypedDict(TypedDict):
     r"""A semantic snippet of the article content."""
     topic_breadcrumb: List[AITopicBreadcrumbTypedDict]
     r"""A list of topics from the root topic to this Article. There may be multiple paths."""
-    relevance_score: float
-    r"""Generated confidence score (0.0-1.0) for the snippet's relevance to the query."""
+    normalized_score: float
+    r"""Relative ranking score (0.0-1.0) normalized across all returned results, based on a combination of BM25 and semantic similarity scores. This score indicates how a result ranks compared to others in the same response, not its absolute relevance to the query. As a result, a high score does not necessarily imply strong query relevance.
+
+    """
     doc_name: NotRequired[str]
     r"""Name of the attachment, if an attachment was used as the source content."""
     custom_attributes: NotRequired[List[ArticleAISearchResultCustomAttributeTypedDict]]
@@ -104,7 +106,7 @@ class ArticleAISearchResultTypedDict(TypedDict):
     additional_snippet_count: NotRequired[int]
     r"""Number of additional snippets."""
     contextual_summary: NotRequired[str]
-    r"""Contextual Summary generated as part of metadata for embedding."""
+    r"""Contextual Summary generated as part of metadata for the chunk content."""
     modified_date: NotRequired[str]
     r"""The date on which the Article was last modified."""
     header_path: NotRequired[str]
@@ -113,6 +115,10 @@ class ArticleAISearchResultTypedDict(TypedDict):
     r"""An array of tag categories. Note that the total number of tag categories cannot exceed 20."""
     article_type_attributes: NotRequired[ArticleTypeAttributesTypedDict]
     r"""The type of the Article and its attributes."""
+    relevance_score: NotRequired[float]
+    r"""Query-specific relevance score (0.0-1.0) that reflects how well the result matches the user query. This score is only available when a re-ranker is enabled and represents a direct relevance comparison between the query and the returned snippet.
+
+    """
 
 
 class ArticleAISearchResult(BaseModel):
@@ -138,8 +144,10 @@ class ArticleAISearchResult(BaseModel):
     ]
     r"""A list of topics from the root topic to this Article. There may be multiple paths."""
 
-    relevance_score: Annotated[float, pydantic.Field(alias="relevanceScore")]
-    r"""Generated confidence score (0.0-1.0) for the snippet's relevance to the query."""
+    normalized_score: Annotated[float, pydantic.Field(alias="normalizedScore")]
+    r"""Relative ranking score (0.0-1.0) normalized across all returned results, based on a combination of BM25 and semantic similarity scores. This score indicates how a result ranks compared to others in the same response, not its absolute relevance to the query. As a result, a high score does not necessarily imply strong query relevance.
+
+    """
 
     doc_name: Annotated[Optional[str], pydantic.Field(alias="docName")] = None
     r"""Name of the attachment, if an attachment was used as the source content."""
@@ -168,7 +176,7 @@ class ArticleAISearchResult(BaseModel):
     contextual_summary: Annotated[
         Optional[str], pydantic.Field(alias="contextualSummary")
     ] = None
-    r"""Contextual Summary generated as part of metadata for embedding."""
+    r"""Contextual Summary generated as part of metadata for the chunk content."""
 
     modified_date: Annotated[Optional[str], pydantic.Field(alias="modifiedDate")] = None
     r"""The date on which the Article was last modified."""
@@ -185,3 +193,10 @@ class ArticleAISearchResult(BaseModel):
         Optional[ArticleTypeAttributes], pydantic.Field(alias="articleTypeAttributes")
     ] = None
     r"""The type of the Article and its attributes."""
+
+    relevance_score: Annotated[
+        Optional[float], pydantic.Field(alias="relevanceScore")
+    ] = None
+    r"""Query-specific relevance score (0.0-1.0) that reflects how well the result matches the user query. This score is only available when a re-ranker is enabled and represents a direct relevance comparison between the query and the returned snippet.
+
+    """

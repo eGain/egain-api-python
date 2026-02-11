@@ -20,7 +20,7 @@ class GetArticleEditionDetailsRequestTypedDict(TypedDict):
     article_id: str
     r"""The ID of the Article. Both numeric and alternate ID formats are supported.<br><br>Valid numerical IDs are 15-19 digits long."""
     publish_view_id: str
-    r"""Publish View Id of the article on which operation is performed."""
+    r"""The ID of a Publish View Id.<br><br>A Publish View Id ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
     language: MandatoryLanguageQueryParameter
     r"""The language used for fetching the details of a resource. Resources available in different languages may differ from each other."""
 
@@ -45,7 +45,7 @@ class GetArticleEditionDetailsRequest(BaseModel):
         pydantic.Field(alias="publishViewId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""Publish View Id of the article on which operation is performed."""
+    r"""The ID of a Publish View Id.<br><br>A Publish View Id ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits."""
 
     language: Annotated[
         MandatoryLanguageQueryParameter,

@@ -9,7 +9,7 @@ with Egain(
     access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
 ) as egain:
 
-    res = egain.aiservices.retrieve.retrieve_chunks(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
+    res = egain.aiservices.retrieve.retrieve_chunks(q="What is a loan?", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-1030", filter_tags={
         "PROD-1234": [
             "PROD-2000",
             "PROD-2003",
@@ -19,7 +19,7 @@ with Egain(
         ],
     }, channel={
         "name": "Eight Bank Website",
-    })
+    }, event_id="6154589f-b43f-4471-b2c7-92c6c888a664", client_session_id="6154589f-b43f-4471-b2c7-92c6c888a643", session_id="6154589f-b43f-4471-b2c7-92c6c888a689")
 
     # Handle response
     print(res)
@@ -41,7 +41,7 @@ async def main():
         access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
     ) as egain:
 
-        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="fair lending", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-3210", filter_tags={
+        res = await egain.aiservices.retrieve.retrieve_chunks_async(q="What is a loan?", portal_id="PROD-1000", language="en-US", filter_user_profile_id="PROD-1030", filter_tags={
             "PROD-1234": [
                 "PROD-2000",
                 "PROD-2003",
@@ -51,7 +51,7 @@ async def main():
             ],
         }, channel={
             "name": "Eight Bank Website",
-        })
+        }, event_id="6154589f-b43f-4471-b2c7-92c6c888a664", client_session_id="6154589f-b43f-4471-b2c7-92c6c888a643", session_id="6154589f-b43f-4471-b2c7-92c6c888a689")
 
         # Handle response
         print(res)
