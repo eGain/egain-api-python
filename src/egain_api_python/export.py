@@ -23,6 +23,7 @@ class Export(BaseSDK):
             models.DataDestination, models.DataDestinationTypedDict
         ],
         article_categories: Optional[models.ArticleCategories] = "searchable",
+        export_unpublished_only: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -31,7 +32,7 @@ class Export(BaseSDK):
         r"""Export Knowledge
 
         ## Overview
-        The Content Export API initiates a bulk export of the Knowledge Hub to a client-provided Amazon S3 bucket.
+        The Content Export API initiates a bulk export of the Knowledge Hub to a client-provided Amazon S3 bucket or SFTP server path.
         It returns a URL with a Job ID to enable tracking the status of this asynchronous operation.
         Each export job can send multiple JSON files, depending on the total number of items to process.
         More than one bulk export can take place, as needed, one per portal.
@@ -46,9 +47,10 @@ class Export(BaseSDK):
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The Knowledge Base language in which the content is created.
-        :param resource_types: Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list: {articles, topics, portals, all}. Details of a single portal are exported.  Articles whose state is Published are returned.  Portal Attribute Name | Description  ------------------------------- | ----------- | id | The ID of the Portal in Readable format. | alternateId | The system-generated ID of the Portal in long format. | name  | The name of the Portal. | description | The Portal's description. | departmentId | ID of the department this Portal belongs to.  | defaultContentLanguageId | The default ID of the language for the portal content.  | Topic Attribute Name | Description  | ------------------------------ | ----------- | id | The ID of the Topic in Readable form. | alternateId | The system-generated ID of the Topic in long form. | name  | The name of the Topic. | departmentId | ID of the department this Topic belongs to. | modifiedDate | The date when the Topic was last modified on. | topicHomeArticleId | The ID of the Article used as the home page of this Topic. | childCount | Total number of children sub-topis below the current Topic. | subTopicIds | Array with the list of sub-topics (all levels of the topic hierarchy). | parentTopicId | ID of the parent Topic. -1 if it is the root Topic. | imageURL | URL of the inline Topic image. | customAttributes | One or more comma-separated names for Topic custom attributes defined by the user to be returned.  | Article Attribute Name | Description  | ---------------------- | ----------- | id | The ID of the Article in Readable form. | alternateId | The system-generated ID of the Article in long form. | name  | The name of the Article. | additionalInfo | Additional information provided as Article metadata.  | type | The Article type object and its attributes. | keywords | A comma-separated list of keywords associated with this Article, provided as metadata. | summary | A brief summary of the Article, provided as metadata. | state | The state of the Article. State P (Published). | departmentId | ID of the department this Article belongs to.  | description | The description of the Article. | imageURL | The URL of the image that is present in the Article version. It is used as the thumbnail image for the Article. | attachements | The Article's uploaded attachments and their IDs. | includeInGenAI  | Indicates whether this Article is used for eGain's generative AI features. | topicBreadcrumb | Contains a list of topics from the top-level topic to this Article. There may be multiple paths. | versionId | The ID of the Article version that is returned. | expirationDate | The date that the Article is set to expire.   | averageRating | Average rating of the Article. | timesRated | Number or times the Article was rated.   | availabilityDate | The date the Article is set to be available.  | modifiedDate | The date that the Article was last modified on.    | articleMacro | The macro of the Article.              | content | path to the Article content in .html format. | customAttributes | One or more comma-separated names for Article custom attributes defined by the user to be returned. | personalization | Article personalization details, incuding tag categories. | editions | The editions of the Article, including the publish profile (view) associated with each edition.
+        :param resource_types: Types of Knowledge Hub resources to export. Use 'all' to specify all resource types at once.   Below are the attributes that are returned for each resource type specified.  ##### Portal Resource Type Attributes Portal Attribute Name | Description  ------------------------------- | ----------- | id | The ID of the Portal in Readable format. | alternateId | The system-generated ID of the Portal in long format. | name  | The name of the Portal. | description | The Portal's description. | departmentId | ID of the department this Portal belongs to.  | defaultContentLanguageId | The default ID of the language for the portal content.  ##### Topic Resource Type Attributes | Topic Attribute Name | Description  | ------------------------------ | ----------- | id | The ID of the Topic in Readable form. | alternateId | The system-generated ID of the Topic in long form. | name  | The name of the Topic. | departmentId | ID of the department this Topic belongs to. | modifiedDate | The date when the Topic was last modified on. | topicHomeArticleId | The ID of the Article used as the home page of this Topic. | childCount | Total number of children sub-topis below the current Topic. | subTopicIds | Array with the list of sub-topics (all levels of the topic hierarchy). | parentTopicId | ID of the parent Topic. -1 if it is the root Topic. | imageURL | URL of the inline Topic image. | customAttributes | One or more comma-separated names for Topic custom attributes defined by the user to be returned.  ##### Article Resource Type Attributes Export article's attributes returned are aligned with the response of the [Get Article By ID with Editions](../article/getarticlebyidwitheditions) API.
         :param data_destination:
-        :param article_categories: Category of articles to return. All includes browsable and searchable.
+        :param article_categories: Category of articles to return. If all is selected, it includes both browsable and searchable articles.
+        :param export_unpublished_only: Determines which article version to export. If true, the latest unpublished version will be exported for each article where available, and articles that do not have an unpublished version will be omitted from the export. If this property is false or omitted, the latest published version will be exported for each article where available. Each request exports either all published or all unpublished article versions in a portal; never both.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -72,6 +74,7 @@ class Export(BaseSDK):
                 language=utils.get_pydantic_model(
                     language, models.KnowledgeExportLanguage
                 ),
+                export_unpublished_only=export_unpublished_only,
                 resource_types=resource_types,
                 data_destination=utils.get_pydantic_model(
                     data_destination, models.DataDestination
@@ -117,7 +120,7 @@ class Export(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -126,7 +129,9 @@ class Export(BaseSDK):
             return models.ExportContentResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
@@ -158,6 +163,7 @@ class Export(BaseSDK):
             models.DataDestination, models.DataDestinationTypedDict
         ],
         article_categories: Optional[models.ArticleCategories] = "searchable",
+        export_unpublished_only: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -166,7 +172,7 @@ class Export(BaseSDK):
         r"""Export Knowledge
 
         ## Overview
-        The Content Export API initiates a bulk export of the Knowledge Hub to a client-provided Amazon S3 bucket.
+        The Content Export API initiates a bulk export of the Knowledge Hub to a client-provided Amazon S3 bucket or SFTP server path.
         It returns a URL with a Job ID to enable tracking the status of this asynchronous operation.
         Each export job can send multiple JSON files, depending on the total number of items to process.
         More than one bulk export can take place, as needed, one per portal.
@@ -181,9 +187,10 @@ class Export(BaseSDK):
         :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param portal_id: The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.
         :param language: The Knowledge Base language in which the content is created.
-        :param resource_types: Types of Knowledge Hub resources to export. Multiple values can be specified using a comma-separated list: {articles, topics, portals, all}. Details of a single portal are exported.  Articles whose state is Published are returned.  Portal Attribute Name | Description  ------------------------------- | ----------- | id | The ID of the Portal in Readable format. | alternateId | The system-generated ID of the Portal in long format. | name  | The name of the Portal. | description | The Portal's description. | departmentId | ID of the department this Portal belongs to.  | defaultContentLanguageId | The default ID of the language for the portal content.  | Topic Attribute Name | Description  | ------------------------------ | ----------- | id | The ID of the Topic in Readable form. | alternateId | The system-generated ID of the Topic in long form. | name  | The name of the Topic. | departmentId | ID of the department this Topic belongs to. | modifiedDate | The date when the Topic was last modified on. | topicHomeArticleId | The ID of the Article used as the home page of this Topic. | childCount | Total number of children sub-topis below the current Topic. | subTopicIds | Array with the list of sub-topics (all levels of the topic hierarchy). | parentTopicId | ID of the parent Topic. -1 if it is the root Topic. | imageURL | URL of the inline Topic image. | customAttributes | One or more comma-separated names for Topic custom attributes defined by the user to be returned.  | Article Attribute Name | Description  | ---------------------- | ----------- | id | The ID of the Article in Readable form. | alternateId | The system-generated ID of the Article in long form. | name  | The name of the Article. | additionalInfo | Additional information provided as Article metadata.  | type | The Article type object and its attributes. | keywords | A comma-separated list of keywords associated with this Article, provided as metadata. | summary | A brief summary of the Article, provided as metadata. | state | The state of the Article. State P (Published). | departmentId | ID of the department this Article belongs to.  | description | The description of the Article. | imageURL | The URL of the image that is present in the Article version. It is used as the thumbnail image for the Article. | attachements | The Article's uploaded attachments and their IDs. | includeInGenAI  | Indicates whether this Article is used for eGain's generative AI features. | topicBreadcrumb | Contains a list of topics from the top-level topic to this Article. There may be multiple paths. | versionId | The ID of the Article version that is returned. | expirationDate | The date that the Article is set to expire.   | averageRating | Average rating of the Article. | timesRated | Number or times the Article was rated.   | availabilityDate | The date the Article is set to be available.  | modifiedDate | The date that the Article was last modified on.    | articleMacro | The macro of the Article.              | content | path to the Article content in .html format. | customAttributes | One or more comma-separated names for Article custom attributes defined by the user to be returned. | personalization | Article personalization details, incuding tag categories. | editions | The editions of the Article, including the publish profile (view) associated with each edition.
+        :param resource_types: Types of Knowledge Hub resources to export. Use 'all' to specify all resource types at once.   Below are the attributes that are returned for each resource type specified.  ##### Portal Resource Type Attributes Portal Attribute Name | Description  ------------------------------- | ----------- | id | The ID of the Portal in Readable format. | alternateId | The system-generated ID of the Portal in long format. | name  | The name of the Portal. | description | The Portal's description. | departmentId | ID of the department this Portal belongs to.  | defaultContentLanguageId | The default ID of the language for the portal content.  ##### Topic Resource Type Attributes | Topic Attribute Name | Description  | ------------------------------ | ----------- | id | The ID of the Topic in Readable form. | alternateId | The system-generated ID of the Topic in long form. | name  | The name of the Topic. | departmentId | ID of the department this Topic belongs to. | modifiedDate | The date when the Topic was last modified on. | topicHomeArticleId | The ID of the Article used as the home page of this Topic. | childCount | Total number of children sub-topis below the current Topic. | subTopicIds | Array with the list of sub-topics (all levels of the topic hierarchy). | parentTopicId | ID of the parent Topic. -1 if it is the root Topic. | imageURL | URL of the inline Topic image. | customAttributes | One or more comma-separated names for Topic custom attributes defined by the user to be returned.  ##### Article Resource Type Attributes Export article's attributes returned are aligned with the response of the [Get Article By ID with Editions](../article/getarticlebyidwitheditions) API.
         :param data_destination:
-        :param article_categories: Category of articles to return. All includes browsable and searchable.
+        :param article_categories: Category of articles to return. If all is selected, it includes both browsable and searchable articles.
+        :param export_unpublished_only: Determines which article version to export. If true, the latest unpublished version will be exported for each article where available, and articles that do not have an unpublished version will be omitted from the export. If this property is false or omitted, the latest published version will be exported for each article where available. Each request exports either all published or all unpublished article versions in a portal; never both.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -207,6 +214,7 @@ class Export(BaseSDK):
                 language=utils.get_pydantic_model(
                     language, models.KnowledgeExportLanguage
                 ),
+                export_unpublished_only=export_unpublished_only,
                 resource_types=resource_types,
                 data_destination=utils.get_pydantic_model(
                     data_destination, models.DataDestination
@@ -252,7 +260,7 @@ class Export(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -261,7 +269,9 @@ class Export(BaseSDK):
             return models.ExportContentResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
@@ -283,6 +293,7 @@ class Export(BaseSDK):
     def export_status(
         self,
         *,
+        accept_language: models.AcceptLanguage,
         job_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -313,6 +324,7 @@ class Export(BaseSDK):
         * This API requires a site license (SKU: EG-CL-RTKA-PT).
 
 
+        :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param job_id: **Example Usage:** ```bash GET /content/export/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -330,6 +342,7 @@ class Export(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.ExportStatusRequest(
+            accept_language=accept_language,
             job_id=job_id,
         )
 
@@ -399,6 +412,7 @@ class Export(BaseSDK):
     async def export_status_async(
         self,
         *,
+        accept_language: models.AcceptLanguage,
         job_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -429,6 +443,7 @@ class Export(BaseSDK):
         * This API requires a site license (SKU: EG-CL-RTKA-PT).
 
 
+        :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
         :param job_id: **Example Usage:** ```bash GET /content/export/7A84B875-6F75-4C7B-B137-0632B62DB0BD/status ```
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -446,6 +461,7 @@ class Export(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.ExportStatusRequest(
+            accept_language=accept_language,
             job_id=job_id,
         )
 

@@ -34,4 +34,3 @@ The language that describes the details of the resource. Resources available in 
 | `BG_BG`  | bg-BG    |
 | `SK_SK`  | sk-SK    |
 | `SL_SI`  | sl-SI    |
-| `SR_RS`  | sr-RS    |

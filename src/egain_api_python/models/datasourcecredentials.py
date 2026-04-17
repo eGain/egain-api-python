@@ -8,9 +8,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class DataSourceCredentialsTypedDict(TypedDict):
-    access_key: NotRequired[str]
+    access_key_id: NotRequired[str]
     r"""Access key for S3 credentials datasource. Provide along with Secret Key."""
-    secret_key: NotRequired[str]
+    secret_access_key: NotRequired[str]
     r"""Secret key for S3 credentials datasource. Provide along with Access Key."""
     username: NotRequired[str]
     r"""Username for SFTP credentials datasource. Provide along with Password."""
@@ -19,10 +19,12 @@ class DataSourceCredentialsTypedDict(TypedDict):
 
 
 class DataSourceCredentials(BaseModel):
-    access_key: Annotated[Optional[str], pydantic.Field(alias="accessKey")] = None
+    access_key_id: Annotated[Optional[str], pydantic.Field(alias="accessKeyId")] = None
     r"""Access key for S3 credentials datasource. Provide along with Secret Key."""
 
-    secret_key: Annotated[Optional[str], pydantic.Field(alias="secretKey")] = None
+    secret_access_key: Annotated[
+        Optional[str], pydantic.Field(alias="secretAccessKey")
+    ] = None
     r"""Secret key for S3 credentials datasource. Provide along with Access Key."""
 
     username: Optional[str] = None

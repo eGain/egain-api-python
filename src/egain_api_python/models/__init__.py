@@ -21,6 +21,10 @@ if TYPE_CHECKING:
         AdditionalSnippetsDocType,
         AdditionalSnippetsTypedDict,
     )
+    from .addsuggestioncommentop import (
+        AddSuggestionCommentRequest,
+        AddSuggestionCommentRequestTypedDict,
+    )
     from .addtoreplyop import AddToReplyRequest, AddToReplyRequestTypedDict
     from .aisearchop import AiSearchRequest, AiSearchRequestTypedDict
     from .aisearchresponse import (
@@ -105,7 +109,8 @@ if TYPE_CHECKING:
     from .articleresults import ArticleResults, ArticleResultsTypedDict
     from .articlesort import ArticleSort
     from .articlesortorder import ArticleSortOrder
-    from .articletype import ArticleType, ArticleTypeTypedDict, TypeName
+    from .articletype import ArticleType, ArticleTypeTypedDict
+    from .articletypeinfo import ArticleTypeInfo, ArticleTypeInfoTypedDict
     from .articlewitheditions import ArticleWithEditions, ArticleWithEditionsTypedDict
     from .attachment import Attachment, AttachmentTypedDict
     from .attachmentadditionalattributes import AttachmentAdditionalAttributes
@@ -193,6 +198,7 @@ if TYPE_CHECKING:
         ConfigurableAttributesTypedDict,
     )
     from .createbookmark import CreateBookmark, CreateBookmarkTypedDict, UserType
+    from .createcomment import CreateComment, CreateCommentTypedDict
     from .createdby import CreatedBy, CreatedByTypedDict
     from .createfederatedsearchevent import (
         CreateFederatedSearchEvent,
@@ -240,6 +246,12 @@ if TYPE_CHECKING:
         CreateSuggestionTypedDict,
         RelatedArticleForCreateUpdateDeleteSuggestion,
         RelatedArticleForCreateUpdateDeleteSuggestionTypedDict,
+    )
+    from .createvalidationhookop import CREATE_VALIDATION_HOOK_OP_SERVERS
+    from .createvalidationhookversionop import (
+        CREATE_VALIDATION_HOOK_VERSION_OP_SERVERS,
+        CreateValidationHookVersionRequest,
+        CreateValidationHookVersionRequestTypedDict,
     )
     from .createviewedsearchresulteventforconnectors import (
         CreateViewedSearchResultEventForConnectors,
@@ -318,6 +330,14 @@ if TYPE_CHECKING:
         FeedbackArticleForSuggestion,
         FeedbackArticleForSuggestionTypedDict,
     )
+    from .fileobject import (
+        File,
+        FileObject,
+        FileObjectTypedDict,
+        FileTypedDict,
+        Version,
+        VersionTypedDict,
+    )
     from .folderbreadcrumb import FolderBreadcrumb, FolderBreadcrumbTypedDict
     from .foldersummary import FolderSummary, FolderSummaryTypedDict
     from .getacknowledgedcompliancearticlesop import (
@@ -327,6 +347,10 @@ if TYPE_CHECKING:
     from .getallarticlelistsop import (
         GetAllArticleListsRequest,
         GetAllArticleListsRequestTypedDict,
+    )
+    from .getallarticletypesop import (
+        GetAllArticleTypesRequest,
+        GetAllArticleTypesRequestTypedDict,
     )
     from .getallcasebasesreleasesop import (
         GetAllCasebasesReleasesRequest,
@@ -484,9 +508,27 @@ if TYPE_CHECKING:
         GetUserMilestonesRequest,
         GetUserMilestonesRequestTypedDict,
     )
+    from .getvalidationhooksop import (
+        GET_VALIDATION_HOOKS_OP_SERVERS,
+        GetValidationHooksRequest,
+        GetValidationHooksRequestTypedDict,
+    )
+    from .getvalidationhookversionop import (
+        GET_VALIDATION_HOOK_VERSION_OP_SERVERS,
+        GetValidationHookVersionRequest,
+        GetValidationHookVersionRequestTypedDict,
+    )
+    from .getvalidationhookversionsop import (
+        GET_VALIDATION_HOOK_VERSIONS_OP_SERVERS,
+        GetValidationHookVersionsRequest,
+        GetValidationHookVersionsRequestTypedDict,
+    )
     from .ghsearchrequest import GHSearchRequest, GHSearchRequestTypedDict
     from .ghsearchresult import GHSearchResult, GHSearchResultTypedDict
     from .ghstepsearchrequest import GHStepSearchRequest, GHStepSearchRequestTypedDict
+    from .hook import Hook, HookType, HookTypedDict
+    from .hooks import Hooks, HooksTypedDict
+    from .hooktypeparam import HookTypeParam
     from .image import Image, ImageTypedDict
     from .importcontent import (
         ImportContent,
@@ -513,8 +555,6 @@ if TYPE_CHECKING:
     from .kblanguages import KbLanguages, KbLanguagesTypedDict
     from .knowledgeexport import (
         ArticleCategories,
-        Credentials,
-        CredentialsTypedDict,
         DataDestination,
         DataDestinationTypedDict,
         DestinationType,
@@ -632,6 +672,7 @@ if TYPE_CHECKING:
     )
     from .role import Role, RoleTypedDict
     from .roletemplate import RoleTemplate, RoleTemplateTypedDict
+    from .s3config import S3Config, S3ConfigTypedDict
     from .schemas_answer import SchemasAnswer, SchemasAnswerTypedDict
     from .schemas_customattribute import (
         SchemasCustomAttribute,
@@ -685,6 +726,7 @@ if TYPE_CHECKING:
         SessionContextVariable,
         SessionContextVariableTypedDict,
     )
+    from .sftpconfig import SftpConfig, SftpConfigTypedDict
     from .shorturl import ShortURL, ShortURLTypedDict
     from .sortidname import SortIDName
     from .sortidnamedepartment import SortIDNameDepartment
@@ -745,6 +787,10 @@ if TYPE_CHECKING:
     from .topic import Topic, TopicTypedDict
     from .topicadditionalattributes import TopicAdditionalAttributes
     from .topicbreadcrumb import TopicBreadcrumb, TopicBreadcrumbTypedDict
+    from .topicbreadcrumbslist import (
+        TopicBreadcrumbsList,
+        TopicBreadcrumbsListTypedDict,
+    )
     from .topicresult import TopicResult, TopicResultTypedDict
     from .topicsummary import TopicSummary, TopicSummaryTypedDict
     from .topictreenode import TopicTreeNode, TopicTreeNodeTypedDict
@@ -791,6 +837,8 @@ __all__ = [
     "ActionTypedDict",
     "AddAsReferenceRequest",
     "AddAsReferenceRequestTypedDict",
+    "AddSuggestionCommentRequest",
+    "AddSuggestionCommentRequestTypedDict",
     "AddToReplyRequest",
     "AddToReplyRequestTypedDict",
     "AddbookmarkRequest",
@@ -867,6 +915,8 @@ __all__ = [
     "ArticleType",
     "ArticleTypeAttributes",
     "ArticleTypeAttributesTypedDict",
+    "ArticleTypeInfo",
+    "ArticleTypeInfoTypedDict",
     "ArticleTypeTypedDict",
     "ArticleTypedDict",
     "ArticleWithEditions",
@@ -896,6 +946,8 @@ __all__ = [
     "CANCEL_IMPORT_OP_SERVERS",
     "CREATE_IMPORT_JOB_OP_SERVERS",
     "CREATE_IMPORT_VALIDATION_JOB_OP_SERVERS",
+    "CREATE_VALIDATION_HOOK_OP_SERVERS",
+    "CREATE_VALIDATION_HOOK_VERSION_OP_SERVERS",
     "CancelImportRequest",
     "CancelImportRequestTypedDict",
     "Case",
@@ -953,6 +1005,8 @@ __all__ = [
     "ConfigurableAttributesTypedDict",
     "CreateBookmark",
     "CreateBookmarkTypedDict",
+    "CreateComment",
+    "CreateCommentTypedDict",
     "CreateFederatedSearchEvent",
     "CreateFederatedSearchEventTypedDict",
     "CreateFederatedSearchResultEventRequest",
@@ -978,6 +1032,8 @@ __all__ = [
     "CreateSuggestionLanguage",
     "CreateSuggestionLanguageTypedDict",
     "CreateSuggestionTypedDict",
+    "CreateValidationHookVersionRequest",
+    "CreateValidationHookVersionRequestTypedDict",
     "CreateViewedSearchResultEventForConnectors",
     "CreateViewedSearchResultEventForConnectorsTypedDict",
     "CreateViewedSearchResultsEventForConnectorsRequest",
@@ -986,8 +1042,6 @@ __all__ = [
     "CreatedByTypedDict",
     "CreatedDateAndTime",
     "CreatedDateAndTimeTypedDict",
-    "Credentials",
-    "CredentialsTypedDict",
     "CustomAttribute",
     "CustomAttributeType",
     "CustomAttributeTypedDict",
@@ -1046,6 +1100,10 @@ __all__ = [
     "ExportStatusTypedDict",
     "FeedbackArticleForSuggestion",
     "FeedbackArticleForSuggestionTypedDict",
+    "File",
+    "FileObject",
+    "FileObjectTypedDict",
+    "FileTypedDict",
     "FilterStatus",
     "Filters",
     "FiltersTypedDict",
@@ -1057,6 +1115,9 @@ __all__ = [
     "GET_IMPORT_STATUS_OP_SERVERS",
     "GET_PROMPT_TEMPLATES_OP_SERVERS",
     "GET_PROMPT_TEMPLATE_BY_ID_OP_SERVERS",
+    "GET_VALIDATION_HOOKS_OP_SERVERS",
+    "GET_VALIDATION_HOOK_VERSIONS_OP_SERVERS",
+    "GET_VALIDATION_HOOK_VERSION_OP_SERVERS",
     "GHSearchRequest",
     "GHSearchRequestTypedDict",
     "GHSearchResult",
@@ -1067,6 +1128,8 @@ __all__ = [
     "GetAcknowledgedComplianceArticlesRequestTypedDict",
     "GetAllArticleListsRequest",
     "GetAllArticleListsRequestTypedDict",
+    "GetAllArticleTypesRequest",
+    "GetAllArticleTypesRequestTypedDict",
     "GetAllCasebasesReleasesRequest",
     "GetAllCasebasesReleasesRequestTypedDict",
     "GetAllCasesRequest",
@@ -1149,6 +1212,12 @@ __all__ = [
     "GetUserDetailsRequestTypedDict",
     "GetUserMilestonesRequest",
     "GetUserMilestonesRequestTypedDict",
+    "GetValidationHookVersionRequest",
+    "GetValidationHookVersionRequestTypedDict",
+    "GetValidationHookVersionsRequest",
+    "GetValidationHookVersionsRequestTypedDict",
+    "GetValidationHooksRequest",
+    "GetValidationHooksRequestTypedDict",
     "GetalltopicsRequest",
     "GetalltopicsRequestTypedDict",
     "GetancestortopicsRequest",
@@ -1159,6 +1228,12 @@ __all__ = [
     "GetchildtopicsRequestTypedDict",
     "GetpopulararticlesRequest",
     "GetpopulararticlesRequestTypedDict",
+    "Hook",
+    "HookType",
+    "HookTypeParam",
+    "HookTypedDict",
+    "Hooks",
+    "HooksTypedDict",
     "Image",
     "ImageTypedDict",
     "ImportContent",
@@ -1299,6 +1374,8 @@ __all__ = [
     "RoleTemplate",
     "RoleTemplateTypedDict",
     "RoleTypedDict",
+    "S3Config",
+    "S3ConfigTypedDict",
     "ScheduleTime",
     "ScheduleTimeTypedDict",
     "SchemasAnswer",
@@ -1339,6 +1416,8 @@ __all__ = [
     "SessionContextVariable",
     "SessionContextVariableTypedDict",
     "SessionStatus",
+    "SftpConfig",
+    "SftpConfigTypedDict",
     "ShortURL",
     "ShortURLTypedDict",
     "SnippetType",
@@ -1394,6 +1473,8 @@ __all__ = [
     "TopicAdditionalAttributes",
     "TopicBreadcrumb",
     "TopicBreadcrumbTypedDict",
+    "TopicBreadcrumbsList",
+    "TopicBreadcrumbsListTypedDict",
     "TopicResult",
     "TopicResultTypedDict",
     "TopicSummary",
@@ -1403,7 +1484,6 @@ __all__ = [
     "TopicTreeResult",
     "TopicTreeResultTypedDict",
     "TopicTypedDict",
-    "TypeName",
     "UnsubscribeArticleRequest",
     "UnsubscribeArticleRequestTypedDict",
     "UseFor",
@@ -1422,6 +1502,8 @@ __all__ = [
     "ValidateImportContentType",
     "ValidateImportContentTypedDict",
     "ValueType",
+    "Version",
+    "VersionTypedDict",
     "VirtualCase",
     "VirtualCaseTypedDict",
     "WSErrorCommonDetail",
@@ -1449,6 +1531,8 @@ _dynamic_imports: dict[str, str] = {
     "AdditionalSnippets": ".additionalsnippets",
     "AdditionalSnippetsDocType": ".additionalsnippets",
     "AdditionalSnippetsTypedDict": ".additionalsnippets",
+    "AddSuggestionCommentRequest": ".addsuggestioncommentop",
+    "AddSuggestionCommentRequestTypedDict": ".addsuggestioncommentop",
     "AddToReplyRequest": ".addtoreplyop",
     "AddToReplyRequestTypedDict": ".addtoreplyop",
     "AiSearchRequest": ".aisearchop",
@@ -1530,7 +1614,8 @@ _dynamic_imports: dict[str, str] = {
     "ArticleSortOrder": ".articlesortorder",
     "ArticleType": ".articletype",
     "ArticleTypeTypedDict": ".articletype",
-    "TypeName": ".articletype",
+    "ArticleTypeInfo": ".articletypeinfo",
+    "ArticleTypeInfoTypedDict": ".articletypeinfo",
     "ArticleWithEditions": ".articlewitheditions",
     "ArticleWithEditionsTypedDict": ".articlewitheditions",
     "Attachment": ".attachment",
@@ -1619,6 +1704,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateBookmark": ".createbookmark",
     "CreateBookmarkTypedDict": ".createbookmark",
     "UserType": ".createbookmark",
+    "CreateComment": ".createcomment",
+    "CreateCommentTypedDict": ".createcomment",
     "CreatedBy": ".createdby",
     "CreatedByTypedDict": ".createdby",
     "CreateFederatedSearchEvent": ".createfederatedsearchevent",
@@ -1651,6 +1738,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateSuggestionTypedDict": ".createsuggestion",
     "RelatedArticleForCreateUpdateDeleteSuggestion": ".createsuggestion",
     "RelatedArticleForCreateUpdateDeleteSuggestionTypedDict": ".createsuggestion",
+    "CREATE_VALIDATION_HOOK_OP_SERVERS": ".createvalidationhookop",
+    "CREATE_VALIDATION_HOOK_VERSION_OP_SERVERS": ".createvalidationhookversionop",
+    "CreateValidationHookVersionRequest": ".createvalidationhookversionop",
+    "CreateValidationHookVersionRequestTypedDict": ".createvalidationhookversionop",
     "CreateViewedSearchResultEventForConnectors": ".createviewedsearchresulteventforconnectors",
     "CreateViewedSearchResultEventForConnectorsTypedDict": ".createviewedsearchresulteventforconnectors",
     "CreateViewedSearchResultsEventForConnectorsRequest": ".createviewedsearchresultseventforconnectorsop",
@@ -1709,6 +1800,12 @@ _dynamic_imports: dict[str, str] = {
     "ExportStatusRequestTypedDict": ".exportstatusop",
     "FeedbackArticleForSuggestion": ".feedbackarticleforsuggestion",
     "FeedbackArticleForSuggestionTypedDict": ".feedbackarticleforsuggestion",
+    "File": ".fileobject",
+    "FileObject": ".fileobject",
+    "FileObjectTypedDict": ".fileobject",
+    "FileTypedDict": ".fileobject",
+    "Version": ".fileobject",
+    "VersionTypedDict": ".fileobject",
     "FolderBreadcrumb": ".folderbreadcrumb",
     "FolderBreadcrumbTypedDict": ".folderbreadcrumb",
     "FolderSummary": ".foldersummary",
@@ -1717,6 +1814,8 @@ _dynamic_imports: dict[str, str] = {
     "GetAcknowledgedComplianceArticlesRequestTypedDict": ".getacknowledgedcompliancearticlesop",
     "GetAllArticleListsRequest": ".getallarticlelistsop",
     "GetAllArticleListsRequestTypedDict": ".getallarticlelistsop",
+    "GetAllArticleTypesRequest": ".getallarticletypesop",
+    "GetAllArticleTypesRequestTypedDict": ".getallarticletypesop",
     "GetAllCasebasesReleasesRequest": ".getallcasebasesreleasesop",
     "GetAllCasebasesReleasesRequestTypedDict": ".getallcasebasesreleasesop",
     "GetAllCasesRequest": ".getallcasesop",
@@ -1814,12 +1913,27 @@ _dynamic_imports: dict[str, str] = {
     "GetUserDetailsRequestTypedDict": ".getuserdetailsop",
     "GetUserMilestonesRequest": ".getusermilestonesop",
     "GetUserMilestonesRequestTypedDict": ".getusermilestonesop",
+    "GET_VALIDATION_HOOKS_OP_SERVERS": ".getvalidationhooksop",
+    "GetValidationHooksRequest": ".getvalidationhooksop",
+    "GetValidationHooksRequestTypedDict": ".getvalidationhooksop",
+    "GET_VALIDATION_HOOK_VERSION_OP_SERVERS": ".getvalidationhookversionop",
+    "GetValidationHookVersionRequest": ".getvalidationhookversionop",
+    "GetValidationHookVersionRequestTypedDict": ".getvalidationhookversionop",
+    "GET_VALIDATION_HOOK_VERSIONS_OP_SERVERS": ".getvalidationhookversionsop",
+    "GetValidationHookVersionsRequest": ".getvalidationhookversionsop",
+    "GetValidationHookVersionsRequestTypedDict": ".getvalidationhookversionsop",
     "GHSearchRequest": ".ghsearchrequest",
     "GHSearchRequestTypedDict": ".ghsearchrequest",
     "GHSearchResult": ".ghsearchresult",
     "GHSearchResultTypedDict": ".ghsearchresult",
     "GHStepSearchRequest": ".ghstepsearchrequest",
     "GHStepSearchRequestTypedDict": ".ghstepsearchrequest",
+    "Hook": ".hook",
+    "HookType": ".hook",
+    "HookTypedDict": ".hook",
+    "Hooks": ".hooks",
+    "HooksTypedDict": ".hooks",
+    "HookTypeParam": ".hooktypeparam",
     "Image": ".image",
     "ImageTypedDict": ".image",
     "ImportContent": ".importcontent",
@@ -1846,8 +1960,6 @@ _dynamic_imports: dict[str, str] = {
     "KbLanguages": ".kblanguages",
     "KbLanguagesTypedDict": ".kblanguages",
     "ArticleCategories": ".knowledgeexport",
-    "Credentials": ".knowledgeexport",
-    "CredentialsTypedDict": ".knowledgeexport",
     "DataDestination": ".knowledgeexport",
     "DataDestinationTypedDict": ".knowledgeexport",
     "DestinationType": ".knowledgeexport",
@@ -1967,6 +2079,8 @@ _dynamic_imports: dict[str, str] = {
     "RoleTypedDict": ".role",
     "RoleTemplate": ".roletemplate",
     "RoleTemplateTypedDict": ".roletemplate",
+    "S3Config": ".s3config",
+    "S3ConfigTypedDict": ".s3config",
     "SchemasAnswer": ".schemas_answer",
     "SchemasAnswerTypedDict": ".schemas_answer",
     "SchemasCustomAttribute": ".schemas_customattribute",
@@ -2008,6 +2122,8 @@ _dynamic_imports: dict[str, str] = {
     "SelectUserProfileRequestTypedDict": ".selectuserprofileop",
     "SessionContextVariable": ".sessioncontextvariable",
     "SessionContextVariableTypedDict": ".sessioncontextvariable",
+    "SftpConfig": ".sftpconfig",
+    "SftpConfigTypedDict": ".sftpconfig",
     "ShortURL": ".shorturl",
     "ShortURLTypedDict": ".shorturl",
     "SortIDName": ".sortidname",
@@ -2061,6 +2177,8 @@ _dynamic_imports: dict[str, str] = {
     "TopicAdditionalAttributes": ".topicadditionalattributes",
     "TopicBreadcrumb": ".topicbreadcrumb",
     "TopicBreadcrumbTypedDict": ".topicbreadcrumb",
+    "TopicBreadcrumbsList": ".topicbreadcrumbslist",
+    "TopicBreadcrumbsListTypedDict": ".topicbreadcrumbslist",
     "TopicResult": ".topicresult",
     "TopicResultTypedDict": ".topicresult",
     "TopicSummary": ".topicsummary",

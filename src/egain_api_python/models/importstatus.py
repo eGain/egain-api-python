@@ -51,7 +51,7 @@ class ImportStatusProgress(BaseModel):
 class ImportStatusResultsTypedDict(TypedDict):
     r"""Result of job."""
 
-    succesfull: NotRequired[float]
+    successful: NotRequired[float]
     r"""Number of item succesfully processed by job."""
     warnings: NotRequired[float]
     r"""Number of warnings encountered during job."""
@@ -62,7 +62,7 @@ class ImportStatusResultsTypedDict(TypedDict):
 class ImportStatusResults(BaseModel):
     r"""Result of job."""
 
-    succesfull: Optional[float] = None
+    successful: Optional[float] = None
     r"""Number of item succesfully processed by job."""
 
     warnings: Optional[float] = None
@@ -82,6 +82,8 @@ class ImportStatusTypedDict(TypedDict):
     r"""Location of the job log file."""
     start_time: NotRequired[datetime]
     r"""Start time of job."""
+    scheduled_stop_time: NotRequired[datetime]
+    r"""The specific date and time when the job must stop processing, regardless of completion status."""
     estimated_completion: NotRequired[datetime]
     r"""Estimated completion time of job."""
     current_operation: NotRequired[str]
@@ -114,6 +116,11 @@ class ImportStatus(BaseModel):
 
     start_time: Annotated[Optional[datetime], pydantic.Field(alias="startTime")] = None
     r"""Start time of job."""
+
+    scheduled_stop_time: Annotated[
+        Optional[datetime], pydantic.Field(alias="scheduledStopTime")
+    ] = None
+    r"""The specific date and time when the job must stop processing, regardless of completion status."""
 
     estimated_completion: Annotated[
         Optional[datetime], pydantic.Field(alias="estimatedCompletion")

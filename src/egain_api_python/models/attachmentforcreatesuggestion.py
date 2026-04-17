@@ -11,7 +11,7 @@ class AttachmentForCreateSuggestionTypedDict(TypedDict):
     r"""This schema contains the definition of an Attachment."""
 
     alt_id: NotRequired[str]
-    r"""The alternate Id of the Attachment that was obtained after calling **[Generate signed URL to upload an attachment](https://apidev.egain.com/api-catalog/core-filemgr/api-bundled/operation/generatePreUploadURL/)**.
+    r"""The alternate Id of the Attachment that was obtained after calling **[Generate signed URL to upload an attachment](../../../../../v3/core/filemgr/api-bundled/storageservice/generatepreuploadurl)**.
 
     """
 
@@ -20,6 +20,6 @@ class AttachmentForCreateSuggestion(BaseModel):
     r"""This schema contains the definition of an Attachment."""
 
     alt_id: Annotated[Optional[str], pydantic.Field(alias="altId")] = None
-    r"""The alternate Id of the Attachment that was obtained after calling **[Generate signed URL to upload an attachment](https://apidev.egain.com/api-catalog/core-filemgr/api-bundled/operation/generatePreUploadURL/)**.
+    r"""The alternate Id of the Attachment that was obtained after calling **[Generate signed URL to upload an attachment](../../../../../v3/core/filemgr/api-bundled/storageservice/generatepreuploadurl)**.
 
     """

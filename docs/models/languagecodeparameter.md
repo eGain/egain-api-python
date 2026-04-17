@@ -45,5 +45,4 @@
 | `UK_UA`  | uk-UA    |
 | `BG_BG`  | bg-BG    |
 | `SL_SI`  | sl-SI    |
-| `SR_RS`  | sr-RS    |
 | `XX_XX`  | xx-XX    |

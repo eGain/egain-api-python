@@ -3,20 +3,8 @@
 from __future__ import annotations
 from egain_api_python.types import BaseModel
 import pydantic
-from typing import Literal, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-TypeName = Literal[
-    "General",
-    "Guided Help",
-    "Data Link",
-    "Topic Home",
-    "Suggestion",
-    "Virtual Assistant Action",
-    "Rich Message",
-]
-r"""Indicates the article category name."""
 
 
 class ArticleTypeTypedDict(TypedDict):
@@ -24,10 +12,10 @@ class ArticleTypeTypedDict(TypedDict):
 
     article_category_id: NotRequired[int]
     r"""Specifies the article category ID."""
-    type_name: NotRequired[TypeName]
-    r"""Indicates the article category name."""
+    type_name: NotRequired[str]
+    r"""Indicates the article type name."""
     use_structured_authoring: NotRequired[bool]
-    r"""Indicates whether to use Structured Authoring for the Article Type."""
+    r"""Indicates whether structured authoring is enabled for this article type, requiring content to be created using predefined fields"""
     article_type_id: NotRequired[str]
     r"""The ID of the Article Type."""
 
@@ -40,13 +28,13 @@ class ArticleType(BaseModel):
     ] = None
     r"""Specifies the article category ID."""
 
-    type_name: Annotated[Optional[TypeName], pydantic.Field(alias="typeName")] = None
-    r"""Indicates the article category name."""
+    type_name: Annotated[Optional[str], pydantic.Field(alias="typeName")] = None
+    r"""Indicates the article type name."""
 
     use_structured_authoring: Annotated[
         Optional[bool], pydantic.Field(alias="useStructuredAuthoring")
     ] = None
-    r"""Indicates whether to use Structured Authoring for the Article Type."""
+    r"""Indicates whether structured authoring is enabled for this article type, requiring content to be created using predefined fields"""
 
     article_type_id: Annotated[Optional[str], pydantic.Field(alias="articleTypeId")] = (
         None

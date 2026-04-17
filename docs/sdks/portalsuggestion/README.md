@@ -12,6 +12,7 @@
 * [delete_suggestion](#delete_suggestion) - Delete a Suggestion
 * [get_related_articles_for_suggestion](#get_related_articles_for_suggestion) - Get Related Articles for Suggestion
 * [get_suggestion_comments](#get_suggestion_comments) - Get Suggestion Comments
+* [add_suggestion_comment](#add_suggestion_comment) - Add a Suggestion Comment
 * [get_suggestion_attachments](#get_suggestion_attachments) - Get Suggestion Attachments
 * [get_suggestion_attachment_by_id](#get_suggestion_attachment_by_id) - Get Suggestion Attachment by ID
 
@@ -386,6 +387,54 @@ with Egain(
 ### Response
 
 **[models.Comments](../../models/comments.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.WSErrorCommon     | 400, 401, 403, 404, 406  | application/json         |
+| errors.WSErrorCommon     | 500                      | application/json         |
+| errors.EgainDefaultError | 4XX, 5XX                 | \*/\*                    |
+
+## add_suggestion_comment
+
+## Overview
+  The Add Suggestion Comment API allows authenticated users and agents to add a new comment to a Suggestion.
+
+## Prerequisites
+  * Enable the setting "My Suggestions" for the portal specified in the URL.
+  * If the user is a customer, enable the setting "Allow Customer Access" for the portal.
+  * The Suggestion specified in the URL must belong to the user, or the user must have appropriate administrative permissions to comment on it.
+  * The Suggestion must be in **Suggested** or **Pending** status, otherwise no comments can be added.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="addSuggestionComment" method="post" path="/portals/{portalID}/suggestions/{suggestionID}/comments" -->
+```python
+from egain_api_python import Egain
+import os
+
+
+with Egain(
+    access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
+) as egain:
+
+    egain.portal.suggestion.add_suggestion_comment(accept_language="en-US", portal_id="PROD-1000", suggestion_id="PROD-11829", content="I have uploaded the requested documents regarding the new phone numbers. Please review.")
+
+    # Use the SDK ...
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     | Example                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `accept_language`                                                                                                               | [models.AcceptLanguage](../../models/acceptlanguage.md)                                                                         | :heavy_check_mark:                                                                                                              | The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses). | en-US                                                                                                                           |
+| `portal_id`                                                                                                                     | *str*                                                                                                                           | :heavy_check_mark:                                                                                                              | The ID of the portal being accessed.<br><br>A portal ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits. | PROD-1000                                                                                                                       |
+| `suggestion_id`                                                                                                                 | *str*                                                                                                                           | :heavy_check_mark:                                                                                                              | The ID of the Suggestion.<br><br>A Suggestion ID is composed of a 2-4 letter prefix, followed by a dash and 4-15 digits.        | PROD-11829                                                                                                                      |
+| `content`                                                                                                                       | *Optional[str]*                                                                                                                 | :heavy_minus_sign:                                                                                                              | Content of the Comment                                                                                                          |                                                                                                                                 |
+| `retries`                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                | :heavy_minus_sign:                                                                                                              | Configuration to override the default retry behavior of the client.                                                             |                                                                                                                                 |
 
 ### Errors
 

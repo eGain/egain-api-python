@@ -69,7 +69,7 @@ class AiservicesPrompt(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/promptmanager/execute/prompt/{promptId}",
+            path="/prompt/{promptId}/execute",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -203,7 +203,7 @@ class AiservicesPrompt(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/promptmanager/execute/prompt/{promptId}",
+            path="/prompt/{promptId}/execute",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

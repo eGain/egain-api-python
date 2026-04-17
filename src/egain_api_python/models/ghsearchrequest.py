@@ -21,10 +21,7 @@ class GHSearchRequestTypedDict(TypedDict):
     questions: NotRequired[List[StartQuestionAndAnswerTypedDict]]
     r"""Pre-answered Questions in Guided Help search"""
     profile_id: NotRequired[str]
-    r"""The ID of the guided help profile.<br>
-    1 will always be the **system profile**.
-
-    """
+    r"""The ID of the guided help profile. 1 will always be the **system profile**."""
     session_variable: NotRequired[List[SessionContextVariableTypedDict]]
     r"""Session variables used to give Guided Help additional context."""
     start_over: NotRequired[bool]
@@ -43,10 +40,7 @@ class GHSearchRequest(BaseModel):
     r"""Pre-answered Questions in Guided Help search"""
 
     profile_id: Annotated[Optional[str], pydantic.Field(alias="profileId")] = None
-    r"""The ID of the guided help profile.<br>
-    1 will always be the **system profile**.
-
-    """
+    r"""The ID of the guided help profile. 1 will always be the **system profile**."""
 
     session_variable: Annotated[
         Optional[List[SessionContextVariable]], pydantic.Field(alias="sessionVariable")

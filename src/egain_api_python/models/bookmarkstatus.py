@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 from .folderbreadcrumb import FolderBreadcrumb, FolderBreadcrumbTypedDict
-from egain_api_python.types import BaseModel
+from egain_api_python.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -13,7 +20,7 @@ class BookmarkStatusTypedDict(TypedDict):
 
     is_bookmarked: bool
     r"""Indicates whether the Article is bookmarked"""
-    bookmark_id: NotRequired[int]
+    bookmark_id: NotRequired[Nullable[int]]
     r"""The ID of the Bookmark, if Article is bookmarked."""
     folder_breadcrumb: NotRequired[FolderBreadcrumbTypedDict]
     r"""This schema contains one or more FolderSummary instances."""
@@ -25,10 +32,42 @@ class BookmarkStatus(BaseModel):
     is_bookmarked: Annotated[bool, pydantic.Field(alias="isBookmarked")]
     r"""Indicates whether the Article is bookmarked"""
 
-    bookmark_id: Annotated[Optional[int], pydantic.Field(alias="bookmarkID")] = None
+    bookmark_id: Annotated[
+        OptionalNullable[int], pydantic.Field(alias="bookmarkID")
+    ] = UNSET
     r"""The ID of the Bookmark, if Article is bookmarked."""
 
     folder_breadcrumb: Annotated[
         Optional[FolderBreadcrumb], pydantic.Field(alias="folderBreadcrumb")
     ] = None
     r"""This schema contains one or more FolderSummary instances."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["bookmarkID", "folderBreadcrumb"]
+        nullable_fields = ["bookmarkID"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

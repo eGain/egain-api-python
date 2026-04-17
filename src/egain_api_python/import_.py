@@ -6,7 +6,7 @@ from egain_api_python._hooks import HookContext
 from egain_api_python.types import OptionalNullable, UNSET
 from egain_api_python.utils import get_security_from_env
 from egain_api_python.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union
 
 
 class Import(BaseSDK):
@@ -52,9 +52,12 @@ class Import(BaseSDK):
         - Shared file path
 
         ## Best Practices
-        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact.  Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
+        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact. Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
         - **Monitoring**: Regularly check job status and logs for any issues
         - **Error Handling**: Review failed items and retry with corrections
+
+        ## Job Timing Controls
+        - **scheduleTime.stopDate**: Defines a specific date time to cease operations regardless of progress (e.g., \"Stop exactly at 5:00 PM\").
 
 
         :param data_source:
@@ -132,14 +135,16 @@ class Import(BaseSDK):
             return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
-            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
-            raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, ["406", "412"], "application/json"):
+        if utils.match_response(http_res, "406", "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
             raise errors.SchemasWSErrorCommon(response_data, http_res)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "412"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -198,9 +203,12 @@ class Import(BaseSDK):
         - Shared file path
 
         ## Best Practices
-        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact.  Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
+        - **Scheduling**: Use scheduleTime for off-peak imports to minimize system impact. Please note that jobs can only be scheduled for a maximum of 7 days from the current date and time.
         - **Monitoring**: Regularly check job status and logs for any issues
         - **Error Handling**: Review failed items and retry with corrections
+
+        ## Job Timing Controls
+        - **scheduleTime.stopDate**: Defines a specific date time to cease operations regardless of progress (e.g., \"Stop exactly at 5:00 PM\").
 
 
         :param data_source:
@@ -278,15 +286,1215 @@ class Import(BaseSDK):
             return models.CreateImportJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
-            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
-            raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, ["406", "412"], "application/json"):
+        if utils.match_response(http_res, "406", "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
             raise errors.SchemasWSErrorCommon(response_data, http_res)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "412"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def get_validation_hooks(
+        self,
+        *,
+        type_: Optional[models.HookTypeParam] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.Hooks:
+        r"""Get validation hooks
+
+        Retrieve all validation hooks configured for the current environment. Only the current version of each hook is returned.
+
+
+        :param type: Filter by hook type.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOKS_OP_SERVERS[0]
+
+        request = models.GetValidationHooksRequest(
+            type=type_,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/import/config/hooks",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHooks",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.Hooks, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def get_validation_hooks_async(
+        self,
+        *,
+        type_: Optional[models.HookTypeParam] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.Hooks:
+        r"""Get validation hooks
+
+        Retrieve all validation hooks configured for the current environment. Only the current version of each hook is returned.
+
+
+        :param type: Filter by hook type.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOKS_OP_SERVERS[0]
+
+        request = models.GetValidationHooksRequest(
+            type=type_,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/import/config/hooks",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHooks",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.Hooks, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def create_validation_hook(
+        self,
+        *,
+        type_: models.HookType,
+        file_object: Union[models.FileObject, models.FileObjectTypedDict],
+        hook_id: Optional[int] = None,
+        name: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Create validation hook
+
+        # Create Validation Hook
+
+        ## Overview
+        This API allows you to create custom JavaScript-based validation hooks that execute during the bulk content ingestion process. Validation hooks enable organizations to enforce specific business rules, verify metadata compliance, and perform complex data integrity checks that go beyond standard system validation.
+
+        ## Usage Requirements
+        To ensure successful hook creation and execution, please adhere to the following:
+        - **Content Encoding**: The `fileObject.file.content` property must be a **Base64 encoded** string of your JavaScript logic.
+        - **File Naming**: The filename should use the `.js` extension.
+        - **Logic Return**: Your script must return a `result` object containing a boolean `success` property.
+        - **Size Limit**: The encoded content must not exceed 1.5MB.
+
+        ## Hook Types
+        - **Pre-Validation Hooks (`import_pre_validation_hook`)**: These execute **before** the standard system validation. They are ideal for enforcing custom business rules, such as ensuring all articles contain specific metadata.
+        - **Post-Validation Hooks (`import_post_validation_hook`)**: These execute **after** the standard system validation. They have access to the `validationResults` from the system check, allowing you to block an import based on the severity of errors found.
+
+        ## Execution Environment
+        Hooks run in a secure, sandboxed JavaScript environment (ES5/ES6).
+        - **Prohibited**: File system access (`fs`), network access (HTTP requests), and module loading (`require`).
+        - **Supported**: Standard JavaScript logic, `console.log()` for debugging, and a specialized `helpers` utility library for safe data access.
+
+        ## Implementation Examples
+
+        ### Example: Pre-Validation Logic
+        This example demonstrates checking that every article contains a specific metadata field.
+        ```javascript
+        // Initialize result
+        var result = { success: true };
+
+        // Verify data exists
+        if (helpers.hasField(data, 'articles') && helpers.isNotEmpty(data.articles)) {
+
+        var invalidArticles = [];
+
+        for (var i = 0; i < data.articles.length; i++) {
+        var article = data.articles[i];
+
+        if (!helpers.hasField(article, 'name')) {
+        invalidArticles.push({ index: i, issue: \"Missing name\" });
+        continue;
+        }
+
+        // Custom Rule: Check if 'description' exists in metadata
+        if (!helpers.hasField(article, 'metadata') ||
+        !helpers.hasField(article.metadata, 'description') ||
+        helpers.isEmpty(article.metadata.description)) {
+
+        invalidArticles.push({
+        name: article.name,
+        issue: \"Missing required description metadata\"
+        });
+        }
+        }
+
+        if (invalidArticles.length > 0) {
+        result = {
+        success: false,
+        error: 'Articles failed custom metadata validation',
+        details: { count: invalidArticles.length, errors: invalidArticles }
+        };
+        }
+        }
+        result;
+        ```
+
+        ### Example: Post-Validation Logic
+        This example checks the standard validation results. If there are standard errors, it logs them and fails the job explicitly.
+        ```javascript
+        var result = { success: true };
+
+        // Check if standard validation found errors
+        if (helpers.hasField(validationResults, 'errors') && validationResults.errors.length > 0) {
+
+        var errorCount = validationResults.errors.length;
+        console.log('Standard validation found ' + errorCount + ' errors.');
+
+        var errorTypes = {};
+        validationResults.errors.forEach(function(err) {
+        var type = err.type || 'unknown';
+        errorTypes[type] = (errorTypes[type] || 0) + 1;
+        });
+
+        result = {
+        success: false,
+        error: 'Standard validation failed with ' + errorCount + ' errors.',
+        details: {
+        summary: errorTypes,
+        firstError: validationResults.errors[0].message
+        }
+        };
+        }
+        result;
+        ```
+
+        ## Further Documentation
+        For more detailed context on available objects (`data`, `metadata`, `helpers`) and best practices, refer to the [Validation Hook Guide](https://apidev.egain.com/developer-portal/guides/ingestion/validation-hook-guide/#example-pre-validation-logic).
+
+
+        :param type:
+        :param file_object:
+        :param hook_id: ID of hook
+        :param name: Name of the hook.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.CREATE_VALIDATION_HOOK_OP_SERVERS[0]
+
+        request = models.Hook(
+            hook_id=hook_id,
+            name=name,
+            type=type_,
+            file_object=utils.get_pydantic_model(file_object, models.FileObject),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/import/config/hooks",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.Hook
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createValidationHook",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def create_validation_hook_async(
+        self,
+        *,
+        type_: models.HookType,
+        file_object: Union[models.FileObject, models.FileObjectTypedDict],
+        hook_id: Optional[int] = None,
+        name: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Create validation hook
+
+        # Create Validation Hook
+
+        ## Overview
+        This API allows you to create custom JavaScript-based validation hooks that execute during the bulk content ingestion process. Validation hooks enable organizations to enforce specific business rules, verify metadata compliance, and perform complex data integrity checks that go beyond standard system validation.
+
+        ## Usage Requirements
+        To ensure successful hook creation and execution, please adhere to the following:
+        - **Content Encoding**: The `fileObject.file.content` property must be a **Base64 encoded** string of your JavaScript logic.
+        - **File Naming**: The filename should use the `.js` extension.
+        - **Logic Return**: Your script must return a `result` object containing a boolean `success` property.
+        - **Size Limit**: The encoded content must not exceed 1.5MB.
+
+        ## Hook Types
+        - **Pre-Validation Hooks (`import_pre_validation_hook`)**: These execute **before** the standard system validation. They are ideal for enforcing custom business rules, such as ensuring all articles contain specific metadata.
+        - **Post-Validation Hooks (`import_post_validation_hook`)**: These execute **after** the standard system validation. They have access to the `validationResults` from the system check, allowing you to block an import based on the severity of errors found.
+
+        ## Execution Environment
+        Hooks run in a secure, sandboxed JavaScript environment (ES5/ES6).
+        - **Prohibited**: File system access (`fs`), network access (HTTP requests), and module loading (`require`).
+        - **Supported**: Standard JavaScript logic, `console.log()` for debugging, and a specialized `helpers` utility library for safe data access.
+
+        ## Implementation Examples
+
+        ### Example: Pre-Validation Logic
+        This example demonstrates checking that every article contains a specific metadata field.
+        ```javascript
+        // Initialize result
+        var result = { success: true };
+
+        // Verify data exists
+        if (helpers.hasField(data, 'articles') && helpers.isNotEmpty(data.articles)) {
+
+        var invalidArticles = [];
+
+        for (var i = 0; i < data.articles.length; i++) {
+        var article = data.articles[i];
+
+        if (!helpers.hasField(article, 'name')) {
+        invalidArticles.push({ index: i, issue: \"Missing name\" });
+        continue;
+        }
+
+        // Custom Rule: Check if 'description' exists in metadata
+        if (!helpers.hasField(article, 'metadata') ||
+        !helpers.hasField(article.metadata, 'description') ||
+        helpers.isEmpty(article.metadata.description)) {
+
+        invalidArticles.push({
+        name: article.name,
+        issue: \"Missing required description metadata\"
+        });
+        }
+        }
+
+        if (invalidArticles.length > 0) {
+        result = {
+        success: false,
+        error: 'Articles failed custom metadata validation',
+        details: { count: invalidArticles.length, errors: invalidArticles }
+        };
+        }
+        }
+        result;
+        ```
+
+        ### Example: Post-Validation Logic
+        This example checks the standard validation results. If there are standard errors, it logs them and fails the job explicitly.
+        ```javascript
+        var result = { success: true };
+
+        // Check if standard validation found errors
+        if (helpers.hasField(validationResults, 'errors') && validationResults.errors.length > 0) {
+
+        var errorCount = validationResults.errors.length;
+        console.log('Standard validation found ' + errorCount + ' errors.');
+
+        var errorTypes = {};
+        validationResults.errors.forEach(function(err) {
+        var type = err.type || 'unknown';
+        errorTypes[type] = (errorTypes[type] || 0) + 1;
+        });
+
+        result = {
+        success: false,
+        error: 'Standard validation failed with ' + errorCount + ' errors.',
+        details: {
+        summary: errorTypes,
+        firstError: validationResults.errors[0].message
+        }
+        };
+        }
+        result;
+        ```
+
+        ## Further Documentation
+        For more detailed context on available objects (`data`, `metadata`, `helpers`) and best practices, refer to the [Validation Hook Guide](https://apidev.egain.com/developer-portal/guides/ingestion/validation-hook-guide/#example-pre-validation-logic).
+
+
+        :param type:
+        :param file_object:
+        :param hook_id: ID of hook
+        :param name: Name of the hook.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.CREATE_VALIDATION_HOOK_OP_SERVERS[0]
+
+        request = models.Hook(
+            hook_id=hook_id,
+            name=name,
+            type=type_,
+            file_object=utils.get_pydantic_model(file_object, models.FileObject),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/import/config/hooks",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.Hook
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createValidationHook",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def get_validation_hook_versions(
+        self,
+        *,
+        hook_id: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> List[models.FileObject]:
+        r"""Get all versions for a validation hook
+
+        Retrieve a history of all versions uploaded for a specific validation hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOK_VERSIONS_OP_SERVERS[0]
+
+        request = models.GetValidationHookVersionsRequest(
+            hook_id=hook_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/import/config/hooks/{hookID}/version",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHookVersions",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(List[models.FileObject], http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def get_validation_hook_versions_async(
+        self,
+        *,
+        hook_id: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> List[models.FileObject]:
+        r"""Get all versions for a validation hook
+
+        Retrieve a history of all versions uploaded for a specific validation hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOK_VERSIONS_OP_SERVERS[0]
+
+        request = models.GetValidationHookVersionsRequest(
+            hook_id=hook_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/import/config/hooks/{hookID}/version",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHookVersions",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(List[models.FileObject], http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def create_validation_hook_version(
+        self,
+        *,
+        hook_id: int,
+        file_id: Optional[str] = None,
+        created_date: Optional[str] = None,
+        created_by: Optional[Union[models.CreatedBy, models.CreatedByTypedDict]] = None,
+        modified_date: Optional[str] = None,
+        modified_by: Optional[
+            Union[models.ModifiedBy, models.ModifiedByTypedDict]
+        ] = None,
+        version: Optional[Union[models.Version, models.VersionTypedDict]] = None,
+        file: Optional[Union[models.File, models.FileTypedDict]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Update validation hook version
+
+        Upload a new version of the JavaScript logic for an existing hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param file_id: ID of Hook File
+        :param created_date: The date on which the resource was last modified.
+        :param created_by:
+        :param modified_date: The date on which the resource was last modified.
+        :param modified_by:
+        :param version:
+        :param file:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.CREATE_VALIDATION_HOOK_VERSION_OP_SERVERS[0]
+
+        request = models.CreateValidationHookVersionRequest(
+            hook_id=hook_id,
+            file_object=models.FileObject(
+                file_id=file_id,
+                created_date=created_date,
+                created_by=utils.get_pydantic_model(
+                    created_by, Optional[models.CreatedBy]
+                ),
+                modified_date=modified_date,
+                modified_by=utils.get_pydantic_model(
+                    modified_by, Optional[models.ModifiedBy]
+                ),
+                version=utils.get_pydantic_model(version, Optional[models.Version]),
+                file=utils.get_pydantic_model(file, Optional[models.File]),
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/import/config/hooks/{hookID}/version",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.file_object, False, False, "json", models.FileObject
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createValidationHookVersion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def create_validation_hook_version_async(
+        self,
+        *,
+        hook_id: int,
+        file_id: Optional[str] = None,
+        created_date: Optional[str] = None,
+        created_by: Optional[Union[models.CreatedBy, models.CreatedByTypedDict]] = None,
+        modified_date: Optional[str] = None,
+        modified_by: Optional[
+            Union[models.ModifiedBy, models.ModifiedByTypedDict]
+        ] = None,
+        version: Optional[Union[models.Version, models.VersionTypedDict]] = None,
+        file: Optional[Union[models.File, models.FileTypedDict]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Update validation hook version
+
+        Upload a new version of the JavaScript logic for an existing hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param file_id: ID of Hook File
+        :param created_date: The date on which the resource was last modified.
+        :param created_by:
+        :param modified_date: The date on which the resource was last modified.
+        :param modified_by:
+        :param version:
+        :param file:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.CREATE_VALIDATION_HOOK_VERSION_OP_SERVERS[0]
+
+        request = models.CreateValidationHookVersionRequest(
+            hook_id=hook_id,
+            file_object=models.FileObject(
+                file_id=file_id,
+                created_date=created_date,
+                created_by=utils.get_pydantic_model(
+                    created_by, Optional[models.CreatedBy]
+                ),
+                modified_date=modified_date,
+                modified_by=utils.get_pydantic_model(
+                    modified_by, Optional[models.ModifiedBy]
+                ),
+                version=utils.get_pydantic_model(version, Optional[models.Version]),
+                file=utils.get_pydantic_model(file, Optional[models.File]),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/import/config/hooks/{hookID}/version",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.file_object, False, False, "json", models.FileObject
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createValidationHookVersion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def get_validation_hook_version(
+        self,
+        *,
+        hook_id: int,
+        version_id: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.FileObject:
+        r"""Get validation hook version details
+
+        Get details and content URL for a specific version of a hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param version_id: The sequential version number of the hook (e.g., 1, 2, 3).
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOK_VERSION_OP_SERVERS[0]
+
+        request = models.GetValidationHookVersionRequest(
+            hook_id=hook_id,
+            version_id=version_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/import/config/hooks/{hookID}/version/{versionID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHookVersion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.FileObject, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def get_validation_hook_version_async(
+        self,
+        *,
+        hook_id: int,
+        version_id: int,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.FileObject:
+        r"""Get validation hook version details
+
+        Get details and content URL for a specific version of a hook.
+
+        :param hook_id: Integer ID of the Hook resource.
+        :param version_id: The sequential version number of the hook (e.g., 1, 2, 3).
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = models.GET_VALIDATION_HOOK_VERSION_OP_SERVERS[0]
+
+        request = models.GetValidationHookVersionRequest(
+            hook_id=hook_id,
+            version_id=version_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/import/config/hooks/{hookID}/version/{versionID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getValidationHookVersion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.FileObject, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -673,14 +1881,16 @@ class Import(BaseSDK):
             return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
-            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
-            raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, ["406", "412"], "application/json"):
+        if utils.match_response(http_res, "406", "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
             raise errors.SchemasWSErrorCommon(response_data, http_res)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "412"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -818,14 +2028,16 @@ class Import(BaseSDK):
             return models.CreateImportValidationJobResponse(
                 headers=utils.get_response_headers(http_res.headers)
             )
-        if utils.match_response(http_res, ["400", "401", "403"], "application/json"):
-            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
-            raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, ["406", "412"], "application/json"):
+        if utils.match_response(http_res, "406", "application/json"):
             response_data = unmarshal_json_response(
                 errors.SchemasWSErrorCommonData, http_res
             )
             raise errors.SchemasWSErrorCommon(response_data, http_res)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "412"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -946,7 +2158,7 @@ class Import(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "406", "4XX", "500", "5XX"],
+            error_status_codes=["401", "403", "404", "406", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -964,7 +2176,7 @@ class Import(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, ["409", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text
@@ -1081,7 +2293,7 @@ class Import(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "406", "4XX", "500", "5XX"],
+            error_status_codes=["401", "403", "404", "406", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1099,7 +2311,7 @@ class Import(BaseSDK):
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, ["409", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.EgainDefaultError(
                 "API error occurred", http_res, http_res_text

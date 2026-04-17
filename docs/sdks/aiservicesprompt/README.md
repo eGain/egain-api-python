@@ -13,7 +13,7 @@ Execute a published and active prompt template from the AI console.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="executePrompt" method="post" path="/promptmanager/execute/prompt/{promptId}" -->
+<!-- UsageSnippet language="python" operationID="executePrompt" method="post" path="/prompt/{promptId}/execute" -->
 ```python
 from egain_api_python import Egain
 import os

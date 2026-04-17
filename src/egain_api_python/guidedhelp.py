@@ -966,7 +966,7 @@ class Guidedhelp(BaseSDK):
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param gh_custom_additional_attributes:
         :param questions: Pre-answered Questions in Guided Help search
-        :param profile_id: The ID of the guided help profile.<br> 1 will always be the **system profile**.
+        :param profile_id: The ID of the guided help profile. 1 will always be the **system profile**.
         :param session_variable: Session variables used to give Guided Help additional context.
         :param start_over: Restart the current Guided Help search with the existing context along with session variable context.
         :param use_live_release: Use current live release snapshot of the Casebase otherwise use the authoring release.
@@ -1143,7 +1143,7 @@ class Guidedhelp(BaseSDK):
         :param language: The language that describes the details of a resource. Resources available in different languages may differ from each other.<li>If <code>lang</code> is not passed, then the portal's default language is used.</li>
         :param gh_custom_additional_attributes:
         :param questions: Pre-answered Questions in Guided Help search
-        :param profile_id: The ID of the guided help profile.<br> 1 will always be the **system profile**.
+        :param profile_id: The ID of the guided help profile. 1 will always be the **system profile**.
         :param session_variable: Session variables used to give Guided Help additional context.
         :param start_over: Restart the current Guided Help search with the existing context along with session variable context.
         :param use_live_release: Use current live release snapshot of the Casebase otherwise use the authoring release.
@@ -2169,6 +2169,7 @@ class Guidedhelp(BaseSDK):
                 "403",
                 "404",
                 "406",
+                "412",
                 "415",
                 "4XX",
                 "500",
@@ -2181,7 +2182,7 @@ class Guidedhelp(BaseSDK):
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404", "406", "412"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -2300,6 +2301,7 @@ class Guidedhelp(BaseSDK):
                 "403",
                 "404",
                 "406",
+                "412",
                 "415",
                 "4XX",
                 "500",
@@ -2312,7 +2314,7 @@ class Guidedhelp(BaseSDK):
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404", "406", "412"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -2431,6 +2433,7 @@ class Guidedhelp(BaseSDK):
                 "403",
                 "404",
                 "406",
+                "412",
                 "415",
                 "4XX",
                 "500",
@@ -2443,7 +2446,7 @@ class Guidedhelp(BaseSDK):
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404", "406", "412"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)
@@ -2562,6 +2565,7 @@ class Guidedhelp(BaseSDK):
                 "403",
                 "404",
                 "406",
+                "412",
                 "415",
                 "4XX",
                 "500",
@@ -2574,7 +2578,7 @@ class Guidedhelp(BaseSDK):
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "406"], "application/json"
+            http_res, ["400", "401", "403", "404", "406", "412"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
             raise errors.WSErrorCommon(response_data, http_res)

@@ -47,7 +47,7 @@ with Egain(
 
 ### Response
 
-**[models.TopicBreadcrumb](../../models/topicbreadcrumb.md)**
+**[models.TopicBreadcrumbsList](../../models/topicbreadcrumbslist.md)**
 
 ### Errors
 

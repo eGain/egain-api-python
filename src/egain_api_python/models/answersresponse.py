@@ -76,10 +76,10 @@ class AnswersResponseTypedDict(TypedDict):
     session_id: str
     r"""eGain Session ID that ties multiple API calls to the same user session. Will be used as part of to tie events back to a session."""
     channel: NotRequired[AnswersResponseChannelTypedDict]
-    event_id: NotRequired[str]
-    r"""Unique ID for this specific API call or event."""
     client_session_id: NotRequired[str]
     r"""Session ID passed by the client for this specific API call or event."""
+    event_id: NotRequired[str]
+    r"""Unique ID for this specific API call or event."""
 
 
 class AnswersResponse(BaseModel):
@@ -93,10 +93,10 @@ class AnswersResponse(BaseModel):
 
     channel: Optional[AnswersResponseChannel] = None
 
-    event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
-    r"""Unique ID for this specific API call or event."""
-
     client_session_id: Annotated[
         Optional[str], pydantic.Field(alias="clientSessionId")
     ] = None
     r"""Session ID passed by the client for this specific API call or event."""
+
+    event_id: Annotated[Optional[str], pydantic.Field(alias="eventId")] = None
+    r"""Unique ID for this specific API call or event."""

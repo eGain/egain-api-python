@@ -32,8 +32,8 @@ class PortalArticle(BaseSDK):
         r"""Get Article by ID
 
         ## Overview
-        * The Get Article by ID API allows a user to retrieve an Article using its ID.
-        * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
+        * The Get Article by ID API allows a user or client application to retrieve an Article using its ID.
+        * It requires a Portal ID, which a user or client application can retrieve through the Administrative Console or by calling Get All Portals API.
         * Additional Article attributes and contextual views can be specified in the query parameters.
 
         * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -179,8 +179,8 @@ class PortalArticle(BaseSDK):
         r"""Get Article by ID
 
         ## Overview
-        * The Get Article by ID API allows a user to retrieve an Article using its ID.
-        * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
+        * The Get Article by ID API allows a user or client application to retrieve an Article using its ID.
+        * It requires a Portal ID, which a user or client application can retrieve through the Administrative Console or by calling Get All Portals API.
         * Additional Article attributes and contextual views can be specified in the query parameters.
 
         * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -707,6 +707,212 @@ class PortalArticle(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.EditionWithContent, http_res)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    def get_all_article_types(
+        self,
+        *,
+        accept_language: models.AcceptLanguage,
+        department_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Optional[List[models.ArticleTypeInfo]]:
+        r"""Get All Article Types in a Department
+
+        ## Overview
+        The Get All Article Types in a Department API retrieves a list of all Article Types configured for a specific department.
+
+
+        :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
+        :param department_id: The ID of the department.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetAllArticleTypesRequest(
+            accept_language=accept_language,
+            department_id=department_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/articletypes",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getAllArticleTypes",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(List[models.ArticleTypeInfo], http_res)
+        if utils.match_response(http_res, "204", "*"):
+            return None
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404", "406"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.WSErrorCommonData, http_res)
+            raise errors.WSErrorCommon(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.EgainDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.EgainDefaultError("Unexpected response received", http_res)
+
+    async def get_all_article_types_async(
+        self,
+        *,
+        accept_language: models.AcceptLanguage,
+        department_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Optional[List[models.ArticleTypeInfo]]:
+        r"""Get All Article Types in a Department
+
+        ## Overview
+        The Get All Article Types in a Department API retrieves a list of all Article Types configured for a specific department.
+
+
+        :param accept_language: The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses).
+        :param department_id: The ID of the department.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetAllArticleTypesRequest(
+            accept_language=accept_language,
+            department_id=department_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/articletypes",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getAllArticleTypes",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "406", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(List[models.ArticleTypeInfo], http_res)
+        if utils.match_response(http_res, "204", "*"):
+            return None
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "406"], "application/json"
         ):

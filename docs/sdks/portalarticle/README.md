@@ -8,6 +8,7 @@
 * [get_article_by_id](#get_article_by_id) - Get Article by ID
 * [get_article_by_id_with_editions](#get_article_by_id_with_editions) - Get Article By ID with Editions
 * [get_article_edition_details](#get_article_edition_details) - Get Article Edition Details
+* [get_all_article_types](#get_all_article_types) - Get All Article Types in a Department
 * [add_to_reply](#add_to_reply) - Add Article to Reply
 * [add_as_reference](#add_as_reference) - Add as Reference
 * [get_articles_in_topic](#get_articles_in_topic) - Get Articles in Topic
@@ -29,8 +30,8 @@
 ## get_article_by_id
 
 ## Overview
-  * The Get Article by ID API allows a user to retrieve an Article using its ID.
-    * It requires a Portal ID, which a user can retrieve by calling the Get All Portals API.
+  * The Get Article by ID API allows a user or client application to retrieve an Article using its ID.
+    * It requires a Portal ID, which a user or client application can retrieve through the Administrative Console or by calling Get All Portals API.
     * Additional Article attributes and contextual views can be specified in the query parameters.
 
   * This API returns structured authoring attributes of Issue, Environment, Cause and Confidence Level when the following conditions are met:
@@ -188,6 +189,53 @@ with Egain(
 ### Response
 
 **[models.EditionWithContent](../../models/editionwithcontent.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.WSErrorCommon     | 400, 401, 403, 404, 406  | application/json         |
+| errors.WSErrorCommon     | 500                      | application/json         |
+| errors.EgainDefaultError | 4XX, 5XX                 | \*/\*                    |
+
+## get_all_article_types
+
+## Overview
+The Get All Article Types in a Department API retrieves a list of all Article Types configured for a specific department.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getAllArticleTypes" method="get" path="/articletypes" -->
+```python
+from egain_api_python import Egain
+import os
+
+
+with Egain(
+    access_token=os.getenv("EGAIN_ACCESS_TOKEN", ""),
+) as egain:
+
+    res = egain.portal.article.get_all_article_types(accept_language="en-US", department_id="999")
+
+    assert res is not None
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     | Example                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `accept_language`                                                                                                               | [models.AcceptLanguage](../../models/acceptlanguage.md)                                                                         | :heavy_check_mark:                                                                                                              | The Language locale accepted by the client (used for locale specific fields in resource representation and in error responses). | en-US                                                                                                                           |
+| `department_id`                                                                                                                 | *str*                                                                                                                           | :heavy_check_mark:                                                                                                              | The ID of the department.                                                                                                       | 999                                                                                                                             |
+| `retries`                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                | :heavy_minus_sign:                                                                                                              | Configuration to override the default retry behavior of the client.                                                             |                                                                                                                                 |
+
+### Response
+
+**[List[models.ArticleTypeInfo]](../../models/.md)**
 
 ### Errors
 

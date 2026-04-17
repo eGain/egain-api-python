@@ -47,10 +47,17 @@ Operation = Literal[
 
 class ScheduleTimeTypedDict(TypedDict):
     date_: datetime
+    r"""The scheduled start time for the import job."""
+    stop_date: NotRequired[datetime]
+    r"""The specific date and time when the job must stop processing, regardless of completion status."""
 
 
 class ScheduleTime(BaseModel):
     date_: Annotated[datetime, pydantic.Field(alias="date")]
+    r"""The scheduled start time for the import job."""
+
+    stop_date: Annotated[Optional[datetime], pydantic.Field(alias="stopDate")] = None
+    r"""The specific date and time when the job must stop processing, regardless of completion status."""
 
 
 class ImportContentTypedDict(TypedDict):

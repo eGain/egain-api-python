@@ -262,6 +262,11 @@ with Egain(
 #### [content.import_](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md)
 
 * [create_import_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_job) - Create Import Job
+* [get_validation_hooks](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_validation_hooks) - Get validation hooks
+* [create_validation_hook](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_validation_hook) - Create validation hook
+* [get_validation_hook_versions](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_validation_hook_versions) - Get all versions for a validation hook
+* [create_validation_hook_version](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_validation_hook_version) - Update validation hook version
+* [get_validation_hook_version](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_validation_hook_version) - Get validation hook version details
 * [get_import_status](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#get_import_status) - Get Job Status
 * [create_import_validation_job](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#create_import_validation_job) - Create Validation Job
 * [cancel_import](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/import/README.md#cancel_import) - Cancel Job
@@ -271,6 +276,7 @@ with Egain(
 * [get_article_by_id](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#get_article_by_id) - Get Article by ID
 * [get_article_by_id_with_editions](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#get_article_by_id_with_editions) - Get Article By ID with Editions
 * [get_article_edition_details](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#get_article_edition_details) - Get Article Edition Details
+* [get_all_article_types](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#get_all_article_types) - Get All Article Types in a Department
 * [add_to_reply](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#add_to_reply) - Add Article to Reply
 * [add_as_reference](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#add_as_reference) - Add as Reference
 * [get_articles_in_topic](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalarticle/README.md#get_articles_in_topic) - Get Articles in Topic
@@ -358,6 +364,7 @@ with Egain(
 * [delete_suggestion](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#delete_suggestion) - Delete a Suggestion
 * [get_related_articles_for_suggestion](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#get_related_articles_for_suggestion) - Get Related Articles for Suggestion
 * [get_suggestion_comments](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_comments) - Get Suggestion Comments
+* [add_suggestion_comment](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#add_suggestion_comment) - Add a Suggestion Comment
 * [get_suggestion_attachments](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_attachments) - Get Suggestion Attachments
 * [get_suggestion_attachment_by_id](https://github.com/eGain/egain-api-python/blob/main/docs/sdks/portalsuggestion/README.md#get_suggestion_attachment_by_id) - Get Suggestion Attachment by ID
 
@@ -495,8 +502,8 @@ with Egain(
 
 
 **Inherit from [`EgainError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/egainerror.py)**:
-* [`SchemasWSErrorCommon`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/schemaswserrorcommon.py): Not acceptable. Applicable to 4 of 76 methods.*
-* [`BadRequestError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/badrequesterror.py): Bad Request. Status code `400`. Applicable to 1 of 76 methods.*
+* [`SchemasWSErrorCommon`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/schemaswserrorcommon.py): Not acceptable. Status code `406`. Applicable to 4 of 83 methods.*
+* [`BadRequestError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/badrequesterror.py): Bad Request. Status code `400`. Applicable to 1 of 83 methods.*
 * [`ResponseValidationError`](https://github.com/eGain/egain-api-python/blob/main/src/egain_api_python/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

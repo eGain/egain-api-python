@@ -68,7 +68,6 @@ SuggestionCode = Literal[
     "bg-BG",
     "sk-SK",
     "sl-SI",
-    "sr-RS",
 ]
 r"""The language that describes the details of the resource. Resources available in different languages may differ from each other."""
 

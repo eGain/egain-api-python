@@ -45,6 +45,5 @@ MandatoryLanguageQueryParameter = Literal[
     "uk-UA",
     "bg-BG",
     "sl-SI",
-    "sr-RS",
     "xx-XX",
 ]

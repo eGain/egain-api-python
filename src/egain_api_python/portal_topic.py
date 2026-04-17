@@ -21,7 +21,7 @@ class PortalTopic(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TopicBreadcrumb:
+    ) -> models.TopicBreadcrumbsList:
         r"""Get Topic Breadcrumb for Article
 
         ## Overview
@@ -95,7 +95,7 @@ class PortalTopic(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.TopicBreadcrumb, http_res)
+            return unmarshal_json_response(models.TopicBreadcrumbsList, http_res)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "406"], "application/json"
         ):
@@ -128,7 +128,7 @@ class PortalTopic(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TopicBreadcrumb:
+    ) -> models.TopicBreadcrumbsList:
         r"""Get Topic Breadcrumb for Article
 
         ## Overview
@@ -202,7 +202,7 @@ class PortalTopic(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(models.TopicBreadcrumb, http_res)
+            return unmarshal_json_response(models.TopicBreadcrumbsList, http_res)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "406"], "application/json"
         ):
